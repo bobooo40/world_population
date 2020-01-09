@@ -1,5 +1,5 @@
 FROM openjdk:latest
-COPY ./target/classes/com /tmp/com
+COPY ./target/world_population-0.1.0.1-jar-with-dependencies.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "com.napier.worldpopulation.App"]
+ENTRYPOINT ["java", "-jar", "world_population-0.1.0.1-jar-with-dependencies.jar"]
 

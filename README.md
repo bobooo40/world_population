@@ -1,6 +1,13 @@
 
 # World Population
 
+## Status 
+
+- Build Status [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=master)](https://travis-ci.org/bobooo40/world_population)
+- License [![LICENSE](https://img.shields.io/github/license/bobooo40/world_population.svg?style=flat-square)](https://github.com/bobooo40/world_population)
+- Develop Build Status [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=develop)](https://travis-ci.org/bobooo40/world_population)
+- Release [![Releases](https://img.shields.io/github/release/bobooo40/world_population/all.svg?style=flat-square)](https://github.com/bobooo40/world_population)
+
 ## Functional requirements for World Population
 
 - Sorting functions for population by continent, region and world. 
@@ -53,11 +60,6 @@ For the population reports, the following information is requested:
 - The total population of the continent/region/country not living in cities (including a %).
 
 
-## Status 
 
-- Build Status [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=master)](https://travis-ci.org/bobooo40/world_population)
-- License [![LICENSE](https://img.shields.io/github/license/bobooo40/world_population.svg?style=flat-square)](https://github.com/bobooo40/world_population)
-- Develop Build Status [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=develop)](https://travis-ci.org/bobooo40/world_population)
-- Release [![Releases](https://img.shields.io/github/release/bobooo40/world_population/all.svg?style=flat-square)](https://github.com/bobooo40/world_population)
 
  

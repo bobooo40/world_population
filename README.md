@@ -20,7 +20,7 @@
 - Population of people differentiation in each continent, region and country
 
 ### Country Report
-     A country report requires the following columns:
+A country report requires the following columns:
 
 - Code.
 - Name.
@@ -30,7 +30,7 @@
 - Capital.
 
 ### City Report
-      A city report requires the following columns:
+A city report requires the following columns:
 
 - Name.
 - Country.
@@ -38,14 +38,14 @@
 - Population.
 
 ### Capital City Report
-      A capital city report requires the following columns:
+A capital city report requires the following columns:
   
 - Name.
 - Country.
 - Population.
 
 ### Population Report
-     For the population reports, the following information is requested:
+For the population reports, the following information is requested:
 
 - The name of the continent/region/country.
 - The total population of the continent/region/country.

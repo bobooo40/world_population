@@ -4,7 +4,6 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
-
 public class App
 {
     public static void main(String[] args)
@@ -24,7 +23,6 @@ public class App
                 .append("result", new Document("CW", 95).append("EX", 85));
         // Add document to collection
         collection.insertOne(doc);
-
         // Check document in collection
         Document myDoc = collection.find().first();
         System.out.println(myDoc.toJson());

@@ -1,5 +1,16 @@
 # Contributor Covenant Code of Conduct
 
+## Our Ethical workplace
+
+Being one team, we represent our own ideas, creations, experiences, and 
+background to promote our communication networks and the impact values on each 
+other's contributions. We, team contributors, are sharing one goals therefore 
+we have the equal chance of success and failures. We treat each other with 
+full of respect, honesty, and dignity for driving a positive environment 
+to reduce absenteeism and contributor's turnover, and lead to more satisfied 
+and productive team. We communicate our contributors with verbal communication
+and non-verbal communication to advance our working culture.
+
 ## Our Pledge
 
 In the interest of fostering an open and welcoming environment, we as
@@ -14,14 +25,22 @@ appearance, race, religion, or sexual identity and orientation.
 Examples of behavior that contributes to creating a positive environment
 include:
 
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
+* Instilling a strong team spirit
+* Recognizing the individuals who work hard will encourage them to keep up the great work
+* Showing empathy towards other community members
 * Gracefully accepting constructive criticism
 * Focusing on what is best for the community
-* Showing empathy towards other community members
+* Using welcoming and inclusive language
+* Being respectful of differing viewpoints and experiences
+* Promoting trust in day-to-day interactions between community members, as well as
+between subordinates and supervisors
 
 Examples of unacceptable behavior by participants include:
 
+* Raising anxiety levels
+* Abusing their authorities to community members
+* Focusing on frontal lobs instead of learning objectives
+* Disrupting the workplace or present obstacles to other contributors’ work.
 * The use of sexualized language or imagery and unwelcome sexual attention or
  advances
 * Trolling, insulting/derogatory comments, and personal or political attacks
@@ -35,7 +54,9 @@ Examples of unacceptable behavior by participants include:
 
 Project maintainers are responsible for clarifying the standards of acceptable
 behavior and are expected to take appropriate and fair corrective action in
-response to any instances of unacceptable behavior.
+response to any instances of unacceptable behavior. Follow our Code and 
+policies as well as the laws and regulations of the country (or countries)
+where contributor work, and protect what we have built.
 
 Project maintainers have the right and responsibility to remove, edit, or
 reject comments, commits, code, wiki edits, issues, and other contributions
@@ -55,11 +76,11 @@ further defined and clarified by project maintainers.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team at 40437537@live.napier.ac.uk. All
-complaints will be reviewed and investigated and will result in a response that
-is deemed necessary and appropriate to the circumstances. The project team is
-obligated to maintain confidentiality with regard to the reporter of an incident.
-Further details of specific enforcement policies may be posted separately.
+reported by contacting the project team. All complaints will be reviewed 
+and investigated and will result in a response that is deemed necessary and
+appropriate to the circumstances. The project team is obligated to maintain 
+confidentiality with regard to the reporter of an incident.Further details 
+of specific enforcement policies may be posted separately.
 
 Project maintainers who do not follow or enforce the Code of Conduct in good
 faith may face temporary or permanent repercussions as determined by other
@@ -67,7 +88,7 @@ members of the project's leadership.
 
 ## Attribution
 
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4,
+This Code of Conduct is modified and adapted from the [Contributor Covenant] [homepage], version 1.4,
 available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
 
 [homepage]: https://www.contributor-covenant.org

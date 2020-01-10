@@ -6,9 +6,9 @@ Being one team, we represent our own ideas, creations, experiences, and
 background to promote our communication networks and the impact values on each 
 other's contributions. We, team contributors, are sharing one goals therefore 
 we have the equal chance of success and failures. We treat each other with 
-full of respect, honesty, and dignity for driving a posoitive environment 
-to reduce absenteeism and contributors turnover, and lead to more satisfied 
-and productive teams. We comminuicate our contributors with verbal communication
+full of respect, honesty, and dignity for driving a positive environment 
+to reduce absenteeism and contributor's turnover, and lead to more satisfied 
+and productive team. We communicate our contributors with verbal communication
 and non-verbal communication to advance our working culture.
 
 ## Our Pledge
@@ -88,7 +88,7 @@ members of the project's leadership.
 
 ## Attribution
 
-This Code of Conduct is modified and adapted from the [Contributor Covenant][homepage], version 1.4,
+This Code of Conduct is modified and adapted from the [Contributor Covenant] [homepage], version 1.4,
 available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
 
 [homepage]: https://www.contributor-covenant.org

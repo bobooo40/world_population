@@ -1,0 +1,25 @@
+'USE CASE: 1 Produce a report on the countries (categorized by the world, their region, their continent) which are organised by the largest population to the smallest)
+@startuml
+'Delecare skinparam
+skinparam packageStyle rectangle
+'Declare actor as user
+actor User
+'Declare database as D for world sql
+rectangle "World Database" as D
+
+rectangle "Report on the countries" {
+'Delcare usecase information
+usecase UC1 as "Request for countries information in a certain area"
+usecase UC2 as "Query by certain area"
+usecase UC3 as "View countries information"
+
+'Start usecase diagram
+User --> UC1
+'(start) -down-> UC1
+UC1 .down.> UC2:include
+UC2 .left. D
+UC2 .down.> UC3
+}
+
+'End usecase diagram
+@enduml

@@ -1,0 +1,25 @@
+'USE CASE: 5 Produce a report on all of the capital cities (categorized by the world, a region, a continent) which are organised by the largest population to the smallest
+@startuml
+'Delecare skinparam
+skinparam packageStyle rectangle
+'Declare actor as user
+actor User
+'Declare database as D for world sql
+rectangle "World Database" as D
+
+rectangle "Report on the capital cities" {
+'Delcare usecase information
+usecase UC1 as "Request for capital cities information in a certain area"
+usecase UC2 as "Query by certain area"
+usecase UC3 as "View capital cities information"
+
+'Start usecase diagram
+User --> UC1
+'(start) -down-> UC1
+UC1 .down.> UC2:include
+UC2 .left. D
+UC2 .down.> UC3
+}
+
+'End usecase diagram
+@endum

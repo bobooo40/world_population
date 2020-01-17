@@ -1,5 +1,6 @@
 # USE CASE: 1 Produce a report on the countries (categorized by the world, their region, their continent) which are organised by the largest population to the smallest
 
+
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context

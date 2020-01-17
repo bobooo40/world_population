@@ -1,3 +1,4 @@
+#This file contains file types that are needed to ignore by Git
 # Compiled class file
 *.class
 

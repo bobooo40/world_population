@@ -1,18 +1,14 @@
 package com.napier.worldpopulation;
-
+//import required packages
 import java.sql.*;
 import java.util.ArrayList;
 
 public class App
 {
-    /**
-     * Connection to MySQL database.
-     */
+//    Connection to MySQL database
     private Connection con = null;
 
-    /**
-     * Connect to the MySQL database.
-     */
+//    Connect to the MySQL database.
     public void connect()
     {
         try
@@ -31,6 +27,7 @@ public class App
         int i;
         for (i = 0; i < retries; ++i)
         {
+            // Message for database connenction
             System.out.println("Connecting to database...");
             try
             {
@@ -49,15 +46,12 @@ public class App
             }
             catch (InterruptedException ie)
             {
-//                Error message for thread interruption
+                // Error message for thread interruption
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
     }
-
-    /**
-     * Disconnect from the MySQL database.
-     */
+    // Disconnect from the MySQL database
     public void disconnect()
     {
         if (con != null)
@@ -69,7 +63,7 @@ public class App
             }
             catch (Exception e)
             {
-//                Error message for closing database connection
+                // Error message for closing database connection
                 System.out.println("Error closing connection to database");
             }
         }
@@ -79,13 +73,13 @@ public class App
     public ArrayList<Country> getAllCountries() {
         try {
             Statement stmt = con.createStatement();
-            // Region
+            // Query country information from database
             String query = "SELECT * FROM country ORDER BY Population DESC";
 
             ResultSet rset = stmt.executeQuery(query);
 
             ArrayList<Country> countries = new ArrayList<Country>();
-
+            // Show the results
             while (rset.next()) {
                 Country country = new Country();
                 country.code = rset.getString("Code");
@@ -99,6 +93,7 @@ public class App
             return countries;
 
         } catch (Exception e) {
+            // Error message for getting countries information
             System.out.println(e.getMessage());
             System.out.println("Failed to get countries details");
             return null;
@@ -109,13 +104,14 @@ public class App
     public ArrayList<Country> getAllCountriesByRegions() {
         try {
             Statement stmt = con.createStatement();
-            // Region
+            // Query region region from database
             String query = "SELECT * FROM country ORDER BY Region ASC, Population DESC";
 
             ResultSet rset = stmt.executeQuery(query);
 
             ArrayList<Country> countries = new ArrayList<Country>();
 
+            // Show the results
             while (rset.next()) {
                 Country country = new Country();
                 country.code = rset.getString("Code");
@@ -129,6 +125,7 @@ public class App
             return countries;
 
         } catch (Exception e) {
+            // Error message for getting countries information
             System.out.println(e.getMessage());
             System.out.println("Failed to get countries details");
             return null;
@@ -139,13 +136,14 @@ public class App
     public ArrayList<Country> getAllCountriesByContinents() {
         try {
             Statement stmt = con.createStatement();
-            // Continent
+            // Query country information by continent and population
             String query = "SELECT * FROM country ORDER BY Continent ASC, Population DESC";
 
             ResultSet rset = stmt.executeQuery(query);
 
             ArrayList<Country> countries = new ArrayList<Country>();
 
+            // Show the results
             while (rset.next()) {
                 Country country = new Country();
                 country.code = rset.getString("Code");
@@ -159,6 +157,7 @@ public class App
             return countries;
 
         } catch (Exception e) {
+            // Error message for getting countries information
             System.out.println(e.getMessage());
             System.out.println("Failed to get countries details");
             return null;
@@ -170,13 +169,14 @@ public class App
     public ArrayList<City> getAllCities() {
         try {
             Statement stmt = con.createStatement();
-            // Continent
+            // Query sepcific attribues from database
             String query = "SELECT city.Name, city.District, city.Population, country.Name FROM city, country WHERE city.CountryCode=country.Code ORDER BY city.Population DESC";
 
             ResultSet rset = stmt.executeQuery(query);
 
             ArrayList<City> cities = new ArrayList<City>();
 
+            // Show city results
             while (rset.next()) {
                 City city = new City();
                 city.name = rset.getString("city.Name");
@@ -188,6 +188,7 @@ public class App
             return cities;
 
         } catch (Exception e) {
+            // Error message for getting cities information
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities details");
             return null;
@@ -198,13 +199,14 @@ public class App
     public ArrayList<City> getAllCitiesByContinent() {
         try {
             Statement stmt = con.createStatement();
-            // Continent
+            // Query specifc for city information from database
             String query = "SELECT city.Name, city.District, city.Population, country.Name, country.Continent FROM city, country WHERE city.CountryCode=country.Code ORDER BY country.Continent ASC, city.Population DESC";
 
             ResultSet rset = stmt.executeQuery(query);
 
             ArrayList<City> cities = new ArrayList<City>();
 
+            // Show city results
             while (rset.next()) {
                 City city = new City();
                 city.name = rset.getString("city.Name");
@@ -217,6 +219,7 @@ public class App
             return cities;
 
         } catch (Exception e) {
+            // Error message for getting continents information
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities details");
             return null;
@@ -227,13 +230,14 @@ public class App
     public ArrayList<City> getAllCitiesByRegion() {
         try {
             Statement stmt = con.createStatement();
-            // Region
+            // Query Region informatin from database
             String query = "SELECT city.Name, city.District, city.Population, country.Name, country.Region FROM city, country WHERE city.CountryCode=country.Code ORDER BY country.Region ASC, city.Population DESC";
 
             ResultSet rset = stmt.executeQuery(query);
 
             ArrayList<City> cities = new ArrayList<City>();
 
+            // Show the results
             while (rset.next()) {
                 City city = new City();
                 city.name = rset.getString("city.Name");
@@ -246,6 +250,7 @@ public class App
             return cities;
 
         } catch (Exception e) {
+            // Error message for getting information
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities details");
             return null;
@@ -256,13 +261,14 @@ public class App
     public ArrayList<City> getAllCitiesByDistrict() {
         try {
             Statement stmt = con.createStatement();
-            // District
+            // Query District informatin from database
             String query = "SELECT city.Name, city.District, city.Population, city.District, country.Name FROM city, country WHERE city.CountryCode=country.Code ORDER BY city.District ASC, city.Population DESC";
 
             ResultSet rset = stmt.executeQuery(query);
 
             ArrayList<City> cities = new ArrayList<City>();
 
+            // Show the results
             while (rset.next()) {
                 City city = new City();
                 city.name = rset.getString("city.Name");
@@ -274,6 +280,7 @@ public class App
             return cities;
 
         } catch (Exception e) {
+            // Error message for getting information
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities details");
             return null;
@@ -284,13 +291,14 @@ public class App
     public ArrayList<City> getAllCitiesByCountries() {
         try {
             Statement stmt = con.createStatement();
-            // Continent
+            // Query Continent information from database
             String query = "SELECT city.Name, city.District, city.Population, city.District, country.Name FROM city, country WHERE city.CountryCode=country.Code ORDER BY country.Name ASC, city.Population DESC";
 
             ResultSet rset = stmt.executeQuery(query);
 
             ArrayList<City> cities = new ArrayList<City>();
 
+            // Show the results
             while (rset.next()) {
                 City city = new City();
                 city.name = rset.getString("city.Name");
@@ -302,6 +310,7 @@ public class App
             return cities;
 
         } catch (Exception e) {
+            // Error message for getting information
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities details");
             return null;

@@ -5,26 +5,6 @@ import java.util.ArrayList;
 
 public class App
 {
-
-    public static void main(String[] args)
-    {
-        // Create new Application
-        App a = new App();
-
-        // Connect to database
-        a.connect();
-
-        // Extract employee salary information
-      //  ArrayList<Employee> employees = a.getAllSalaries();
-        //a.printSalaries(employees);
-
-//        a.printSalaries(employoees);
-        // Test the size of the returned data - should be 240124
-       // System.out.println(employees.size());
-
-        // Disconnect from database
-        a.disconnect();
-    }
     /**
      * Prints a list of employees.
      * @param employees The list of employees to print.
@@ -94,6 +74,56 @@ public class App
                 System.out.println("Error closing connection to database");
             }
         }
+    }
+
+    public ArrayList<Country> getAllCountries() {
+        try {
+            Statement stmt = con.createStatement();
+            String query = "SELECT * FROM country ORDER BY Region ASC, Population DESC";
+
+            ResultSet rset = stmt.executeQuery(query);
+
+            ArrayList<Country> countries = new ArrayList<Country>();
+
+            while (rset.next()) {
+                Country country = new Country();
+                country.code = rset.getString("Code");
+                country.name = rset.getString("Name");
+                country.capital = rset.getString("Capital");
+                country.region = rset.getString("Region");
+                country.continent = rset.getString("Continent");
+                country.population = rset.getInt("Population");
+                countries.add(country);
+            }
+            return countries;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get employee details");
+            return null;
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        // Create new Application
+        App a = new App();
+
+        // Connect to database
+        a.connect();
+
+        // Extract countries
+        ArrayList<Country> countries = a.getAllCountries();
+
+        System.out.println(countries.size());
+        // Print countries
+        for (int i = 0; i < countries.size(); i++) {
+            Country country = countries.get(i);
+            System.out.println(country.name + ", " + Integer.toString(country.population) + ", " + country.region);
+        }
+
+        // Disconnect from database
+        a.disconnect();
     }
 
 }

@@ -1,0 +1,24 @@
+'USE CASE: 4 Produce a report on the top N populated countries (categorized by the world, their region, their continent) where N is provided by the user@startuml
+'Delecare skinparam
+skinparam packageStyle rectangle
+'Declare actor as user
+actor User
+'Declare database as D for world sql
+rectangle "World Database" as D
+
+rectangle "Report on N populated countries" {
+'Delcare usecase information
+usecase UC1 as "Request for countries information in a certain area by user defined numbers of N"
+usecase UC2 as "Query by certain area by numbers N"
+usecase UC3 as "View countries information by numbers of N"
+
+'Start usecase diagram
+User --> UC1
+'(start) -down-> UC1
+UC1 .down.> UC2:include
+UC2 .left. D
+UC2 .down.> UC3
+}
+
+'End usecase diagram
+@endum

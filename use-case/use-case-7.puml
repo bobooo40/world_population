@@ -1,0 +1,26 @@
+' USE CASE: 7 Generate a report on the population of the people, living in cities, and not living in cities in a certain area
+@startuml
+'Delecare skinparam
+skinparam packageStyle rectangle
+'Declare actor as user
+actor User
+
+'Declare database as D for world sql
+rectangle "World Database" as D
+
+rectangle "Report on the population of the people, living in cities, and not living in cities" {
+'Delcare usecase information
+usecase UC1 as "Request for the population of the people, living in cities, and not living in cities"
+usecase UC2 as "Query by certain area"
+usecase UC3 as "View population information"
+
+'Start usecase diagram
+User --> UC1
+'(start) -down-> UC1
+UC1 .down.> UC2:include
+UC2 .left. D
+UC2 .down.> UC3
+}
+
+'End usecase diagram
+@endum

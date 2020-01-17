@@ -74,6 +74,7 @@ public class App
             }
             catch (InterruptedException ie)
             {
+//                Error message for thread interruption
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }

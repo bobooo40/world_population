@@ -10,7 +10,7 @@ rectangle "World Database" as D
 
 rectangle "Report on the population of the people, living in cities, and not living in cities" {
 'Delcare usecase information
-usecase UC1 as "Request for the population of the people, living in cities, and not living in cities"
+usecase UC1 as "Request for the population of the people by certain area"
 usecase UC2 as "Query by certain area"
 usecase UC3 as "View population information"
 
@@ -23,4 +23,4 @@ UC2 .down.> UC3
 }
 
 'End usecase diagram
-@endum
+@enduml

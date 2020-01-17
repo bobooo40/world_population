@@ -47,6 +47,7 @@ public class App
         }
         catch (ClassNotFoundException e)
         {
+//            Error message for sql driver connection
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
@@ -67,6 +68,7 @@ public class App
             }
             catch (SQLException sqle)
             {
+                // Error message for database connection
                 System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
             }
@@ -91,6 +93,7 @@ public class App
             }
             catch (Exception e)
             {
+//                Error message for closing database connection
                 System.out.println("Error closing connection to database");
             }
         }

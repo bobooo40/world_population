@@ -1,4 +1,4 @@
-' USE CASE: 9 Generate a report on the number of people who speak different languages, and the percentage of the world population
+'USE CASE: 9 Generate a report on the number of people who speak different languages, and the percentage of the world population
 @startuml
 'Delecare skinparam
 skinparam packageStyle rectangle
@@ -7,7 +7,7 @@ actor User
 'Declare database as D for world sql
 rectangle "World Database" as D
 
-rectangle "a report on the number of people who speak different languages, and the percentage of the world population" {
+rectangle "A report on the number of people who speak different languages, and the percentage of the world population" {
 'Delcare usecase information
 usecase UC1 as "Request the number of people by certain attributes"
 usecase UC2 as "Query by certain area"
@@ -22,4 +22,4 @@ UC2 .down.> UC3
 }
 
 'End usecase diagram
-@endum
+@enduml

@@ -1,4 +1,4 @@
-' USE CASE: 8  Produce a report on the population of the people, living in the world, a continent, a region, a country, a district, a city
+'USE CASE: 8  Produce a report on the population of the people, living in the world, a continent, a region, a country, a district, a city
 @startuml
 'Delecare skinparam
 skinparam packageStyle rectangle
@@ -22,4 +22,4 @@ UC2 .down.> UC3
 }
 
 'End usecase diagram
-@endum
+@enduml

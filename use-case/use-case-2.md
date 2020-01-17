@@ -1,4 +1,4 @@
-# USE CASE: 1 Produce a report on the cities (categorized by the world, their region, their continent, their country, or their district) which are organised by the largest population to the smallest
+# USE CASE: 2 Produce a report on the cities (categorized by the world, their region, their continent, their country, or their district) which are organised by the largest population to the smallest
 
 ## CHARACTERISTIC INFORMATION
 

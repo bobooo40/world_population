@@ -1,4 +1,4 @@
-# USE CASE: 1 Generate a report on the number of people who speak different languages, and the percentage of the world population
+# USE CASE: 9 Generate a report on the number of people who speak different languages, and the percentage of the world population
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context

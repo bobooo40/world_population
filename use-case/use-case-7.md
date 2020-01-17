@@ -1,4 +1,4 @@
-# USE CASE: 1 Generate a report on the population of the people, living in cities, and not living in cities in a certain area
+# USE CASE: 7 Generate a report on the population of the people, living in cities, and not living in cities in a certain area
 
 ## CHARACTERISTIC INFORMATION
 

@@ -1,4 +1,4 @@
-# USE CASE: 1 Produce a report on the top N populated countries (categorized by the world, their region, their continent) where N is provided by the user
+# USE CASE: 3 Produce a report on the top N populated countries (categorized by the world, their region, their continent) where N is provided by the user
 
 ## CHARACTERISTIC INFORMATION
 

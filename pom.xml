@@ -17,8 +17,11 @@
     </dependencies>
 
     <properties>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--        use Java 8 language features-->
         <maven.compiler.source>1.8</maven.compiler.source>
+<!--        get compiled classes to be compatible with Java 8 -->
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 

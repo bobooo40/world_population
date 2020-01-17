@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-As a *user*, I want to *produce a report on the cities (categorized by the world, their region, their continent, their country, or their district) which are organized by the largest population to the smallest population* so that the users can better filter the information of the countries.
+As a *user*, I want to *produce a report on the cities (categorized by the world, their region, their continent, their country, or their district) which are organized by the largest population to the smallest population* so that the users can better filter the information of the cities.
 
 ### Scope
 
@@ -38,7 +38,7 @@ User
 ## MAIN SUCCESS SCENARIO
 
 1. A request for cities information in a certain area (e.g. continent) is sent to the user.
-2. The user captures parameter (region, continent, the world, district, country) to produce countries report.
+2. The user captures parameter (region, continent, the world, district, country) to produce cities report.
 3. The user extracts information of the cities based on the given parameter.
 4. The report is produced.
 
@@ -52,4 +52,4 @@ none
 
 ## SCHEDULE
 
-**DUE DATE**: Release version-0.1-alpha-0.6
+**DUE DATE**: Release version-0.1-alpha-0.5

@@ -6,11 +6,6 @@ import java.util.ArrayList;
 public class App
 {
     /**
-     * Prints a list of employees.
-     * @param employees The list of employees to print.
-     */
-
-    /**
      * Connection to MySQL database.
      */
     private Connection con = null;
@@ -32,7 +27,7 @@ public class App
         }
 
         int retries = 10;
-        int i=0;
+        int i;
         for (i = 0; i < retries; ++i)
         {
             System.out.println("Connecting to database...");

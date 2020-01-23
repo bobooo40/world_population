@@ -82,10 +82,19 @@ public class App
                         query = "SELECT * FROM country ORDER BY Population DESC";
                         break;
                     case 1:
-                        query = "SELECT * FROM country  WHERE Continent='Asia' ORDER BY Continent ASC, Population DESC" ;
+                        query = "SELECT * FROM country  WHERE Continent='Asia' ORDER BY Population DESC" ;
                         break;
                     case 2:
-                        query = "SELECT * FROM country WHERE Region='Eastern Africa' ORDER BY Region ASC, Population DESC";
+                        query = "SELECT * FROM country WHERE Region='Eastern Africa' ORDER BY Population DESC";
+                        break;
+                    case 3:
+                        query = "SELECT * FROM country ORDER BY Population DESC LIMIT 10";
+                        break;
+                    case 4:
+                        query = "SELECT * FROM country  WHERE Continent='Asia' ORDER BY Population DESC LIMIT 10" ;
+                        break;
+                    case 5:
+                        query = "SELECT * FROM country WHERE Region='Eastern Africa' ORDER BY Population DESC LIMIT 10";
                         break;
                     default:
                         System.out.println("An unknown error has occurred");
@@ -123,7 +132,7 @@ public class App
     public void printCountries(ArrayList<Country> countries)
     {
         // Print header
-        System.out.println(String.format("%-10s %-20s %-20s %-20s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        System.out.println(String.format("%-10s %-20s %-20s %-35s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Loop over all countries in the list
         for (Country country : countries)
         {
@@ -146,7 +155,7 @@ public class App
         a.connect();
 
         // Countries Report Generation
-        ArrayList<Country> countries = a.countries(1);
+        ArrayList<Country> countries = a.countries(4);
         a.printCountries(countries);
 
 

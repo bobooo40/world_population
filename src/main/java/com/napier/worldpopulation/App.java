@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class App
 {
-    //    Connection to MySQL database
+//    Connection to MySQL database
     private Connection con = null;
 
-    //    Connect to the MySQL database.
+//    Connect to the MySQL database.
     public void connect()
     {
         try
@@ -79,8 +79,22 @@ public class App
             try {
                 switch (choice) {
                     case 0:
-                        query = "SELECT city.Name, city.Population, country.Name FROM city, country WHERE city.ID=country.Capital ORDER BY city.Population DESC";
+                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE city.ID=country.Capital ORDER BY Population DESC";
                         break;
+                    case 1:
+                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Continent='Asia' AND city.ID=country.Capital ORDER BY Population DESC";
+                        break;
+                    case 2:
+                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Region='Eastern Africa' AND city.ID=country.Capital ORDER BY Population DESC";
+                        break;
+                    case 3:
+                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE city.ID=country.Capital ORDER BY Population DESC LIMIT 10";
+                        break;
+                    case 4:
+                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Continent='Asia' AND city.ID=country.Capital ORDER BY Population DESC LIMIT 10";
+                        break;
+                    case 5:
+                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Region='Eastern Africa' AND city.ID=country.Capital ORDER BY Population DESC LIMIT 10";
                     default:
                         System.out.println("An unknown error has occurred");
                 }
@@ -89,38 +103,38 @@ public class App
             }
 
             ResultSet results = statement.executeQuery(query);
-            ArrayList<City> cities = new ArrayList<City>();
+            ArrayList<City> capitals = new ArrayList<City>();
             // The following block pushes the retrieved data into the array list
             while(results.next()) {
-                City city = new City();
-                city.name = results.getString("city.Name");
-                city.country = results.getString("country.Name");
-                city.population = results.getInt("city.Population");
-                cities.add(city);
+                City capital = new City();
+                capital.name = results.getString("city.Name");
+                capital.country = results.getString("country.Name");
+                capital.population = results.getInt("city.Population");
+                capitals.add(capital);
             }
-            return cities;
+            return capitals;
         } catch (Exception e) {
             // Error message
             System.out.println(e.getMessage());
-            System.out.println("Failed to get capitals details");
+            System.out.println("Failed to get countries details");
             return null;
         }
     }
 
     /**
-     * Prints a list of capital cities.
-     * @param cities The list of countries to print
+     * Prints a list of capitals.
+     * @param capitals The list of capitals to print
      */
-    public void printCapitals(ArrayList<City> cities)
+    public void printCapitals(ArrayList<City> capitals)
     {
         // Print header
         System.out.println(String.format("%-20s %-20s %-20s", "Name", "Country", "Population"));
         // Loop over all countries in the list
-        for (City city : cities)
+        for (City capital : capitals)
         {
             String emp_string =
                     String.format("%-20s %-20s %-20s",
-                            city.name, city.country, city.population);
+                            capital.name, capital.country, capital.population);
             System.out.println(emp_string);
         }
     }
@@ -137,8 +151,9 @@ public class App
         a.connect();
 
         // Countries Report Generation
-        ArrayList<City> cities = a.capitals(0);
-        System.out.println(cities.size());
+        ArrayList<City> capitals = a.capitals(4);
+        a.printCapitals(capitals);
+        System.out.println(capitals.size());
 
 
 

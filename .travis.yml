@@ -6,7 +6,6 @@ addons:
   hosts:
     - db
 
-#  tells Travis to run docker service
 services:
   - docker
 
@@ -15,17 +14,15 @@ install:
   - docker run --rm -d -e MYSQL_ROOT_PASSWORD=example -p 33060:3306 database
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
-#  script to run before any script part of a job
 before_script:
   - mvn clean
 
-#  to define build stages under a include item
 jobs:
   include:
     - stage: unit tests
       install: skip
       jdk: oraclejdk11
-      script: mvn test -Dtest=com.napier.worldpopulation.Testing
+      script: mvn test -Dtest=com.napier.sem.AppTest
     - stage: integration tests
       jdk: oraclejdk11
       script: echo "Integration Tests"
@@ -33,3 +30,9 @@ jobs:
       install: skip
       jdk: oraclejdk11
       script: echo "Deploy"
+
+stages:
+  - unit tests
+  - integration tests
+  - name: deploy
+    if: branch = master

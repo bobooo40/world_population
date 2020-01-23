@@ -69,253 +69,73 @@ public class App
         }
     }
 
-    // Extract all the countries from the database ordered by population
-    public ArrayList<Country> getAllCountries() {
+    // The following function produces countries information report filtered by different criteria
+    public ArrayList<Country> countries(int choice) {
         try {
-            Statement stmt = con.createStatement();
-            // Query country information from database
-            String query = "SELECT * FROM country ORDER BY Population DESC";
 
-            ResultSet rset = stmt.executeQuery(query);
+            Statement statement = con.createStatement();
+            // The following is a query to retrieve all the countries in the world
+            String query = null;
+            try {
+                switch (choice) {
+                    case 0:
+                        query = "SELECT * FROM country ORDER BY Population DESC";
+                        break;
+                    case 1:
+                        query = "SELECT * FROM country  WHERE Continent='Asia' ORDER BY Continent ASC, Population DESC" ;
+                        break;
+                    case 2:
+                        query = "SELECT * FROM country WHERE Region='Eastern Africa' ORDER BY Region ASC, Population DESC";
+                        break;
+                    default:
+                        System.out.println("An unknown error has occurred");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Please, try again.");
+            }
 
+            ResultSet results = statement.executeQuery(query);
             ArrayList<Country> countries = new ArrayList<Country>();
-            // Show the results
-            while (rset.next()) {
+            // The following block pushes the retrieved data into the array list
+            while(results.next()) {
                 Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.capital = rset.getString("Capital");
-                country.region = rset.getString("Region");
-                country.continent = rset.getString("Continent");
-                country.population = rset.getInt("Population");
+                country.code = results.getString("Code");
+                country.name = results.getString("Name");
+                country.continent = results.getString("Continent");
+                country.region = results.getString("Region");
+                country.population = results.getInt("Population");
+                country.capital = results.getString("Capital");
                 countries.add(country);
             }
             return countries;
-
         } catch (Exception e) {
-            // Error message for getting countries information
+            // Error message
             System.out.println(e.getMessage());
             System.out.println("Failed to get countries details");
             return null;
         }
     }
 
-    // Extract all the countries from the database ordered by region and population
-    public ArrayList<Country> getAllCountriesByRegions() {
-        try {
-            Statement stmt = con.createStatement();
-            // Query region region from database
-            String query = "SELECT * FROM country ORDER BY Region ASC, Population DESC";
-
-            ResultSet rset = stmt.executeQuery(query);
-
-            ArrayList<Country> countries = new ArrayList<Country>();
-
-            // Show the results
-            while (rset.next()) {
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.capital = rset.getString("Capital");
-                country.region = rset.getString("Region");
-                country.continent = rset.getString("Continent");
-                country.population = rset.getInt("Population");
-                countries.add(country);
-            }
-            return countries;
-
-        } catch (Exception e) {
-            // Error message for getting countries information
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries details");
-            return null;
-        }
-    }
-
-    // Extract all the countries from the database ordered by continent and population
-    public ArrayList<Country> getAllCountriesByContinents() {
-        try {
-            Statement stmt = con.createStatement();
-            // Query country information by continent and population
-            String query = "SELECT * FROM country ORDER BY Continent ASC, Population DESC";
-
-            ResultSet rset = stmt.executeQuery(query);
-
-            ArrayList<Country> countries = new ArrayList<Country>();
-
-            // Show the results
-            while (rset.next()) {
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.capital = rset.getString("Capital");
-                country.region = rset.getString("Region");
-                country.continent = rset.getString("Continent");
-                country.population = rset.getInt("Population");
-                countries.add(country);
-            }
-            return countries;
-
-        } catch (Exception e) {
-            // Error message for getting countries information
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries details");
-            return null;
+    /**
+     * Prints a list of countries.
+     * @param countries The list of countries to print
+     */
+    public void printCountries(ArrayList<Country> countries)
+    {
+        // Print header
+        System.out.println(String.format("%-10s %-20s %-20s %-20s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        // Loop over all countries in the list
+        for (Country country : countries)
+        {
+            String emp_string =
+                    String.format("%-10s %-20s %-20s %-35s %-20s %-20s",
+                            country.code, country.name, country.continent, country.region, country.population, country.capital);
+            System.out.println(emp_string);
         }
     }
 
 
-    // Extract all the cities from the database ordered by population
-    public ArrayList<City> getAllCities() {
-        try {
-            Statement stmt = con.createStatement();
-            // Query sepcific attribues from database
-            String query = "SELECT city.Name, city.District, city.Population, country.Name FROM city, country WHERE city.CountryCode=country.Code ORDER BY city.Population DESC";
 
-            ResultSet rset = stmt.executeQuery(query);
-
-            ArrayList<City> cities = new ArrayList<City>();
-
-            // Show city results
-            while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("city.Name");
-                city.country = rset.getString("country.Name");
-                city.district = rset.getString("city.District");
-                city.population = rset.getInt("city.Population");
-                cities.add(city);
-            }
-            return cities;
-
-        } catch (Exception e) {
-            // Error message for getting cities information
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get cities details");
-            return null;
-        }
-    }
-
-    // Extract all the cities from database ordered by continent and population
-    public ArrayList<City> getAllCitiesByContinent() {
-        try {
-            Statement stmt = con.createStatement();
-            // Query specifc for city information from database
-            String query = "SELECT city.Name, city.District, city.Population, country.Name, country.Continent FROM city, country WHERE city.CountryCode=country.Code ORDER BY country.Continent ASC, city.Population DESC";
-
-            ResultSet rset = stmt.executeQuery(query);
-
-            ArrayList<City> cities = new ArrayList<City>();
-
-            // Show city results
-            while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("city.Name");
-                city.country = rset.getString("country.Name");
-                city.continent = rset.getString("country.Continent");
-                city.district = rset.getString("city.District");
-                city.population = rset.getInt("city.Population");
-                cities.add(city);
-            }
-            return cities;
-
-        } catch (Exception e) {
-            // Error message for getting continents information
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get cities details");
-            return null;
-        }
-    }
-
-    // Extract all the cities from database ordered by region and population
-    public ArrayList<City> getAllCitiesByRegion() {
-        try {
-            Statement stmt = con.createStatement();
-            // Query Region informatin from database
-            String query = "SELECT city.Name, city.District, city.Population, country.Name, country.Region FROM city, country WHERE city.CountryCode=country.Code ORDER BY country.Region ASC, city.Population DESC";
-
-            ResultSet rset = stmt.executeQuery(query);
-
-            ArrayList<City> cities = new ArrayList<City>();
-
-            // Show the results
-            while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("city.Name");
-                city.country = rset.getString("country.Name");
-                city.region = rset.getString("country.Region");
-                city.district = rset.getString("city.District");
-                city.population = rset.getInt("city.Population");
-                cities.add(city);
-            }
-            return cities;
-
-        } catch (Exception e) {
-            // Error message for getting information
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get cities details");
-            return null;
-        }
-    }
-
-    // Extract all the cities from database ordered by district and population
-    public ArrayList<City> getAllCitiesByDistrict() {
-        try {
-            Statement stmt = con.createStatement();
-            // Query District informatin from database
-            String query = "SELECT city.Name, city.District, city.Population, city.District, country.Name FROM city, country WHERE city.CountryCode=country.Code ORDER BY city.District ASC, city.Population DESC";
-
-            ResultSet rset = stmt.executeQuery(query);
-
-            ArrayList<City> cities = new ArrayList<City>();
-
-            // Show the results
-            while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("city.Name");
-                city.country = rset.getString("country.Name");
-                city.district = rset.getString("city.District");
-                city.population = rset.getInt("city.Population");
-                cities.add(city);
-            }
-            return cities;
-
-        } catch (Exception e) {
-            // Error message for getting information
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get cities details");
-            return null;
-        }
-    }
-
-    // Extract all the countries from database ordered by countries
-    public ArrayList<City> getAllCitiesByCountries() {
-        try {
-            Statement stmt = con.createStatement();
-            // Query Continent information from database
-            String query = "SELECT city.Name, city.District, city.Population, city.District, country.Name FROM city, country WHERE city.CountryCode=country.Code ORDER BY country.Name ASC, city.Population DESC";
-
-            ResultSet rset = stmt.executeQuery(query);
-
-            ArrayList<City> cities = new ArrayList<City>();
-
-            // Show the results
-            while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("city.Name");
-                city.country = rset.getString("country.Name");
-                city.district = rset.getString("city.District");
-                city.population = rset.getInt("city.Population");
-                cities.add(city);
-            }
-            return cities;
-
-        } catch (Exception e) {
-            // Error message for getting information
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get cities details");
-            return null;
-        }
-    }
 
     public static void main(String[] args)
     {
@@ -325,17 +145,11 @@ public class App
         // Connect to database
         a.connect();
 
-        // Extract countries
-        ArrayList<Country> countries = a.getAllCountriesByRegions();
-        ArrayList<City> cities = a.getAllCitiesByContinent();
+        // Countries Report Generation
+        ArrayList<Country> countries = a.countries(1);
+        a.printCountries(countries);
 
-        System.out.println(countries.size());
-        System.out.println(cities.size());
-        // Print countries
-        for (int i = 0; i < cities.size(); i++) {
-            City city = cities.get(i);
-            System.out.println(city.name + ", " + Integer.toString(city.population) + ", " + city.continent);
-        }
+
 
         // Disconnect from database
         a.disconnect();

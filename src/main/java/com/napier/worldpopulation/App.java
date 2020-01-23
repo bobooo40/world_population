@@ -127,14 +127,22 @@ public class App
      */
 
     public void viewCities (ArrayList<City> Cities) {
-        System.out.println(String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s", "City Name", "Country Code", "District", "Population", "Country Name", "Country Continent", "Country Region"));
-        // Loop over all countries in the list
-        for (City city : Cities)
+        if (Cities == null)
         {
-            String emp_string =
-                    String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s",
-                            city.Name, city.CountryCode, city.District,city.Population,city.CountryName,city.CountryContinent,city.CountryRegion);
-            System.out.println(emp_string);
+            System.out.println("No employees");
+            return;
+        }
+        else
+        {
+            System.out.println(String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s", "City Name", "Country Code", "District", "Population", "Country Name", "Country Continent", "Country Region"));
+            // Loop over all countries in the list
+            for (City city : Cities)
+            {
+                String emp_string =
+                        String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s",
+                                city.Name, city.CountryCode, city.District,city.Population,city.CountryName,city.CountryContinent,city.CountryRegion);
+                System.out.println(emp_string);
+            }
         }
     }
 

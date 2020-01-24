@@ -36,7 +36,7 @@ public class AppIntegrationTests
         for (City capital : capitals)
         {
             assertEquals(capital.Name, "Seoul");
-            assertEquals(capital.Country, "Afghanistan");
+            assertEquals(capital.Country, "South Korea");
         }
 
     }
@@ -57,7 +57,7 @@ public class AppIntegrationTests
         ArrayList<City> arr_c_world = app.getCitiesInWorldByPopulation(4);
         for (City city: arr_c_world)
         {
-            assertEquals(city.CountryName,"JPN");
+            assertEquals(city.CountryName,"Afghanistan");
         }
     }
 

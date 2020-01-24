@@ -11,6 +11,7 @@ public class AppIntegrationTests
 {
     static App app;
 
+    // Testing database connection
     @BeforeAll
     static void init()
     {
@@ -18,6 +19,7 @@ public class AppIntegrationTests
         app.connect("localhost:33060");
     }
 
+    // Testing get country information by choice
     @Test
     void testGetCountry()
     {
@@ -29,7 +31,7 @@ public class AppIntegrationTests
     }
 
 //    @Test
-//    void testCapitals()
+//    void testGetCities()
 //    {
 //        ArrayList<City> capitals = app.capitals(2);
 //
@@ -40,13 +42,14 @@ public class AppIntegrationTests
 //
 //    }
 
+    // Testing get capital information by choice
     @Test
-    void testGetCountries()
+    void testGetCaptial()
     {
-        ArrayList<Country> countries = app.countries(4);
-        for (Country country : countries)
+        ArrayList<City> capitals = app.capitals(4);
+        for (City capital : capitals)
         {
-            assertEquals(country.continent, "Asia");
+            assertEquals(capital.Continent, "Asia");
         }
     }
 
@@ -57,6 +60,7 @@ public class AppIntegrationTests
 //        assertEquals(arr_c_world.size(), 10);
 //    }
 
+    // Testing countries information
     @Test
     void printCountriesInfoTest()
     {
@@ -72,6 +76,7 @@ public class AppIntegrationTests
         app.printCountries(countries);
     }
 
+    // Testing null countries information
     @Test
     void printCountriesNullInfoTest()
     {
@@ -87,6 +92,7 @@ public class AppIntegrationTests
         app.printCountries(countries);
     }
 
+    // Testing capitals information
     @Test
     void viewCapitalsInfoTest()
     {
@@ -99,6 +105,7 @@ public class AppIntegrationTests
         app.printCapitals(capitals);
     }
 
+    // Testing null capital information
     @Test
     void viewCaptitalNullInfoTest()
     {

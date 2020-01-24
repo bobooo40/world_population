@@ -1,13 +1,9 @@
 package com.napier.worldpopulation;
 
-import com.napier.worldpopulation.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class AppTests {
     static App app;
@@ -17,24 +13,29 @@ public class AppTests {
     {
         app = new App();
     }
+
+    // Testing null countries information
     @Test
     void printCountriesInfoTestNull()
     {
         app.printCountries(null);
     }
 
-//    @Test
-//    void viewCitiesInfoUserInputTest()
-//    {
-//        app.getCitiesInWorldByPopulationUserInput(1 ,0);
-//    }
-//
-//    @Test
-//    void viewCitiesInfoUserInputWValidNoTest()
-//    {
-//        app.getCitiesInWorldByPopulationUserInput(1 ,10);
-//    }
-//
+    // Testing view Cities by user input
+    @Test
+    void viewCitiesInfoUserInputTest()
+    {
+        app.getCitiesInWorldByPopulationUserInput(1 ,0);
+    }
+
+    // Testing view Cities by invalid user input
+    @Test
+    void viewCitiesInfoUserInputWValidNoTest()
+    {
+        app.getCitiesInWorldByPopulationUserInput(1 ,10);
+    }
+
+    // Testing view Countries information
     @Test
     void printCountriesInfoTest()
     {
@@ -50,6 +51,7 @@ public class AppTests {
         app.printCountries(countries);
     }
 
+    // Testing view null countries
     @Test
     void printCountriesNullInfoTest()
     {
@@ -64,6 +66,8 @@ public class AppTests {
         countries.add(country);
         app.printCountries(countries);
     }
+
+    // Testing view null capitals information
     @Test
     void printCapitalInfoTestNull()
     {
@@ -76,6 +80,7 @@ public class AppTests {
 //        App.getCapitalsInWorldByPopulationUserInput(1 ,10);
 //    }
 
+    // Testing view capitals information
     @Test
     void viewCapitalsInfoTest()
     {
@@ -88,6 +93,7 @@ public class AppTests {
         app.printCapitals(capitals);
     }
 
+    // Testing view null capitals information
     @Test
     void viewCaptitalNullInfoTest()
     {
@@ -100,6 +106,7 @@ public class AppTests {
         app.printCapitals(capitals);
     }
 
+    // Testing view null cities information
     @Test
     void printCitiesInfoTestNull()
     {
@@ -113,6 +120,7 @@ public class AppTests {
 //        App.viewCities(App.getCitiesInWorldByPopulationUserInput(1,10));
 //    }
 
+    // Testing view cities information
     @Test
     void viewCitiesInfoTest()
     {
@@ -125,6 +133,7 @@ public class AppTests {
         app.viewCities(cities);
     }
 
+    // Testing view null cities information
     @Test
     void viewCitiesNullInfoTest()
     {

@@ -27,7 +27,7 @@ public class App
         int i;
         for (i = 0; i < retries; ++i)
         {
-            // Message for database connenction
+            // Message for database connection
             System.out.println("Connecting to database...");
             try
             {
@@ -79,21 +79,27 @@ public class App
             try {
                 switch (choice) {
                     case 0:
+                        // Get country information by population
                         query = "SELECT * FROM country ORDER BY Population DESC";
                         break;
                     case 1:
+                        // Get country information with specific continent by population
                         query = "SELECT * FROM country  WHERE Continent='Asia' ORDER BY Population DESC" ;
                         break;
                     case 2:
+                        // Get country information with specific region by population
                         query = "SELECT * FROM country WHERE Region='Eastern Africa' ORDER BY Population DESC";
                         break;
                     case 3:
+                        // Get country information by population with defined numbers
                         query = "SELECT * FROM country ORDER BY Population DESC LIMIT 10";
                         break;
                     case 4:
+                        // Get country information with specific continent by population with defined number
                         query = "SELECT * FROM country  WHERE Continent='Asia' ORDER BY Population DESC LIMIT 10" ;
                         break;
                     case 5:
+                        // Get country information with specific region by population with defined number
                         query = "SELECT * FROM country WHERE Region='Eastern Africa' ORDER BY Population DESC LIMIT 10";
                         break;
                     default:
@@ -151,7 +157,7 @@ public class App
         }
     }
 
-    /// The following function produces countries information report filtered by different criteria
+    /// The following function produces cities information report filtered by different criteria
 
     public ArrayList<City> getCitiesInWorldByPopulation(int choice)  {
         try {
@@ -161,15 +167,23 @@ public class App
             try {
                 switch (choice) {
                     case 1:
+                        // Get city information by population
                         query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`Population` DESC";
                         break;
                     case 2:
+                        // Get city information in the district by population
                         query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`District` ASC, `city`.`Population` DESC ";
                         break;
                     case 3:
+                        // Get city information in the continent by population
                         query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Continent` ASC, `city`.`Population` DESC";
                         break;
                     case 4:
+                        // Get city information in the region by population
+                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Region` ASC, `city`.`Population` DESC ";
+                        break;
+                    case 5:
+                        // Get city information in the country by population
                         query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Name` ASC, `city`.`Population` DESC ";
                         break;
                     default:
@@ -187,7 +201,10 @@ public class App
             return null;
         }
     }
-
+    /**
+     * Prints a list of cities.
+     * @param choice,number The list of countries to print
+     */
     public ArrayList<City> getCitiesInWorldByPopulationUserInput(int choice,int number)  {
         try {
             Statement statement = con.createStatement();
@@ -196,17 +213,26 @@ public class App
             try {
                 switch (choice) {
                     case 1:
+                        // Get top N number city information by population
                         query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`Population` LIMIT "+number;
                         break;
                     case 2:
+                        // Get top N number city information in the district by population
                         query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`District` ASC, `city`.`Population` DESC LIMIT"+number;
                         break;
                     case 3:
+                        // Get top N number city information in the continent by population
                         query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Continent` ASC, `city`.`Population` DESC LIMIT "+number;
                         break;
                     case 4:
+                        // Get top N number city information in the region by population
+                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Region` ASC, `city`.`Population` DESC LIMIT "+number;
+                        break;
+                    case 5:
+                        // Get top N number city information in the country by population
                         query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Name` ASC, `city`.`Population` DESC LIMIT "+number;
                         break;
+
                     default:
                         System.out.println("An unknown error has occurred");
                 }
@@ -223,6 +249,7 @@ public class App
         }
     }
 
+    // Generate the array list from the chosen query
     private ArrayList<City> getCities(Statement statement, String query) throws SQLException {
         ResultSet results = statement.executeQuery(query);
         ArrayList<City> arr_c_world = new ArrayList<City>();
@@ -241,7 +268,7 @@ public class App
     }
 
     /**
-     * Prints a list of capitals.
+     * Prints a list of cities.
      * @param Cities The list of capitals to print
      */
 
@@ -264,6 +291,9 @@ public class App
             }
         }
     }
+
+    /// The following function produces capitals information report filtered by different criteria
+
     public ArrayList<City> capitals(int choice) {
         try {
 
@@ -273,21 +303,27 @@ public class App
             try {
                 switch (choice) {
                     case 0:
+                        // Get capital information in the world by population
                         query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE city.ID=country.Capital ORDER BY Population DESC";
                         break;
                     case 1:
+                        // Get capital information in the continent by population
                         query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Continent='Asia' AND city.ID=country.Capital ORDER BY Population DESC";
                         break;
                     case 2:
+                        // Get capital information in the region by population
                         query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Region='Eastern Africa' AND city.ID=country.Capital ORDER BY Population DESC";
                         break;
                     case 3:
+                        // Get the top N numbers capital information in the world by population
                         query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE city.ID=country.Capital ORDER BY Population DESC LIMIT 10";
                         break;
                     case 4:
+                        // Get the top N numbers capital information in the continent by population
                         query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Continent='Asia' AND city.ID=country.Capital ORDER BY Population DESC LIMIT 10";
                         break;
                     case 5:
+                        // Get the top N numbers capital information in the region by population
                         query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Region='Eastern Africa' AND city.ID=country.Capital ORDER BY Population DESC LIMIT 10";
                     default:
                         System.out.println("An unknown error has occurred");
@@ -339,11 +375,7 @@ public class App
                 System.out.println(emp_string);
             }
         }
-
-
     }
-
-
 
     public static void main(String[] args)
     {
@@ -368,11 +400,13 @@ public class App
         a.printCapitals(capitals);
         System.out.println(capitals.size());
 
+        // All the cities information by population
         a.viewCities(a.getCitiesInWorldByPopulation(1));
         a.viewCities(a.getCitiesInWorldByPopulation(2));
         a.viewCities(a.getCitiesInWorldByPopulation(3));
         a.viewCities(a.getCitiesInWorldByPopulation(4));
 
+        // All the top cities information by population
         a.viewCities(a.getCitiesInWorldByPopulationUserInput(1,10));
         a.viewCities(a.getCitiesInWorldByPopulationUserInput(2,10));
         a.viewCities(a.getCitiesInWorldByPopulationUserInput(3,10));

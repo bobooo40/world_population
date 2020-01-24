@@ -2,25 +2,53 @@ package com.napier.worldpopulation;
 // Declare public function for City informaiton
 public class City {
 
-    // Declare City's name
+    /**
+     * Declare City's name
+     */
     public String Name;
 
-    // Declare City's country
+    /**
+     * Declare City's country name
+     */
     public String Country;
 
-    // Declare City's continent
+    /**
+     * Declare City's continent
+     */
     public String Continent;
 
-    // Declare City's region
+    /**
+     * Declare City's Region
+     */
     public String Region;
 
-    // Declare City's district
+    /**
+     * Declare City's dictrict
+     */
     public String District;
 
-    // Declare City's population
+    /**
+     * Declare City's population
+     */
     public int Population;
+
+    /**
+     * Declare Country's Code
+     */
     public String CountryCode;
+
+    /**
+     * Declare Country's Name
+     */
     public String CountryName;
+
+    /**
+     * Declare Country's Continent
+     */
     public String CountryContinent;
+
+    /**
+     * Declare Country's Region
+     */
     public String CountryRegion;
 }

@@ -7,14 +7,13 @@ public class App
 {
 //    Connection to MySQL database
     private Connection con = null;
-
-//    Connect to the MySQL database.
-    public void connect()
+    //    Connect to the MySQL database.
+    public void connect(String location)
     {
         try
         {
             // Load Database driver
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
         {
@@ -34,7 +33,7 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -131,20 +130,25 @@ public class App
      */
     public void printCountries(ArrayList<Country> countries)
     {
-        // Print header
-        System.out.println(String.format("%-10s %-20s %-20s %-35s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
-        // Loop over all countries in the list
-        for (Country country : countries)
+        if (countries == null)
         {
-            String emp_string =
-                    String.format("%-10s %-20s %-20s %-35s %-20s %-20s",
-                            country.code, country.name, country.continent, country.region, country.population, country.capital);
-            System.out.println(emp_string);
+            System.out.println("No countries");
+            return;
+        }
+        else
+        {
+            // Print header
+            System.out.println(String.format("%-10s %-20s %-20s %-35s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+            // Loop over all countries in the list
+            for (Country country : countries)
+            {
+                String emp_string =
+                        String.format("%-10s %-20s %-20s %-35s %-20s %-20s",
+                                country.code, country.name, country.continent, country.region, country.population, country.capital);
+                System.out.println(emp_string);
+            }
         }
     }
-
-
-
 
     public static void main(String[] args)
     {
@@ -152,8 +156,14 @@ public class App
         App a = new App();
 
         // Connect to database
-        a.connect();
-
+        if (args.length < 1)
+        {
+            a.connect("localhost:3306");
+        }
+        else
+        {
+            a.connect(args[0]);
+        }
         // Countries Report Generation
         ArrayList<Country> countries = a.countries(4);
         a.printCountries(countries);

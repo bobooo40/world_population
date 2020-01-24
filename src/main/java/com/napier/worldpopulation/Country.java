@@ -1,41 +1,54 @@
 package com.napier.worldpopulation;
 
-// Declare public function for Country informaiton
 public class Country {
 
-    // Declare Country's code
+    /**
+     * Declare Country's Code
+     */
     public String code;
-    /**
-     * Country's Code
-     */
 
-    // Declare Country's name
+    /**
+     * Declare Country's name
+     */
     public String name;
-    /**
-     * Country's name
-     */
 
-    // Declare Country's continent
+    /**
+     * Declare Country's Continent
+     */
     public String continent;
-    /**
-     * Country's Continent
-     */
 
-    // Declare Country's region
+    /**
+     * Declare Country's region
+     */
     public String region;
-    /**
-     * Country's region
-     */
 
-    // Declare Country's capital
+    /**
+     * Declare Country's Capital
+     */
     public String capital;
-    /**
-     * Country's Capital
-     */
 
-    // Declare Country's population
-    public int population;
     /**
-     * Country's Population 
+     * Declare Country's population
      */
+    public int population;
+
+    public String SurfaceArea;
+
+    public int IndepYear;
+
+    public float LifeExpectancy;
+
+    public float GNP;
+
+    public float GNPOld;
+
+    public String LocalName;
+
+    public String GovernmentForm;
+
+    public String HeadOfState;
+
+    public int Capital;
+
+    public String Code2;
 }

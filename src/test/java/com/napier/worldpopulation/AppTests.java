@@ -20,53 +20,39 @@ public class AppTests
     }
 
     @Test
-    void viewCitiesInfoTestNull()
+    void printCapitalInfoTestNull()
     {
-        app.viewCities(null);
+        app.printCapitals(null);
+    }
+
+//    @Test
+//    void viewCapitalsInfoUserInputWValidNoTest()
+//    {
+//        App.getCapitalsInWorldByPopulationUserInput(1 ,10);
+//    }
+
+    @Test
+    void viewCapitalsInfoTest()
+    {
+        ArrayList<City> capitals = new ArrayList<City>();
+        City capital = new City();
+        capital.name = "Tokyo";
+        capital.country = "JPN";
+        capital.population = 7980230;
+        capitals.add(capital);
+        app.printCapitals(capitals);
     }
 
     @Test
-    void viewCitiesInfoUserInputTest()
+    void viewCaptitalNullInfoTest()
     {
-        app.getCitiesInWorldByPopulationUserInput(1 ,0);
-    }
-
-    @Test
-    void viewCitiesInfoUserInputWValidNoTest()
-    {
-        app.getCitiesInWorldByPopulationUserInput(1 ,10);
-    }
-
-    @Test
-    void viewCitiesInfoTest()
-    {
-        ArrayList<City> cities = new ArrayList<City>();
-        City city = new City();
-        city.Name = "Tokyo";
-        city.CountryCode = "JPN";
-        city.District = "Tokyo-to";
-        city.Population = 7980230;
-        city.CountryName = "Japan";
-        city.CountryContinent = "Asia";
-        city.CountryRegion = "Eastern Asia";
-        cities.add(city);
-        app.viewCities(cities);
-    }
-
-    @Test
-    void viewCitiesNullInfoTest()
-    {
-        ArrayList<City> cities = new ArrayList<City>();
-        City city = new City();
-        city.Name = null;
-        city.CountryCode = null;
-        city.District = null;
-        city.Population = 0;
-        city.CountryName = null;
-        city.CountryContinent = null;
-        city.CountryRegion = null;
-        cities.add(city);
-        app.viewCities(cities);
+        ArrayList<City> capitals = new ArrayList<City>();
+        City capital = new City();
+        capital.name = null;
+        capital.country = null;
+        capital.population = 0;
+        capitals.add(capital);
+        app.printCapitals(capitals);
     }
 
 }

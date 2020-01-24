@@ -363,6 +363,21 @@ public class App
         ArrayList<Country> countries = a.countries(4);
         a.printCountries(countries);
 
+        // Countries Report Generation
+        ArrayList<City> capitals = a.capitals(4);
+        a.printCapitals(capitals);
+        System.out.println(capitals.size());
+
+        a.viewCities(a.getCitiesInWorldByPopulation(1));
+        a.viewCities(a.getCitiesInWorldByPopulation(2));
+        a.viewCities(a.getCitiesInWorldByPopulation(3));
+        a.viewCities(a.getCitiesInWorldByPopulation(4));
+
+        a.viewCities(a.getCitiesInWorldByPopulationUserInput(1,10));
+        a.viewCities(a.getCitiesInWorldByPopulationUserInput(2,10));
+        a.viewCities(a.getCitiesInWorldByPopulationUserInput(3,10));
+        a.viewCities(a.getCitiesInWorldByPopulationUserInput(4,10));
+
 
 
         // Disconnect from database

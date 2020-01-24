@@ -29,7 +29,7 @@ public class AppIntegrationTests
             assertEquals(country.continent, "Asia");
         }
     }
-    
+
     @Test
     void printCountriesInfoTest()
     {

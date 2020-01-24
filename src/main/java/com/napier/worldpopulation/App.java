@@ -340,6 +340,9 @@ public class App
                 capital.Name = results.getString("city.Name");
                 capital.Country = results.getString("country.Name");
                 capital.Population = results.getInt("city.Population");
+                capital.Continent = results.getString("country.Continent");
+                capital.Region = results.getString("country.Region");
+
                 capitals.add(capital);
             }
             return capitals;

@@ -13,6 +13,7 @@ public class AppTests {
     {
         app = new App();
     }
+    
 
     // Testing null countries information
     @Test

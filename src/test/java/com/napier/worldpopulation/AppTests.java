@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AppTest
+public class AppTests
 {
     static App app;
 
@@ -58,13 +58,13 @@ public class AppTest
     {
         ArrayList<City> cities = new ArrayList<City>();
         City city = new City();
-        city.Name = "Tokyo";
-        city.CountryCode = "JPN";
-        city.District = "Tokyo-to";
+        city.Name = null;
+        city.CountryCode = null;
+        city.District = null;
         city.Population = 0;
-        city.CountryName = "Japan";
-        city.CountryContinent = "Asia";
-        city.CountryRegion = "Eastern Asia";
+        city.CountryName = null;
+        city.CountryContinent = null;
+        city.CountryRegion = null;
         cities.add(city);
         app.viewCities(cities);
     }

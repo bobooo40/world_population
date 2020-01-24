@@ -9,6 +9,10 @@
 - Develop Build Status [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=develop)](https://travis-ci.org/bobooo40/world_population)
 - Build Status [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=master)](https://travis-ci.org/bobooo40/world_population)
 - SQL Integration [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=feature/mysql-integration)](https://travis-ci.org/bobooo40/world_population)
+- Produce City Report [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=features/produce-cities-report)](https://travis-ci.org/bobooo40/world_population)
+
+- CodeCov [![codecov](https://codecov.io/gh/bobooo40/world_population/branch/master/graph/badge.svg)](https://codecov.io/gh/bobooo40/world_population)
+
 
 
 ## Functional requirements for World Population

@@ -9,28 +9,27 @@
     <version>0.1.0.3</version>
 
     <dependencies>
-<!--        <dependencies>-->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.11</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>[5.1.0,)</version>
-                <scope>test</scope>
-            </dependency>
-<!--        </dependencies>-->
+        <!--            Dependency for my-sql connector-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>[8.0,)</version>
+        </dependency>
+<!--        Maven Configuration Dependency Code for JUnit-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>[5.1.0,)</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <properties>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--        use Java 8 language features-->
+<!--        use Java 8 language features-->
         <maven.compiler.source>1.8</maven.compiler.source>
-        <!--        get compiled classes to be compatible with Java 8 -->
+<!--        get compiled classes to be compatible with Java 8 -->
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
@@ -39,6 +38,7 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
+                    <finalName>world_population</finalName>
                     <archive>
                         <manifest>
                             <mainClass>com.napier.worldpopulation.App</mainClass>
@@ -49,15 +49,6 @@
                     </descriptorRefs>
                     <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

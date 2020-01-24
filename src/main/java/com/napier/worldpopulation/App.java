@@ -1,14 +1,15 @@
 package com.napier.worldpopulation;
 //import required packages
+
 import java.sql.*;
 import java.util.ArrayList;
 
 public class App
 {
-//    Connection to MySQL database
+    //    Connection to MySQL database
     private Connection con = null;
 
-//    Connect to the MySQL database.
+    //    Connect to the MySQL database.
     public void connect(String location)
     {
         try
@@ -34,7 +35,7 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?" + "allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -70,83 +71,117 @@ public class App
     }
 
     // The following function produces countries information report filtered by different criteria
-    public ArrayList<City> capitals(int choice) {
-        try {
 
+    public ArrayList<City> getCitiesInWorldByPopulation(int choice)  {
+        try {
             Statement statement = con.createStatement();
             // The following is a query to retrieve all the countries in the world
             String query = null;
             try {
                 switch (choice) {
-                    case 0:
-                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE city.ID=country.Capital ORDER BY Population DESC";
-                        break;
                     case 1:
-                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Continent='Asia' AND city.ID=country.Capital ORDER BY Population DESC";
+                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`Population` DESC";
                         break;
                     case 2:
-                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Region='Eastern Africa' AND city.ID=country.Capital ORDER BY Population DESC";
+                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`District` ASC, `city`.`Population` DESC ";
                         break;
                     case 3:
-                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE city.ID=country.Capital ORDER BY Population DESC LIMIT 10";
+                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Continent` ASC, `city`.`Population` DESC";
                         break;
                     case 4:
-                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Continent='Asia' AND city.ID=country.Capital ORDER BY Population DESC LIMIT 10";
+                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Name` ASC, `city`.`Population` DESC ";
                         break;
-                    case 5:
-                        query = "SELECT city.Name, country.Name, city.Population FROM city, country WHERE country.Region='Eastern Africa' AND city.ID=country.Capital ORDER BY Population DESC LIMIT 10";
                     default:
                         System.out.println("An unknown error has occurred");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid selection. Please, try again.");
             }
-
-            ResultSet results = statement.executeQuery(query);
-            ArrayList<City> capitals = new ArrayList<City>();
-            // The following block pushes the retrieved data into the array list
-            while(results.next()) {
-                City capital = new City();
-                capital.name = results.getString("city.Name");
-                capital.country = results.getString("country.Name");
-                capital.population = results.getInt("city.Population");
-                capitals.add(capital);
-            }
-            return capitals;
-        } catch (Exception e) {
+            return getCities(statement, query);
+        }
+        catch (Exception e) {
             // Error message
             System.out.println(e.getMessage());
-            System.out.println("Failed to get capitals details");
+            System.out.println("Failed to get countries details");
             return null;
         }
     }
 
+    public ArrayList<City> getCitiesInWorldByPopulationUserInput(int choice,int number)  {
+        try {
+            Statement statement = con.createStatement();
+            // The following is a query to retrieve all the countries in the world
+            String query = null;
+            try {
+                switch (choice) {
+                    case 1:
+                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`Population` LIMIT "+number;
+                        break;
+                    case 2:
+                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`District` ASC, `city`.`Population` DESC LIMIT"+number;
+                        break;
+                    case 3:
+                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Continent` ASC, `city`.`Population` DESC LIMIT "+number;
+                        break;
+                    case 4:
+                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Name` ASC, `city`.`Population` DESC LIMIT "+number;
+                        break;
+                    default:
+                        System.out.println("An unknown error has occurred");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Please, try again.");
+            }
+            return getCities(statement, query);
+        }
+        catch (Exception e) {
+            // Error message
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get countries details");
+            return null;
+        }
+    }
+
+    private ArrayList<City> getCities(Statement statement, String query) throws SQLException {
+        ResultSet results = statement.executeQuery(query);
+        ArrayList<City> arr_c_world = new ArrayList<City>();
+        System.out.println(results);
+        while(results.next()) {
+            City cities = new City();
+            cities.CountryCode = results.getString("city.CountryCode");
+            cities.District = results.getString("city.District");
+            cities.CountryName = results.getString("country.Name");
+            cities.CountryContinent = results.getString("country.Continent");
+            cities.CountryRegion = results.getString("country.Region");
+            cities.Population = results.getInt("city.Population");
+            arr_c_world.add(cities);
+        }
+        return arr_c_world;
+    }
+
     /**
      * Prints a list of capitals.
-     * @param capitals The list of capitals to print
+     * @param Cities The list of capitals to print
      */
-    public void printCapitals(ArrayList<City> capitals)
-    {
-        if (capitals == null)
+
+    public void viewCities (ArrayList<City> Cities) {
+        if (Cities == null)
         {
-            System.out.println("No capital information");
+            System.out.println("No cities");
             return;
         }
-        else
-        {
-            // Print header
-            System.out.println(String.format("%-20s %-20s %-20s", "Name", "Country", "Population"));
+        else {
+            System.out.println(String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s", "City Name", "Country Code", "District", "Population", "Country Name", "Country Continent", "Country Region"));
             // Loop over all countries in the list
-            for (City capital : capitals)
+            for (City city : Cities)
             {
+
                 String emp_string =
-                        String.format("%-20s %-20s %-20s",
-                                capital.name, capital.country, capital.population);
+                        String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s",
+                                city.Name, city.CountryCode, city.District,city.Population,city.CountryName,city.CountryContinent,city.CountryRegion);
                 System.out.println(emp_string);
             }
         }
-
-
     }
 
     public static void main(String[] args)
@@ -155,21 +190,16 @@ public class App
         App a = new App();
 
         // Connect to database
-        if (args.length < 1)
-        {
-            a.connect("localhost:3306");
-        }
-        else
-        {
-            a.connect(args[0]);
-        }
+        a.connect("localhost:33060");
+        a.viewCities(a.getCitiesInWorldByPopulation(1));
+        a.viewCities(a.getCitiesInWorldByPopulation(2));
+        a.viewCities(a.getCitiesInWorldByPopulation(3));
+        a.viewCities(a.getCitiesInWorldByPopulation(4));
 
-        // Countries Report Generation
-        ArrayList<City> capitals = a.capitals(4);
-        a.printCapitals(capitals);
-        System.out.println(capitals.size());
-
-
+        a.viewCities(a.getCitiesInWorldByPopulationUserInput(1,10));
+        a.viewCities(a.getCitiesInWorldByPopulationUserInput(2,10));
+        a.viewCities(a.getCitiesInWorldByPopulationUserInput(3,10));
+        a.viewCities(a.getCitiesInWorldByPopulationUserInput(4,10));
 
         // Disconnect from database
         a.disconnect();

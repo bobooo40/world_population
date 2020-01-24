@@ -3,20 +3,24 @@ package com.napier.worldpopulation;
 public class City {
 
     // Declare City's name
-    public String name;
+    public String Name;
 
     // Declare City's country
-    public String country;
+    public String Country;
 
     // Declare City's continent
-    public String continent;
+    public String Continent;
 
     // Declare City's region
-    public String region;
+    public String Region;
 
     // Declare City's district
-    public String district;
+    public String District;
 
     // Declare City's population
-    public int population;
+    public int Population;
+    public String CountryCode;
+    public String CountryName;
+    public String CountryContinent;
+    public String CountryRegion;
 }

@@ -19,12 +19,15 @@ public class AppIntegrationTest
         app.connect("localhost:33060");
     }
 
-//    @Test
-//    void testGetEmployee()
-//    {
-//        Employee emp = app.getEmployee(255530);
-//        assertEquals(emp.emp_no, 255530);
-//        assertEquals(emp.first_name, "Ronghao");
-//        assertEquals(emp.last_name, "Garigliano");
-//    }
+    @Test
+    void testcapitals()
+    {
+        ArrayList<City> capitals = new ArrayList<City>();
+        City capital = new City();
+        capital.name = "Tokyo";
+        capital.country = "JPN";
+        capital.population = 7980230;
+        capitals.add(capital);
+        app.printCapitals(capitals);
+    }
 }

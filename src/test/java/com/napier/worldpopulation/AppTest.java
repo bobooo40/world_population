@@ -44,7 +44,7 @@ public class AppTest
     }
 
     @Test
-    void viewCitiesNullInfoTest()
+    void viewCaptitalNullInfoTest()
     {
         ArrayList<City> capitals = new ArrayList<City>();
         City capital = new City();

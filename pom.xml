@@ -6,14 +6,14 @@
 
     <groupId>com.napier.worldpopulation</groupId>
     <artifactId>world_population</artifactId>
-    <version>0.1.0.3</version>
+    <version>0.1.0.5</version>
 
     <dependencies>
         <!--            Dependency for my-sql connector-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>[8.0,)</version>
+            <version>8.0.12</version>
         </dependency>
         <!--        Maven Configuration Dependency Code for JUnit-->
         <dependency>

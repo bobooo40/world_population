@@ -1,6 +1,5 @@
 package com.napier.worldpopulation;
 //import required packages
-import com.mysql.jdbc.SQLError;
 
 import java.sql.*;
 import java.util.ArrayList;

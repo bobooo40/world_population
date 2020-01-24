@@ -176,6 +176,7 @@ public class App
             // Loop over all countries in the list
             for (City city : Cities)
             {
+
                 String emp_string =
                         String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s",
                                 city.Name, city.CountryCode, city.District,city.Population,city.CountryName,city.CountryContinent,city.CountryRegion);
@@ -200,8 +201,6 @@ public class App
         a.viewCities(a.getCitiesInWorldByPopulationUserInput(2,10));
         a.viewCities(a.getCitiesInWorldByPopulationUserInput(3,10));
         a.viewCities(a.getCitiesInWorldByPopulationUserInput(4,10));
-
-
 
         // Disconnect from database
         a.disconnect();

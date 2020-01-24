@@ -26,6 +26,18 @@ public class AppTest
     }
 
     @Test
+    void viewCitiesInfoUserInputTest()
+    {
+        app.getCitiesInWorldByPopulationUserInput(1 ,0);
+    }
+
+    @Test
+    void viewCitiesInfoUserInputWValidNoTest()
+    {
+        app.getCitiesInWorldByPopulationUserInput(1 ,10);
+    }
+
+    @Test
     void viewCitiesInfoTest()
     {
         ArrayList<City> cities = new ArrayList<City>();
@@ -36,8 +48,25 @@ public class AppTest
         city.Population = 7980230;
         city.CountryName = "Japan";
         city.CountryContinent = "Asia";
-        city.Region = "Eastern Asia";
+        city.CountryRegion = "Eastern Asia";
         cities.add(city);
         app.viewCities(cities);
     }
+
+    @Test
+    void viewCitiesNullInfoTest()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.Name = "Tokyo";
+        city.CountryCode = "JPN";
+        city.District = "Tokyo-to";
+        city.Population = 0;
+        city.CountryName = "Japan";
+        city.CountryContinent = "Asia";
+        city.CountryRegion = "Eastern Asia";
+        cities.add(city);
+        app.viewCities(cities);
+    }
+
 }

@@ -23,6 +23,16 @@ public class AppIntegrationTests
     @Test
     void testGetCities()
     {
-
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.Name = "Tokyo";
+        city.CountryCode = "JPN";
+        city.District = "Tokyo-to";
+        city.Population = 7980230;
+        city.CountryName = "Japan";
+        city.CountryContinent = "Asia";
+        city.CountryRegion = "Eastern Asia";
+        cities.add(city);
+        app.viewCities(cities);
     }
 }

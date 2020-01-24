@@ -116,7 +116,7 @@ public class App
         } catch (Exception e) {
             // Error message
             System.out.println(e.getMessage());
-            System.out.println("Failed to get countries details");
+            System.out.println("Failed to get capitals details");
             return null;
         }
     }
@@ -127,20 +127,27 @@ public class App
      */
     public void printCapitals(ArrayList<City> capitals)
     {
-        // Print header
-        System.out.println(String.format("%-20s %-20s %-20s", "Name", "Country", "Population"));
-        // Loop over all countries in the list
-        for (City capital : capitals)
+        if (capitals == null)
         {
-            String emp_string =
-                    String.format("%-20s %-20s %-20s",
-                            capital.name, capital.country, capital.population);
-            System.out.println(emp_string);
+            System.out.println("No capital information");
+            return;
         }
+        else
+        {
+            // Print header
+            System.out.println(String.format("%-20s %-20s %-20s", "Name", "Country", "Population"));
+            // Loop over all countries in the list
+            for (City capital : capitals)
+            {
+                String emp_string =
+                        String.format("%-20s %-20s %-20s",
+                                capital.name, capital.country, capital.population);
+                System.out.println(emp_string);
+            }
+        }
+
+
     }
-
-
-
 
     public static void main(String[] args)
     {

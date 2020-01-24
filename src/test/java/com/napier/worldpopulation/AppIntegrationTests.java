@@ -37,8 +37,8 @@ public class AppIntegrationTests
 
         for (City capital : capitals)
         {
-            assertEquals(capital.Name, "Tokyo");
-            assertEquals(capital.Country, "JPN");
+            assertEquals(capital.Name, "Seoul");
+            assertEquals(capital.Country, "Afghanistan");
         }
 
     }

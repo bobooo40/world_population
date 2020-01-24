@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AppTests
-{
+public class AppTests {
     static App app;
 
     @BeforeAll
@@ -18,41 +17,54 @@ public class AppTests
     {
         app = new App();
     }
-
     @Test
-    void printCapitalInfoTestNull()
+    void printCountriesInfoTestNull()
     {
-        app.printCapitals(null);
+        app.printCountries(null);
     }
 
 //    @Test
-//    void viewCapitalsInfoUserInputWValidNoTest()
+//    void viewCitiesInfoUserInputTest()
 //    {
-//        App.getCapitalsInWorldByPopulationUserInput(1 ,10);
+//        app.getCitiesInWorldByPopulationUserInput(1 ,0);
 //    }
-
+//
+//    @Test
+//    void viewCitiesInfoUserInputWValidNoTest()
+//    {
+//        app.getCitiesInWorldByPopulationUserInput(1 ,10);
+//    }
+//
     @Test
-    void viewCapitalsInfoTest()
+    void printCountriesInfoTest()
     {
-        ArrayList<City> capitals = new ArrayList<City>();
-        City capital = new City();
-        capital.name = "Tokyo";
-        capital.country = "JPN";
-        capital.population = 7980230;
-        capitals.add(capital);
-        app.printCapitals(capitals);
+        ArrayList<Country> countries = new ArrayList<Country>();
+        Country country = new Country();
+        country.code="AGO";
+        country.name="Angola";
+        country.continent="Africa";
+        country.region="Central Africa";
+        country.population=12878000;
+        country.capital="Angola";
+       countries.add(country);
+        app.printCountries(countries);
     }
 
     @Test
-    void viewCaptitalNullInfoTest()
+    void printCountriesNullInfoTest()
     {
-        ArrayList<City> capitals = new ArrayList<City>();
-        City capital = new City();
-        capital.name = null;
-        capital.country = null;
-        capital.population = 0;
-        capitals.add(capital);
-        app.printCapitals(capitals);
+        ArrayList<Country> countries = new ArrayList<Country>();
+        Country country = new Country();
+        country.code=null;
+        country.name=null;
+        country.continent=null;
+        country.region=null;
+        country.population=0;
+        country.capital=null;
+        countries.add(country);
+        app.printCountries(countries);
     }
+
+
 
 }

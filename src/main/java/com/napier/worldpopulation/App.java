@@ -1,14 +1,12 @@
 package com.napier.worldpopulation;
 //import required packages
-
 import java.sql.*;
 import java.util.ArrayList;
 
 public class App
 {
-    //    Connection to MySQL database
+//    Connection to MySQL database
     private Connection con = null;
-
     //    Connect to the MySQL database.
     public void connect(String location)
     {
@@ -71,25 +69,31 @@ public class App
     }
 
     // The following function produces countries information report filtered by different criteria
-
-    public ArrayList<City> getCitiesInWorldByPopulation(int choice)  {
+    public ArrayList<Country> countries(int choice) {
         try {
+
             Statement statement = con.createStatement();
             // The following is a query to retrieve all the countries in the world
             String query = null;
             try {
                 switch (choice) {
+                    case 0:
+                        query = "SELECT * FROM country ORDER BY Population DESC";
+                        break;
                     case 1:
-                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`Population` DESC";
+                        query = "SELECT * FROM country  WHERE Continent='Asia' ORDER BY Population DESC" ;
                         break;
                     case 2:
-                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`District` ASC, `city`.`Population` DESC ";
+                        query = "SELECT * FROM country WHERE Region='Eastern Africa' ORDER BY Population DESC";
                         break;
                     case 3:
-                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Continent` ASC, `city`.`Population` DESC";
+                        query = "SELECT * FROM country ORDER BY Population DESC LIMIT 10";
                         break;
                     case 4:
-                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Name` ASC, `city`.`Population` DESC ";
+                        query = "SELECT * FROM country  WHERE Continent='Asia' ORDER BY Population DESC LIMIT 10" ;
+                        break;
+                    case 5:
+                        query = "SELECT * FROM country WHERE Region='Eastern Africa' ORDER BY Population DESC LIMIT 10";
                         break;
                     default:
                         System.out.println("An unknown error has occurred");
@@ -97,88 +101,50 @@ public class App
             } catch (NumberFormatException e) {
                 System.out.println("Invalid selection. Please, try again.");
             }
-            return getCities(statement, query);
-        }
-        catch (Exception e) {
-            // Error message
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries details");
-            return null;
-        }
-    }
 
-    public ArrayList<City> getCitiesInWorldByPopulationUserInput(int choice,int number)  {
-        try {
-            Statement statement = con.createStatement();
-            // The following is a query to retrieve all the countries in the world
-            String query = null;
-            try {
-                switch (choice) {
-                    case 1:
-                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`Population` LIMIT "+number;
-                        break;
-                    case 2:
-                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`District` ASC, `city`.`Population` DESC LIMIT"+number;
-                        break;
-                    case 3:
-                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Continent` ASC, `city`.`Population` DESC LIMIT "+number;
-                        break;
-                    case 4:
-                        query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Name` ASC, `city`.`Population` DESC LIMIT "+number;
-                        break;
-                    default:
-                        System.out.println("An unknown error has occurred");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid selection. Please, try again.");
+            ResultSet results = statement.executeQuery(query);
+            ArrayList<Country> countries = new ArrayList<Country>();
+            // The following block pushes the retrieved data into the array list
+            while(results.next()) {
+                Country country = new Country();
+                country.code = results.getString("Code");
+                country.name = results.getString("Name");
+                country.continent = results.getString("Continent");
+                country.region = results.getString("Region");
+                country.population = results.getInt("Population");
+                country.capital = results.getString("Capital");
+                countries.add(country);
             }
-            return getCities(statement, query);
-        }
-        catch (Exception e) {
+            return countries;
+        } catch (Exception e) {
             // Error message
             System.out.println(e.getMessage());
             System.out.println("Failed to get countries details");
             return null;
         }
-    }
-
-    private ArrayList<City> getCities(Statement statement, String query) throws SQLException {
-        ResultSet results = statement.executeQuery(query);
-        ArrayList<City> arr_c_world = new ArrayList<City>();
-        System.out.println(results);
-        while(results.next()) {
-            City cities = new City();
-            cities.CountryCode = results.getString("city.CountryCode");
-            cities.District = results.getString("city.District");
-            cities.CountryName = results.getString("country.Name");
-            cities.CountryContinent = results.getString("country.Continent");
-            cities.CountryRegion = results.getString("country.Region");
-            cities.Population = results.getInt("city.Population");
-            arr_c_world.add(cities);
-        }
-        return arr_c_world;
     }
 
     /**
-     * Prints a list of capitals.
-     * @param Cities The list of capitals to print
+     * Prints a list of countries.
+     * @param countries The list of countries to print
      */
-
-    public void viewCities (ArrayList<City> Cities) {
-        if (Cities == null)
+    public void printCountries(ArrayList<Country> countries)
+    {
+        if (countries == null)
         {
-            System.out.println("No cities");
+            System.out.println("No countries");
             return;
         }
-        else {
-            System.out.println(String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s", "City Name", "Country Code", "District", "Population", "Country Name", "Country Continent", "Country Region"));
+        else
+        {
+            // Print header
+            System.out.println(String.format("%-10s %-20s %-20s %-35s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
             // Loop over all countries in the list
-            for (City city : Cities)
+            for (Country country : countries)
             {
-
                 String emp_string =
-                        String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s",
-                                city.Name, city.CountryCode, city.District,city.Population,city.CountryName,city.CountryContinent,city.CountryRegion);
+                        String.format("%-10s %-20s %-20s %-35s %-20s %-20s",
+                                country.code, country.name, country.continent, country.region, country.population, country.capital);
                 System.out.println(emp_string);
             }
         }
@@ -190,16 +156,19 @@ public class App
         App a = new App();
 
         // Connect to database
-        a.connect("localhost:33060");
-        a.viewCities(a.getCitiesInWorldByPopulation(1));
-        a.viewCities(a.getCitiesInWorldByPopulation(2));
-        a.viewCities(a.getCitiesInWorldByPopulation(3));
-        a.viewCities(a.getCitiesInWorldByPopulation(4));
+        if (args.length < 1)
+        {
+            a.connect("localhost:3306");
+        }
+        else
+        {
+            a.connect(args[0]);
+        }
+        // Countries Report Generation
+        ArrayList<Country> countries = a.countries(4);
+        a.printCountries(countries);
 
-        a.viewCities(a.getCitiesInWorldByPopulationUserInput(1,10));
-        a.viewCities(a.getCitiesInWorldByPopulationUserInput(2,10));
-        a.viewCities(a.getCitiesInWorldByPopulationUserInput(3,10));
-        a.viewCities(a.getCitiesInWorldByPopulationUserInput(4,10));
+
 
         // Disconnect from database
         a.disconnect();

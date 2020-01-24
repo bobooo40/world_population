@@ -1,5 +1,6 @@
 package com.napier.worldpopulation;
 
+import com.napier.worldpopulation.App;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -20,12 +21,12 @@ public class AppIntegrationTests
     }
 
     @Test
-    void testCapitals()
+    void testGetCities()
     {
-        ArrayList<City> capitals = app.capitals(1);
-        City city = new City();
-        assertEquals(city.name, "Tokyo");
-        assertEquals(city.country, "JPN");
-        assertEquals(city.population,7980230);
+        ArrayList<Country> countries = app.countries(4);
+        for (Country country : countries)
+        {
+            assertEquals(country.continent, "Asia");
+        }
     }
 }

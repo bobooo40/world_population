@@ -31,12 +31,11 @@ public class AppIntegrationTests
     @Test
     void testCapitals()
     {
-        ArrayList<City> capitals = app.capitals(1);
+        ArrayList<City> capitals = app.capitals(2);
 
         for (City capital : capitals)
         {
-            assertEquals(capital.Name, "Seoul");
-            assertEquals(capital.Country, "South Korea");
+            assertEquals(capital.CountryRegion, "Eastern Africa");
         }
 
     }
@@ -52,13 +51,10 @@ public class AppIntegrationTests
     }
 
     @Test
-    void testGetCities()
+    void testGetCitiesByUserDefine()
     {
-        ArrayList<City> arr_c_world = app.getCitiesInWorldByPopulation(4);
-        for (City city: arr_c_world)
-        {
-            assertEquals(city.CountryName,"Afghanistan");
-        }
+        ArrayList<City> arr_c_world = app.getCitiesInWorldByPopulationUserInput(2,10);
+        assertEquals(arr_c_world.size(), 10);
     }
 
     @Test

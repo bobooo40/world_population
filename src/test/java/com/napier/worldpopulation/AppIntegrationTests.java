@@ -31,6 +31,39 @@ public class AppIntegrationTests
     }
 
     @Test
+    void testCapitals()
+    {
+        ArrayList<City> capitals = app.capitals(1);
+
+        for (City capital : capitals)
+        {
+            assertEquals(capital.Name, "Tokyo");
+            assertEquals(capital.Country, "JPN");
+        }
+
+    }
+
+    @Test
+    void testGetCountries()
+    {
+        ArrayList<Country> countries = app.countries(4);
+        for (Country country : countries)
+        {
+            assertEquals(country.continent, "Asia");
+        }
+    }
+
+    @Test
+    void testGetCities()
+    {
+        ArrayList<City> arr_c_world = app.getCitiesInWorldByPopulation(4);
+        for (City city: arr_c_world)
+        {
+            assertEquals(city.CountryName,"JPN");
+        }
+    }
+
+    @Test
     void printCountriesInfoTest()
     {
         ArrayList<Country> countries = new ArrayList<Country>();
@@ -83,4 +116,6 @@ public class AppIntegrationTests
         capitals.add(capital);
         app.printCapitals(capitals);
     }
+
+
 }

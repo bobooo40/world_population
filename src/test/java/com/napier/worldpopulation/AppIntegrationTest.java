@@ -22,12 +22,10 @@ public class AppIntegrationTest
     @Test
     void testcapitals()
     {
-        ArrayList<City> capitals = new ArrayList<City>();
+        ArrayList<City> capitals = app.capitals(1);
         City capital = new City();
-        capital.name = "Tokyo";
-        capital.country = "JPN";
-        capital.population = 7980230;
-        capitals.add(capital);
-        app.printCapitals(capitals);
+        assertEquals(capital.name, "Tokyo");
+        assertEquals(capital.country, "JPN");
+        assertEquals(capital.population,7980230);
     }
 }

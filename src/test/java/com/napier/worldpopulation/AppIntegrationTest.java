@@ -23,9 +23,9 @@ public class AppIntegrationTest
     void testcapitals()
     {
         ArrayList<City> capitals = app.capitals(1);
-        City capital = new City();
-        assertEquals(capital.name, "Tokyo");
-        assertEquals(capital.country, "JPN");
-        assertEquals(capital.population,7980230);
+        City city = new City();
+        assertEquals(city.name, "Tokyo");
+        assertEquals(city.country, "JPN");
+        assertEquals(city.population,7980230);
     }
 }

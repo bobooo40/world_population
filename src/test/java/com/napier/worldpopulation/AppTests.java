@@ -64,7 +64,77 @@ public class AppTests {
         countries.add(country);
         app.printCountries(countries);
     }
+    @Test
+    void printCapitalInfoTestNull()
+    {
+        app.printCapitals(null);
+    }
 
+//    @Test
+//    void viewCapitalsInfoUserInputWValidNoTest()
+//    {
+//        App.getCapitalsInWorldByPopulationUserInput(1 ,10);
+//    }
 
+    @Test
+    void viewCapitalsInfoTest()
+    {
+        ArrayList<City> capitals = new ArrayList<City>();
+        City capital = new City();
+        capital.Name = "Tokyo";
+        capital.Country = "JPN";
+        capital.Population = 7980230;
+        capitals.add(capital);
+        app.printCapitals(capitals);
+    }
+
+    @Test
+    void viewCaptitalNullInfoTest()
+    {
+        ArrayList<City> capitals = new ArrayList<City>();
+        City capital = new City();
+        capital.Name = null;
+        capital.Country = null;
+        capital.Population = 0;
+        capitals.add(capital);
+        app.printCapitals(capitals);
+    }
+
+    @Test
+    void printCitiesInfoTestNull()
+    {
+        app.viewCities(null);
+    }
+
+//
+//    @Test
+//    void viewCityInfoUserInputWValidNoTest()
+//    {
+//        App.viewCities(App.getCitiesInWorldByPopulationUserInput(1,10));
+//    }
+
+    @Test
+    void viewCitiesInfoTest()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.Name = "Tokyo";
+        city.Country = "JPN";
+        city.Population = 7980230;
+        cities.add(city);
+        app.viewCities(cities);
+    }
+
+    @Test
+    void viewCitiesNullInfoTest()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.Name = null;
+        city.Country = null;
+        city.Population = 0;
+        cities.add(city);
+        app.printCapitals(cities);
+    }
 
 }

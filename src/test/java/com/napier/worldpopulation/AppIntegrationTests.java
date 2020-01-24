@@ -29,24 +29,7 @@ public class AppIntegrationTests
             assertEquals(country.continent, "Asia");
         }
     }
-    @Test
-    void printCountriesInfoTestNull()
-    {
-        app.printCountries(null);
-    }
-
-    //    @Test
-//    void viewCitiesInfoUserInputTest()
-//    {
-//        app.getCitiesInWorldByPopulationUserInput(1 ,0);
-//    }
-//
-//    @Test
-//    void viewCitiesInfoUserInputWValidNoTest()
-//    {
-//        app.getCitiesInWorldByPopulationUserInput(1 ,10);
-//    }
-//
+    
     @Test
     void printCountriesInfoTest()
     {
@@ -76,18 +59,6 @@ public class AppIntegrationTests
         countries.add(country);
         app.printCountries(countries);
     }
-
-    @Test
-    void printCapitalInfoTestNull()
-    {
-        app.printCapitals(null);
-    }
-
-//    @Test
-//    void viewCapitalsInfoUserInputWValidNoTest()
-//    {
-//        App.getCapitalsInWorldByPopulationUserInput(1 ,10);
-//    }
 
     @Test
     void viewCapitalsInfoTest()

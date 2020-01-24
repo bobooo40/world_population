@@ -151,7 +151,7 @@ public class App
         }
     }
 
-    // The following function produces countries information report filtered by different criteria
+    /// The following function produces countries information report filtered by different criteria
 
     public ArrayList<City> getCitiesInWorldByPopulation(int choice)  {
         try {
@@ -264,7 +264,6 @@ public class App
             }
         }
     }
-
     public ArrayList<City> capitals(int choice) {
         try {
 

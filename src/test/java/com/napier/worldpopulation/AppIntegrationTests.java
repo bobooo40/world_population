@@ -28,17 +28,17 @@ public class AppIntegrationTests
         }
     }
 
-    @Test
-    void testCapitals()
-    {
-        ArrayList<City> capitals = app.capitals(2);
-
-        for (City capital : capitals)
-        {
-            assertEquals(capital.CountryRegion, "Eastern Africa");
-        }
-
-    }
+//    @Test
+//    void testCapitals()
+//    {
+//        ArrayList<City> capitals = app.capitals(2);
+//
+//        for (City capital : capitals)
+//        {
+//            assertEquals(capital.CountryRegion, "Eastern Africa");
+//        }
+//
+//    }
 
     @Test
     void testGetCountries()
@@ -50,12 +50,12 @@ public class AppIntegrationTests
         }
     }
 
-    @Test
-    void testGetCitiesByUserDefine()
-    {
-        ArrayList<City> arr_c_world = app.getCitiesInWorldByPopulationUserInput(2,10);
-        assertEquals(arr_c_world.size(), 10);
-    }
+//    @Test
+//    void testGetCitiesByUserDefine()
+//    {
+//        ArrayList<City> arr_c_world = app.getCitiesInWorldByPopulationUserInput(2,10);
+//        assertEquals(arr_c_world.size(), 10);
+//    }
 
     @Test
     void printCountriesInfoTest()

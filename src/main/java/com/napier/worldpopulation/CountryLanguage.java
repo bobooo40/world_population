@@ -21,4 +21,10 @@ public class CountryLanguage {
      * Declare usage percentage
      */
     public float Percentage;
+
+    /**
+     * Declare no of speakers
+     */
+    public Long NoOfSpeakers;
+
 }

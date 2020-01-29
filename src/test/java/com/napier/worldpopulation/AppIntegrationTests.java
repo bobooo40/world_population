@@ -70,7 +70,7 @@ public class AppIntegrationTests
         country.name="Angola";
         country.continent="Africa";
         country.region="Central Africa";
-        country.population=12878000;
+        country.population= 12878000L;
         country.capital="Angola";
         countries.add(country);
         app.printCountries(countries);
@@ -86,7 +86,7 @@ public class AppIntegrationTests
         country.name=null;
         country.continent=null;
         country.region=null;
-        country.population=0;
+        country.population=0L;
         country.capital=null;
         countries.add(country);
         app.printCountries(countries);
@@ -100,7 +100,7 @@ public class AppIntegrationTests
         City capital = new City();
         capital.Name = "Tokyo";
         capital.Country = "JPN";
-        capital.Population = 7980230;
+        capital.Population = 7980230L;
         capitals.add(capital);
         app.printCapitals(capitals);
     }
@@ -113,7 +113,7 @@ public class AppIntegrationTests
         City capital = new City();
         capital.Name = null;
         capital.Country = null;
-        capital.Population = 0;
+        capital.Population = 0L;
         capitals.add(capital);
         app.printCapitals(capitals);
     }

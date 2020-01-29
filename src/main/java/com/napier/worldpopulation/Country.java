@@ -30,7 +30,7 @@ public class Country {
     /**
      * Declare Country's population
      */
-    public int population;
+    public Long population;
 
     /**
      * Declare Country's Surface Area

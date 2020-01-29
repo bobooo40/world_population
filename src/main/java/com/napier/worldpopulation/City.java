@@ -30,7 +30,7 @@ public class City {
     /**
      * Declare City's population
      */
-    public int Population;
+    public Long Population;
 
     /**
      * Declare Country's Code

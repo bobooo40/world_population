@@ -66,12 +66,11 @@ public class AppIntegrationTests
     {
         ArrayList<Country> countries = new ArrayList<Country>();
         Country country = new Country();
-        country.code="AGO";
-        country.name="Angola";
-        country.continent="Africa";
-        country.region="Central Africa";
-        country.population= 12878000L;
-        country.capital="Angola";
+        country.setCode("AGO");
+        country.setContinent("Africa");
+        country.setRegion("Central Africa");
+        country.setPopulation(12878000L);
+        country.setCapital("Angola");
         countries.add(country);
         app.printCountries(countries);
     }
@@ -82,12 +81,12 @@ public class AppIntegrationTests
     {
         ArrayList<Country> countries = new ArrayList<Country>();
         Country country = new Country();
-        country.code=null;
-        country.name=null;
-        country.continent=null;
-        country.region=null;
-        country.population=0L;
-        country.capital=null;
+        country.setCode(null);
+        country.setName(null);
+        country.setContinent(null);
+        country.setRegion(null);
+        country.setPopulation(0L);
+        country.setCapital(null);
         countries.add(country);
         app.printCountries(countries);
     }
@@ -98,9 +97,9 @@ public class AppIntegrationTests
     {
         ArrayList<City> capitals = new ArrayList<City>();
         City capital = new City();
-        capital.Name = "Tokyo";
-        capital.Country = "JPN";
-        capital.Population = 7980230L;
+        capital.setName("Tokyo");
+        capital.setCountryCode("JPN");
+        capital.setPopulation(7980230L);
         capitals.add(capital);
         app.printCapitals(capitals);
     }
@@ -111,9 +110,9 @@ public class AppIntegrationTests
     {
         ArrayList<City> capitals = new ArrayList<City>();
         City capital = new City();
-        capital.Name = null;
-        capital.Country = null;
-        capital.Population = 0L;
+        capital.setName(null);
+        capital.setCountryName(null);
+        capital.setPopulation(0L);
         capitals.add(capital);
         app.printCapitals(capitals);
     }

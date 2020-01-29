@@ -119,12 +119,12 @@ public class App
             // The following block pushes the retrieved data into the array list
             while(results.next()) {
                 Country country = new Country();
-                country.code = results.getString("Code");
-                country.name = results.getString("Name");
-                country.continent = results.getString("Continent");
-                country.region = results.getString("Region");
-                country.population = results.getLong("Population");
-                country.capital = results.getString("Capital");
+                country.setCode(results.getString("Code"));
+                country.setName(results.getString("Name"));
+                country.setContinent(results.getString("Continent"));
+                country.setRegion(results.getString("Region"));
+                country.setPopulation(results.getLong("Population"));
+                country.setCapital(results.getString("Capital")) ;
                 countries.add(country);
             }
             return countries;
@@ -156,7 +156,7 @@ public class App
             {
                 String data_string =
                         String.format("%-10s %-20s %-20s %-35s %-20s %-20s",
-                                country.code, country.name, country.continent, country.region, country.population, country.capital);
+                                country.getCode(), country.getName(), country.getContinent(), country.getRegion(), country.getPopulation(), country.getCapital());
                 System.out.println(data_string);
             }
         }
@@ -261,13 +261,13 @@ public class App
         while(results.next()) {
             City cities = new City();
 
-            cities.Name = results.getString("city.Name");
-            cities.CountryCode = results.getString("city.CountryCode");
-            cities.District = results.getString("city.District");
-            cities.CountryName = results.getString("country.Name");
-            cities.CountryContinent = results.getString("country.Continent");
-            cities.CountryRegion = results.getString("country.Region");
-            cities.Population = results.getLong("city.Population");
+            cities.setName(results.getString("city.Name"));
+            cities.setCountryCode(results.getString("city.CountryCode"));
+            cities.setDistrict(results.getString("city.District"));
+            cities.setCountryName(results.getString("country.Name"));
+            cities.setCountryContinent(results.getString("country.Continent"));
+            cities.setRegion(results.getString("country.Region"));
+            cities.setPopulation(results.getLong("city.Population"));
             arr_c_world.add(cities);
         }
         return arr_c_world;
@@ -292,7 +292,7 @@ public class App
 
                 String data_string =
                         String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s",
-                                city.Name, city.CountryCode, city.District,city.Population,city.CountryName,city.CountryContinent,city.CountryRegion);
+                                city.getName(), city.getCountryCode(), city.getDistrict(),city.getPopulation(),city.getCountryName(),city.getCountryContinent(),city.getCountryRegion());
                 System.out.println(data_string);
             }
         }
@@ -343,11 +343,11 @@ public class App
             // The following block pushes the retrieved data into the array list
             while(results.next()) {
                 City capital = new City();
-                capital.Name = results.getString("city.Name");
-                capital.Country = results.getString("country.Name");
-                capital.Population = results.getLong("city.Population");
-                capital.Continent = results.getString("country.Continent");
-                capital.Region = results.getString("country.Region");
+                capital.setName(results.getString("city.Name"));
+                capital.setCountryName(results.getString("country.Name"));
+                capital.setPopulation(results.getLong("city.Population"));
+                capital.setContinent(results.getString("country.Continent"));
+                capital.setRegion(results.getString("country.Region"));
 
                 capitals.add(capital);
             }
@@ -380,7 +380,7 @@ public class App
             {
                 String data_string =
                         String.format("%-20s %-20s %-20s",
-                                capital.Name, capital.Country, capital.Population);
+                                capital.getName(), capital.getCountryName(), capital.getPopulation());
                 System.out.println(data_string);
             }
         }
@@ -479,8 +479,8 @@ public class App
             // The following block pushes the retrieved data into the array list
             while(results_lang.next()) {
                 CountryLanguage lang = new CountryLanguage();
-                lang.Language = results_lang.getString("countrylanguage.Language");
-                lang.NoOfSpeakers = results_lang.getLong("NoOfSpeakers");
+                lang.setLanguage(results_lang.getString("countrylanguage.Language"));
+                lang.setNoOfSpeakers(results_lang.getLong("NoOfSpeakers"));
                 arr_lang.add(lang);
             }
             return arr_lang;
@@ -502,12 +502,12 @@ public class App
             return;
         } else {
             // Print header
-            System.out.println(String.format("%-20s %-20s", "Language", "Number of Speakers"));
+            System.out.println(String.format("%-20s %-30s", "Language", "Number of Speakers"));
             // Loop over all languages in the list
             for (CountryLanguage lang : langs) {
                 String data_string =
-                        String.format("%-20s %-20s",
-                                lang.Language, lang.NoOfSpeakers);
+                        String.format("%-20s %-30s",
+                                lang.getLanguage(), lang.getNoOfSpeakers());
                 System.out.println(data_string);
             }
         }
@@ -527,14 +527,14 @@ public class App
         else
         {
             // Print header
-            System.out.println(String.format("%-35s %-35s %-35s %-35s %-35s %-35s", "Name", "Total Existing Population",
+            System.out.println(String.format("%-35s %-35s %-35s %-35s %-40s %-40s", "Name", "Total Existing Population",
                     "Total Living Population In Cities", "Total Not Living Population",
                     "Total Living Population In Cities (%)", "Total Not Living Population (%)"));
             // Loop over all population in the list
             for (int i = 0; i < population.size(); i++)
             {
                 String data_string =
-                        String.format("%-35s %-35s %-35s %-35s %-35s %-35s",population.get(i).get("Criteria"),
+                        String.format("%-35s %-35s %-35s %-35s %-40s %-40s",population.get(i).get("Criteria"),
                                 population.get(i).get("TtlExistingPopulation"), population.get(i).get("TtlCityPopulation"),
                                 population.get(i).get("TtlNotLivingPopulation"), population.get(i).get("TtlCityPopulation (%)"),population.get(i).get("TtlNotLivingPopulation (%)"));
                 System.out.println(data_string);
@@ -563,7 +563,7 @@ public class App
 //        // Countries Report Generation
 //        ArrayList<City> capitals = a.capitals(4);
 //        a.printCapitals(capitals);
-
+//
 //        // All the cities information by population
 //        a.viewCities(a.getCitiesInWorldByPopulation(1));
 //        a.viewCities(a.getCitiesInWorldByPopulation(2));

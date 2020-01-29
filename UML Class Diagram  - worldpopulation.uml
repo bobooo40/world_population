@@ -3,29 +3,15 @@
   <ID>JAVA</ID>
   <OriginalElement>com.napier.worldpopulation</OriginalElement>
   <nodes>
-    <node x="5.75" y="0.0">com.napier.worldpopulation.Country</node>
-    <node x="429.337552742616" y="263.5822784810127">com.napier.worldpopulation.CountryLanguage</node>
-    <node x="202.75" y="66.0">com.napier.worldpopulation.City</node>
-    <node x="0.0" y="433.0">com.napier.worldpopulation.App</node>
+    <node x="0.0" y="0.0">com.napier.worldpopulation.Country</node>
+    <node x="0.0" y="428.0">com.napier.worldpopulation.CountryLanguage</node>
+    <node x="222.0" y="0.0">com.napier.worldpopulation.City</node>
   </nodes>
   <notes />
-  <edges>
-    <edge source="com.napier.worldpopulation.App" target="com.napier.worldpopulation.City">
-      <point x="145.125" y="-157.5" />
-      <point x="338.625" y="408.0" />
-      <point x="337.0" y="408.0" />
-      <point x="44.75" y="125.5" />
-    </edge>
-    <edge source="com.napier.worldpopulation.App" target="com.napier.worldpopulation.Country">
-      <point x="-48.375" y="-157.5" />
-      <point x="145.125" y="408.0" />
-      <point x="138.5" y="408.0" />
-      <point x="44.25" y="191.5" />
-    </edge>
-  </edges>
-  <settings layout="Hierarchic Group" zoom="0.751188589540412" x="403.99472573839665" y="221.27953586497893" />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.9230899830220712" x="165.40264251220765" y="239.45839122399977" />
   <SelectedNodes>
-    <node>com.napier.worldpopulation.CountryLanguage</node>
+    <node>com.napier.worldpopulation.Country</node>
   </SelectedNodes>
   <Categories>
     <Category>Fields</Category>

@@ -3,8 +3,6 @@ package com.napier.worldpopulation;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 public class AppTests {
     static App app;
 
@@ -40,32 +38,32 @@ public class AppTests {
     @Test
     void printCountriesInfoTest()
     {
-        ArrayList<Country> countries = new ArrayList<Country>();
-        Country country = new Country();
-        country.code="AGO";
-        country.name="Angola";
-        country.continent="Africa";
-        country.region="Central Africa";
-        country.population=12878000L;
-        country.capital="Angola";
-       countries.add(country);
-        app.printCountries(countries);
+//        ArrayList<Country> countries = new ArrayList<Country>();
+//        Country country = new Country();
+//        country.code="AGO";
+//        country.name="Angola";
+//        country.continent="Africa";
+//        country.region="Central Africa";
+//        country.population=12878000L;
+//        country.capital="Angola";
+//       countries.add(country);
+//        app.printCountries(countries);
     }
 
     // Testing view null countries
     @Test
     void printCountriesNullInfoTest()
     {
-        ArrayList<Country> countries = new ArrayList<Country>();
-        Country country = new Country();
-        country.code=null;
-        country.name=null;
-        country.continent=null;
-        country.region=null;
-        country.population=0L;
-        country.capital=null;
-        countries.add(country);
-        app.printCountries(countries);
+//        ArrayList<Country> countries = new ArrayList<Country>();
+//        Country country = new Country();
+//        country.code=null;
+//        country.name=null;
+//        country.continent=null;
+//        country.region=null;
+//        country.population=0L;
+//        country.capital=null;
+//        countries.add(country);
+//        app.printCountries(countries);
     }
 
     // Testing view null capitals information
@@ -85,26 +83,26 @@ public class AppTests {
     @Test
     void viewCapitalsInfoTest()
     {
-        ArrayList<City> capitals = new ArrayList<City>();
-        City capital = new City();
-        capital.Name = "Tokyo";
-        capital.Country = "JPN";
-        capital.Population = 7980230L;
-        capitals.add(capital);
-        app.printCapitals(capitals);
+//        ArrayList<City> capitals = new ArrayList<City>();
+//        City capital = new City();
+//        capital.Name = "Tokyo";
+//        capital.Country = "JPN";
+//        capital.Population = 7980230L;
+//        capitals.add(capital);
+//        app.printCapitals(capitals);
     }
 
     // Testing view null capitals information
     @Test
     void viewCaptitalNullInfoTest()
     {
-        ArrayList<City> capitals = new ArrayList<City>();
-        City capital = new City();
-        capital.Name = null;
-        capital.Country = null;
-        capital.Population = 0L;
-        capitals.add(capital);
-        app.printCapitals(capitals);
+//        ArrayList<City> capitals = new ArrayList<City>();
+//        City capital = new City();
+//        capital.Name = null;
+//        capital.Country = null;
+//        capital.Population = 0L;
+//        capitals.add(capital);
+//        app.printCapitals(capitals);
     }
 
     // Testing view null cities information
@@ -125,26 +123,26 @@ public class AppTests {
     @Test
     void viewCitiesInfoTest()
     {
-        ArrayList<City> cities = new ArrayList<City>();
-        City city = new City();
-        city.Name = "Tokyo";
-        city.Country = "JPN";
-        city.Population = 7980230L;
-        cities.add(city);
-        app.viewCities(cities);
+//        ArrayList<City> cities = new ArrayList<City>();
+//        City city = new City();
+//        city.Name = "Tokyo";
+//        city.Country = "JPN";
+//        city.Population = 7980230L;
+//        cities.add(city);
+//        app.viewCities(cities);
     }
 
     // Testing view null cities information
     @Test
     void viewCitiesNullInfoTest()
     {
-        ArrayList<City> cities = new ArrayList<City>();
-        City city = new City();
-        city.Name = null;
-        city.Country = null;
-        city.Population = 0L;
-        cities.add(city);
-        app.printCapitals(cities);
+//        ArrayList<City> cities = new ArrayList<City>();
+//        City city = new City();
+//        city.Name = null;
+//        city.Country = null;
+//        city.Population = 0L;
+//        cities.add(city);
+//        app.printCapitals(cities);
     }
 
 }

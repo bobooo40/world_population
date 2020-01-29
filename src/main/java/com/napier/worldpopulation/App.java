@@ -385,6 +385,7 @@ public class App
             }
         }
     }
+
     /// The following function produces population who live in cities or not information report filtered by different criteria
 
     public ArrayList<Dictionary> populationLON(int choice) {
@@ -409,7 +410,7 @@ public class App
                         break;
                     case 3:
                         // Get city population information in the each country
-                        criteria = "country.Country";
+                        criteria = "country.Name";
                         query_city_ppl = "SELECT `country`.`Name`, SUM(`city`.`Population`) AS `TtlCityPopulation` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` GROUP BY `country`.`Name` ORDER BY `country`.`Name` ASC ";
                         query_existiong_ppl = "SELECT `country`.`Name`, SUM(`country`.`Population`) AS `TtlExistingPopulation` FROM `country` GROUP BY `country`.`Name` ORDER BY `country`.`Name` ASC";
                         break;
@@ -445,20 +446,16 @@ public class App
                             double temp = temp_ttl_city*100;
                             String temp_per = String.format("%.2f", temp/temp_ttl_ext) + " %";
                             arr_population.get(i).put("TtlCityPopulation (%)",temp_per);
-
                             Long temp_ttl_not = temp_ttl_ext - temp_ttl_city;
                             temp = temp_ttl_not*100;
                             temp_per = String.format("%.2f", temp/temp_ttl_ext) + " %";
                             arr_population.get(i).put("TtlNotLivingPopulation",temp_ttl_not);
                             arr_population.get(i).put("TtlNotLivingPopulation (%)",temp_per);
-
-                            System.out.println(temp_per);
                             break addInfo;
                         }
                     }
                 }
             }
-            System.out.println(arr_population);
             return arr_population;
         } catch (Exception e) {
             // Error message
@@ -467,6 +464,8 @@ public class App
             return null;
         }
     }
+
+    /// The following function produces population who speak different langauge report filtered by different criteria
 
     public ArrayList<CountryLanguage> languge() {
         try {
@@ -504,7 +503,7 @@ public class App
         } else {
             // Print header
             System.out.println(String.format("%-20s %-20s", "Language", "Number of Speakers"));
-            // Loop over all countries in the list
+            // Loop over all languages in the list
             for (CountryLanguage lang : langs) {
                 String data_string =
                         String.format("%-20s %-20s",
@@ -514,31 +513,34 @@ public class App
         }
     }
 
-//    /**
-//     * Prints a list of population living in the cities or not
-//     * @param capitals The list of population to print
-//     */
-//    public void viewPopulationLON<City> capitals)
-//    {
-//        if (capitals == null)
-//        {
-//            System.out.println("No capital information");
-//            return;
-//        }
-//        else
-//        {
-//            // Print header
-//            System.out.println(String.format("%-20s %-20s %-20s", "Name", "Country", "Population"));
-//            // Loop over all countries in the list
-//            for (City capital : capitals)
-//            {
-//                String data_string =
-//                        String.format("%-20s %-20s %-20s",
-//                                capital.Name, capital.Country, capital.Population);
-//                System.out.println(data_string);
-//            }
-//        }
-//    }
+    /**
+     * Prints a list of population living in the cities or not
+     * @param population The list of population to print
+     */
+    public void viewPopulationLON(ArrayList<Dictionary> population)
+    {
+        if (population == null)
+        {
+            System.out.println("No population information");
+            return;
+        }
+        else
+        {
+            // Print header
+            System.out.println(String.format("%-35s %-35s %-35s %-35s %-35s %-35s", "Name", "Total Existing Population",
+                    "Total Living Population In Cities", "Total Not Living Population",
+                    "Total Living Population In Cities (%)", "Total Not Living Population (%)"));
+            // Loop over all population in the list
+            for (int i = 0; i < population.size(); i++)
+            {
+                String data_string =
+                        String.format("%-35s %-35s %-35s %-35s %-35s %-35s",population.get(i).get("Criteria"),
+                                population.get(i).get("TtlExistingPopulation"), population.get(i).get("TtlCityPopulation"),
+                                population.get(i).get("TtlNotLivingPopulation"), population.get(i).get("TtlCityPopulation (%)"),population.get(i).get("TtlNotLivingPopulation (%)"));
+                System.out.println(data_string);
+            }
+        }
+    }
 
     public static void main(String[] args)
     {
@@ -574,7 +576,11 @@ public class App
 //        a.viewCities(a.getCitiesInWorldByPopulationUserInput(3,10));
 //        a.viewCities(a.getCitiesInWorldByPopulationUserInput(4,10));
 
-        ArrayList<Dictionary> capitals = a.populationLON(1);
+        // All the population information who live in the cities nor not
+        a.viewPopulationLON(a.populationLON(1));
+        a.viewPopulationLON(a.populationLON(2));
+        a.viewPopulationLON(a.populationLON(3));
+
         a.viewLanguages(a.languge());
 
         // Disconnect from database

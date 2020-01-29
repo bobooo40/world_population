@@ -111,7 +111,7 @@ public class AppIntegrationTests
         ArrayList<City> capitals = new ArrayList<City>();
         City capital = new City();
         capital.setName(null);
-        capital.setCountryName(null);
+        capital.setCountryCode(null);
         capital.setPopulation(0L);
         capitals.add(capital);
         app.printCapitals(capitals);

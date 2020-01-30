@@ -5,24 +5,27 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class App
 {
 //    Connection to MySQL database
     private Connection con = null;
+    static Logger log = Logger.getLogger(App.class.getName());
+
     //    Connect to the MySQL database.
     public void connect(String location)
     {
         try
         {
-
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
         {
 //            Error message for sql driver connection
-            System.out.println("Could not load SQL driver");
+            log.log(Level.SEVERE,"Could not load SQL driver", e);
             System.exit(-1);
         }
 
@@ -31,28 +34,25 @@ public class App
         for (i = 0; i < retries; ++i)
         {
             // Message for database connection
-            System.out.println("Connecting to database...");
+            log.info("Connecting to World database...");
             try
             {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "example");
-
-//                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
-                System.out.println("Successfully connected");
+                log.info("Successfully connected");
                 break;
             }
             catch (SQLException sqle)
             {
                 // Error message for database connection
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
-                System.out.println(sqle.getMessage());
+                log.log(Level.WARNING, String.format("%s %d","Failed to connect to database attempt",i),sqle.getMessage());
             }
             catch (InterruptedException ie)
             {
                 // Error message for thread interruption
-                System.out.println("Thread interrupted? Should not happen.");
+                log.log(Level.WARNING,"Thread interrupted? Should not happen.",ie);
             }
         }
     }
@@ -69,7 +69,7 @@ public class App
             catch (Exception e)
             {
                 // Error message for closing database connection
-                System.out.println("Error closing connection to database");
+                log.log(Level.SEVERE,"Error closing connection to database",e);
             }
         }
     }
@@ -108,10 +108,11 @@ public class App
                         query = "SELECT * FROM country WHERE Region='Eastern Africa' ORDER BY Population DESC LIMIT 10";
                         break;
                     default:
-                        System.out.println("An unknown error has occurred");
+                        log.warning("An unknown error has occurred");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid selection. Please, try again.");
+                // Error message for invalid number selection
+                log.log(Level.SEVERE,"Invalid selection. Please, try again.",e);
             }
 
             ResultSet results = statement.executeQuery(query);
@@ -130,35 +131,8 @@ public class App
             return countries;
         } catch (Exception e) {
             // Error message
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries details");
+            log.log(Level.WARNING,"Failed to get countries details",e.getMessage());
             return null;
-        }
-    }
-
-    /**
-     * Prints a list of countries.
-     * @param countries The list of countries to print
-     */
-    public void printCountries(ArrayList<Country> countries)
-    {
-        if (countries == null)
-        {
-            System.out.println("No countries");
-            return;
-        }
-        else
-        {
-            // Print header
-            System.out.println(String.format("%-10s %-20s %-20s %-35s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
-            // Loop over all countries in the list
-            for (Country country : countries)
-            {
-                String data_string =
-                        String.format("%-10s %-20s %-20s %-35s %-20s %-20s",
-                                country.getCode(), country.getName(), country.getContinent(), country.getRegion(), country.getPopulation(), country.getCapital());
-                System.out.println(data_string);
-            }
         }
     }
 
@@ -192,17 +166,18 @@ public class App
                         query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Name` ASC, `city`.`Population` DESC ";
                         break;
                     default:
-                        System.out.println("An unknown error has occurred");
+                        log.warning("An unknown error has occurred");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid selection. Please, try again.");
+
+                // Error message for invalid number selection
+                log.log(Level.SEVERE,"Invalid selection. Please, try again.",e);
             }
             return getCities(statement, query);
         }
         catch (Exception e) {
             // Error message
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries details");
+            log.log(Level.WARNING,"Failed to get cities details",e.getMessage());
             return null;
         }
     }
@@ -239,23 +214,24 @@ public class App
                         break;
 
                     default:
-                        System.out.println("An unknown error has occurred");
+                        log.warning("An unknown error has occurred");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid selection. Please, try again.");
+
+                // Error message for invalid number selection
+                log.log(Level.SEVERE,"Invalid selection. Please, try again.",e);
             }
             return getCities(statement, query);
         }
         catch (Exception e) {
             // Error message
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries details");
+            log.log(Level.WARNING,"Failed to get cities details",e.getMessage());
             return null;
         }
     }
 
     // Generate the array list from the chosen query
-    private ArrayList<City> getCities(Statement statement, String query) throws SQLException {
+    public ArrayList<City> getCities(Statement statement, String query) throws SQLException {
         ResultSet results = statement.executeQuery(query);
         ArrayList<City> arr_c_world = new ArrayList<City>();
         while(results.next()) {
@@ -271,31 +247,6 @@ public class App
             arr_c_world.add(cities);
         }
         return arr_c_world;
-    }
-
-    /**
-     * Prints a list of cities.
-     * @param Cities The list of capitals to print
-     */
-
-    public void viewCities (ArrayList<City> Cities) {
-        if (Cities == null)
-        {
-            System.out.println("No cities");
-            return;
-        }
-        else {
-            System.out.println(String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s", "City Name", "Country Code", "District", "Population", "Country Name", "Country Continent", "Country Region"));
-            // Loop over all countries in the list
-            for (City city : Cities)
-            {
-
-                String data_string =
-                        String.format("%-35s %-5s %-20s %-11s %-50s %-20s %-26s",
-                                city.getName(), city.getCountryCode(), city.getDistrict(),city.getPopulation(),city.getCountryName(),city.getCountryContinent(),city.getCountryRegion());
-                System.out.println(data_string);
-            }
-        }
     }
 
     /// The following function produces capitals information report filtered by different criteria
@@ -332,10 +283,12 @@ public class App
                         // Get the top N numbers capital information in the region by population
                         query = "SELECT city.Name, country.Name, city.Population, country.Continent, country.Region  FROM city, country WHERE country.Region='Eastern Africa' AND city.ID=country.Capital ORDER BY Population DESC LIMIT 10";
                     default:
-                        System.out.println("An unknown error has occurred");
+
+                        log.warning("An unknown error has occurred");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid selection. Please, try again.");
+                // Error message for invalid number selection
+                log.log(Level.SEVERE,"Invalid selection. Please, try again.",e);
             }
 
             ResultSet results = statement.executeQuery(query);
@@ -348,41 +301,14 @@ public class App
                 capital.setPopulation(results.getLong("city.Population"));
                 capital.setContinent(results.getString("country.Continent"));
                 capital.setRegion(results.getString("country.Region"));
-
                 capitals.add(capital);
             }
             return capitals;
         } catch (Exception e) {
-            // Error message
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get capitals details");
-            return null;
-        }
-    }
 
-    /**
-     * Prints a list of capitals.
-     * @param capitals The list of capitals to print
-     */
-    public void printCapitals(ArrayList<City> capitals)
-    {
-        if (capitals == null)
-        {
-            System.out.println("No capital information");
-            return;
-        }
-        else
-        {
-            // Print header
-            System.out.println(String.format("%-20s %-20s %-20s", "Name", "Country", "Population"));
-            // Loop over all countries in the list
-            for (City capital : capitals)
-            {
-                String data_string =
-                        String.format("%-20s %-20s %-20s",
-                                capital.getName(), capital.getCountryName(), capital.getPopulation());
-                System.out.println(data_string);
-            }
+            // Error message
+            log.log(Level.SEVERE,"Failed to get capitals details",e.getMessage());
+            return null;
         }
     }
 
@@ -393,7 +319,9 @@ public class App
 
             Statement statement = con.createStatement();
             // The following is a query to retrieve all the countries in the world
-            String query_city_ppl = null, query_existiong_ppl = null, criteria = null;
+            String query_city_ppl = null;
+            String query_existiong_ppl = null;
+            String criteria = null;
             try {
                 switch (choice) {
                     case 1:
@@ -415,10 +343,12 @@ public class App
                         query_existiong_ppl = "SELECT `country`.`Name`, SUM(`country`.`Population`) AS `TtlExistingPopulation` FROM `country` GROUP BY `country`.`Name` ORDER BY `country`.`Name` ASC";
                         break;
                     default:
-                        System.out.println("An unknown error has occurred");
+                        log.warning("An unknown error has occurred");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid selection. Please, try again.");
+
+                // Error message for invalid number selection
+                log.log(Level.SEVERE,"Failed to get capitals details",e.getMessage());
             }
             ArrayList<Dictionary> arr_population = new ArrayList<>();
             ResultSet results_existing_ppl = statement.executeQuery(query_existiong_ppl);
@@ -436,21 +366,21 @@ public class App
             // The following block pushes the retrieved data into the array list
             while(results_city_ppl.next()) {
                 addInfo: {
-                    for (int i = 0; i < arr_population.size(); i++) {
-                        if (arr_population.get(i).get("Criteria").toString().equals(results_city_ppl.getString(criteria))) {
+                    for (Dictionary arr_temp:arr_population) {
+                        if (arr_temp.get("Criteria").toString().equals(results_city_ppl.getString(criteria))) {
 
-                            arr_population.get(i).put("TtlCityPopulation",results_city_ppl.getLong("TtlCityPopulation"));
+                            arr_temp.put("TtlCityPopulation",results_city_ppl.getLong("TtlCityPopulation"));
                             Long temp_ttl_city = results_city_ppl.getLong("TtlCityPopulation");
-                            Long temp_ttl_ext = (Long) arr_population.get(i).get("TtlExistingPopulation");
+                            Long temp_ttl_ext = (Long) arr_temp.get("TtlExistingPopulation");
                             // Convert double to show two decimal place
                             double temp = temp_ttl_city*100;
                             String temp_per = String.format("%.2f", temp/temp_ttl_ext) + " %";
-                            arr_population.get(i).put("TtlCityPopulation (%)",temp_per);
+                            arr_temp.put("TtlCityPopulation (%)",temp_per);
                             Long temp_ttl_not = temp_ttl_ext - temp_ttl_city;
                             temp = temp_ttl_not*100;
                             temp_per = String.format("%.2f", temp/temp_ttl_ext) + " %";
-                            arr_population.get(i).put("TtlNotLivingPopulation",temp_ttl_not);
-                            arr_population.get(i).put("TtlNotLivingPopulation (%)",temp_per);
+                            arr_temp.put("TtlNotLivingPopulation",temp_ttl_not);
+                            arr_temp.put("TtlNotLivingPopulation (%)",temp_per);
                             break addInfo;
                         }
                     }
@@ -459,8 +389,7 @@ public class App
             return arr_population;
         } catch (Exception e) {
             // Error message
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get population details");
+            log.log(Level.WARNING,"Failed to get population details",e.getMessage());
             return null;
         }
     }
@@ -486,9 +415,91 @@ public class App
             return arr_lang;
         } catch (Exception e) {
             // Error message
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country language details");
+            log.log(Level.WARNING,"Failed to get population details",e.getMessage());
+
             return null;
+        }
+    }
+
+    /**
+     * Prints a list of countries.
+     * @param countries The list of countries to print
+     */
+    public void printCountries(ArrayList<Country> countries)
+    {
+        if (countries == null)
+        {
+            log.info("No countries");
+        }
+        else
+        {
+            // Print header
+            System.out.println(String.format("%5s %-10s %-20s %-20s %-35s %-20s %-20s","###", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+            // Loop over all countries in the list
+            int index =1;
+            for (Country country : countries)
+            {
+                String data_string =
+                        String.format("%5d %-10s %-20s %-20s %-35s %-20s %-20s",index,
+                                country.getCode(), country.getName(), country.getContinent(), country.getRegion(), country.getPopulation(), country.getCapital());
+                System.out.println(data_string);
+                index++;
+            }
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param Cities The list of capitals to print
+     */
+
+    public void viewCities (ArrayList<City> Cities) {
+        if (Cities == null)
+        {
+            log.info("No cities");
+        }
+        else {
+            System.out.println(String.format("%5s %-35s %-5s %-20s %-11s %-50s %-20s %-26s","###", "City Name", "Country Code", "District", "Population", "Country Name", "Country Continent", "Country Region"));
+            // Loop over all countries in the list
+            int index = 1;
+            for (City city : Cities)
+            {
+                String data_string =
+                        String.format("%-5d %-35s %-5s %-20s %-11s %-50s %-20s %-26s", index,
+                                city.getName(), city.getCountryCode(), city.getDistrict(),city.getPopulation(),city.getCountryName(),city.getCountryContinent(),city.getCountryRegion());
+                System.out.println(data_string);
+                index++;
+            }
+        }
+    }
+
+    /**
+     * Prints a list of capitals.
+     * @param capitals The list of capitals to print
+     */
+    public void printCapitals(ArrayList<City> capitals)
+    {
+        if (capitals == null)
+        {
+            log.info("No capital information");
+//            System.out.println("No capital information");
+        }
+        else
+        {
+            // Print header
+            System.out.println(String.format("%-5s %-20s %-20s %-20s", "###", "Name", "Country", "Population"));
+            // Loop over all countries in the list
+
+            int index = 0;
+            for (City capital : capitals)
+            {
+                String data_string =
+                        String.format("%5d %-20s %-20s %-20s", index,
+                                capital.getName(), capital.getCountryName(), capital.getPopulation());
+
+                System.out.println(data_string);
+                index++;
+            }
         }
     }
 
@@ -498,17 +509,19 @@ public class App
      */
     public void viewLanguages(ArrayList<CountryLanguage> langs) {
         if (langs == null) {
-            System.out.println("No language information");
-            return;
+            log.info("No language information");
+//            System.out.println("No language information");
         } else {
             // Print header
-            System.out.println(String.format("%-20s %-30s", "Language", "Number of Speakers"));
-            // Loop over all languages in the list
+            System.out.println(String.format("%5s %-20s %-30s","###", "Language", "Number of Speakers"));
+            // Loop over all languages in the
+            int index = 1;
             for (CountryLanguage lang : langs) {
                 String data_string =
-                        String.format("%-20s %-30s",
+                        String.format("%5d %-20s %30s", index,
                                 lang.getLanguage(), lang.getNoOfSpeakers());
                 System.out.println(data_string);
+                index++;
             }
         }
     }
@@ -521,22 +534,24 @@ public class App
     {
         if (population == null)
         {
-            System.out.println("No population information");
-            return;
+            log.info("No population information");
+//            System.out.println("No population information");
         }
         else
         {
             // Print header
-            System.out.println(String.format("%-35s %-35s %-35s %-35s %-40s %-40s", "Name", "Total Existing Population",
+            System.out.println(String.format("%5s %-35s %-35s %-35s %-35s %-40s %-40s", "###","Name", "Total Existing Population",
                     "Total Living Population In Cities", "Total Not Living Population",
                     "Total Living Population In Cities (%)", "Total Not Living Population (%)"));
             // Loop over all population in the list
-            for (int i = 0; i < population.size(); i++)
+            int index = 1;
+            for (Dictionary temp_ppl: population)
             {
                 String data_string =
-                        String.format("%-35s %-35s %-35s %-35s %-40s %-40s",population.get(i).get("Criteria"),
-                                population.get(i).get("TtlExistingPopulation"), population.get(i).get("TtlCityPopulation"),
-                                population.get(i).get("TtlNotLivingPopulation"), population.get(i).get("TtlCityPopulation (%)"),population.get(i).get("TtlNotLivingPopulation (%)"));
+                        String.format("%5d %-35s %35s %35s %35s %40s %40s",index,temp_ppl.get("Criteria"),
+                                temp_ppl.get("TtlExistingPopulation"), temp_ppl.get("TtlCityPopulation"),
+                                temp_ppl.get("TtlNotLivingPopulation"), temp_ppl.get("TtlCityPopulation (%)"),temp_ppl.get("TtlNotLivingPopulation (%)"));
+                index++;
                 System.out.println(data_string);
             }
         }
@@ -560,7 +575,7 @@ public class App
 //        ArrayList<Country> countries = a.countries(4);
 //        a.printCountries(countries);
 //
-//        // Countries Report Generation
+//        // Capitals Report Generation
 //        ArrayList<City> capitals = a.capitals(4);
 //        a.printCapitals(capitals);
 //

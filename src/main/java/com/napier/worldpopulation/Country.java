@@ -25,7 +25,7 @@ public class Country {
     /**
      * Declare Country's Capital
      */
-    private String capital;
+    private String Capital;
 
     /**
      * Declare Country's population
@@ -73,13 +73,9 @@ public class Country {
     private String HeadOfState;
 
     /**
-     * Declare Country's Capital
-     */
-    private int Capital;
-
-    /**
      * Declare Country's Code2
      */
+
     private String Code2;
 
     public String getCode() {
@@ -115,11 +111,11 @@ public class Country {
     }
 
     public String getCapital() {
-        return capital;
+        return Capital;
     }
 
-    public void setCapital(int capital) {
-        Capital = capital;
+    public void setCapital(String capital) {
+        this.Capital = capital;
     }
 
     public String getCode2() {
@@ -128,10 +124,6 @@ public class Country {
 
     public void setCode2(String code2) {
         Code2 = code2;
-    }
-
-    public void setCapital(String capital) {
-        this.capital = capital;
     }
 
     public Long getPopulation() {

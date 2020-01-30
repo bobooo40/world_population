@@ -21,7 +21,6 @@ public class AppIntegrationTests
     @Test
     void testGetCountry()
     {
-
         ArrayList<Country> countries = app.countries(4);
         app.printCountries(countries);
     }
@@ -116,6 +115,4 @@ public class AppIntegrationTests
         capitals.add(capital);
         app.printCapitals(capitals);
     }
-
-
 }

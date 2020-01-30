@@ -4,43 +4,37 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 
 public class AppTests {
     static App app;
 
     @BeforeAll
-    static void init()
-    {
+    static void init() {
         app = new App();
     }
-    
+
 
     // Testing null countries information
     @Test
-    void printCountriesInfoTestNull()
-    {
+    void printCountriesInfoTestNull() {
         app.printCountries(null);
     }
 
     // Testing view Cities by user input
     @Test
-    void viewCitiesInfoUserInputTest()
-    {
-        app.getCitiesInWorldByPopulationUserInput(1 ,0);
+    void viewCitiesInfoUserInputTest() {
+        app.getCitiesInWorldByPopulationUserInput(1, 0);
     }
 
     // Testing view Cities by invalid user input
     @Test
-    void viewCitiesInfoUserInputWValidNoTest()
-    {
-        app.getCitiesInWorldByPopulationUserInput(1 ,10);
+    void viewCitiesInfoUserInputWValidNoTest() {
+        app.getCitiesInWorldByPopulationUserInput(1, 10);
     }
 
     // Testing view Countries information
     @Test
-    void printCountriesInfoTest()
-    {
+    void printCountriesInfoTest() {
         ArrayList<Country> countries = new ArrayList<Country>();
         Country country = new Country();
         country.setCode("AGO");
@@ -55,8 +49,7 @@ public class AppTests {
 
     // Testing view null countries
     @Test
-    void printCountriesNullInfoTest()
-    {
+    void printCountriesNullInfoTest() {
         ArrayList<Country> countries = new ArrayList<Country>();
         Country country = new Country();
         country.setCode(null);
@@ -71,8 +64,7 @@ public class AppTests {
 
     // Testing view null capitals information
     @Test
-    void printCapitalInfoTestNull()
-    {
+    void printCapitalInfoTestNull() {
         app.printCapitals(null);
     }
 
@@ -84,8 +76,7 @@ public class AppTests {
 
     // Testing view capitals information
     @Test
-    void viewCapitalsInfoTest()
-    {
+    void viewCapitalsInfoTest() {
         ArrayList<City> capitals = new ArrayList<City>();
         City capital = new City();
         capital.setName("Tokyo");
@@ -97,8 +88,7 @@ public class AppTests {
 
     // Testing view null capitals information
     @Test
-    void viewCapitalNullInfoTest()
-    {
+    void viewCapitalNullInfoTest() {
         ArrayList<City> capitals = new ArrayList<City>();
         City capital = new City();
         capital.setName(null);
@@ -108,24 +98,15 @@ public class AppTests {
         app.printCapitals(capitals);
     }
 
-    // Testing view null cities information
+    //
     @Test
-    void printCitiesInfoTestNull()
-    {
-        app.viewCities(null);
-    }
-
-//
-    @Test
-    void viewCityInfoUserInputWValidNoTest()
-    {
-        app.viewCities(app.getCitiesInWorldByPopulationUserInput(1,10));
+    void viewCityInfoUserInputWValidNoTest() {
+        app.viewCities(app.getCitiesInWorldByPopulationUserInput(1, 10));
     }
 
     // Testing view cities information
     @Test
-    void viewCitiesInfoTest()
-    {
+    void viewCitiesInfoTest() {
         ArrayList<City> cities = new ArrayList<City>();
         City city = new City();
         city.setName("Tokyo");
@@ -135,10 +116,9 @@ public class AppTests {
         app.viewCities(cities);
     }
 
-    // Testing view null cities information
+    // Testing view null capitals information
     @Test
-    void viewCitiesNullInfoTest()
-    {
+    void viewCapitalsInfoTestNull() {
         ArrayList<City> cities = new ArrayList<City>();
         City city = new City();
         city.setName(null);
@@ -150,10 +130,9 @@ public class AppTests {
 
     //Testing view capital info
     @Test
-    void viewCapitalsNullInfoTest()
-    {
+    void viewCapitalsNullInfoTest() {
         ArrayList<City> capitals = new ArrayList<City>();
-        City capital = new City();  
+        City capital = new City();
         capital.setName(null);
         capital.setCountryName(null);
         capital.setPopulation(0L);
@@ -162,10 +141,10 @@ public class AppTests {
         capitals.add(capital);
         app.printCapitals(capitals);
     }
+
     //Testing view populationLON
-    @Test
-    void viewPopulationLON()
-    {
-        ArrayList<Dictionary> population = null;
-    }
+//    @Test
+//    void viewPopulationLON() {
+//        ArrayList<Dictionary> population = null;
+//    }
 }

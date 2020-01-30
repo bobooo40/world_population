@@ -1,13 +1,15 @@
-
-
 ---
 name: Feature request
 about: Request for feature (report generation, population)
 title: ''
 labels: enhancement
 assignees: bobooo40
-
 ---
+
+
+
+
+
 
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]

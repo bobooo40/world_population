@@ -15,7 +15,10 @@ User want to be able to produce a report on all the cities in the world arranged
 The solution of this feature request is in the branch of "features/produce-cities-report". THe user can find that solution for this feature request. 
 
 **Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+
+---
 
 **Additional context**
-Add any other context or screenshots about the feature request here.
+
+
+---

@@ -7,13 +7,15 @@ assignees: shoonlaiyee, khanttayza and oaksoephonekhant
 ---
 
 **Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+I want to be able to generate a report on the population of the people, people living in cities, and people not living in each of the following areas: continent, region, country.
 
 **Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+
+The solution for this feature request is in the branch of "features/produce-population-report". 
 
 **Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+--
 
 **Additional context**
-Add any other context or screenshots about the feature request here.
+---

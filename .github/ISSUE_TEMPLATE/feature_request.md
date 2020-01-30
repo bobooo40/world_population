@@ -1,9 +1,9 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
+about: Request for feature (report generation, population)
 title: ''
-labels: ''
-assignees: ''
+labels: enhancement
+assignees: bobooo40
 
 ---
 

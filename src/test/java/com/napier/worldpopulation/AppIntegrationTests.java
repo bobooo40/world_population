@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 public class AppIntegrationTests
 {
@@ -43,11 +44,27 @@ public class AppIntegrationTests
         app.viewCities(app.getCitiesInWorldByPopulationUserInput(1,10));
     }
 
-    // Testing view Cities by invalid user input
+    // Testing view Cities by valid user input
     @Test
     void viewCountriesInfoUserInputWValidNoTest() {
         Assert.assertNotNull(app.countries(1));
         ArrayList<Country> countries = app.countries(4);
         app.printCountries(countries);
+    }
+
+    // Testing view Cities by valid user input
+    @Test
+    void viewLanguageInfo() {
+        Assert.assertNotNull(app.languge());
+        ArrayList<CountryLanguage> langs = app.languge();
+        app.viewLanguages(langs);
+    }
+
+    // Testing view population information by valid user input
+    @Test
+    void viewPopulationInfoUserInputWValidNoTest() {
+        Assert.assertNotNull(app.populationLON(1));
+        ArrayList<Dictionary> population = app.populationLON(1);
+        app.viewPopulationLON(population);
     }
 }

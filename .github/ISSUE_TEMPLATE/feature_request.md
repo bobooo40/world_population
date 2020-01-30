@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Request for feature (report generation, population)
+about: Request for feature (report generation, top N populated countries)
 title: ''
 labels: enhancement
 assignees: bobooo40

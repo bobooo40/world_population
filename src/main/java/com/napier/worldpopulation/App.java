@@ -12,7 +12,7 @@ public class App
 {
 //    Connection to MySQL database
     private Connection con = null;
-    static Logger log = Logger.getLogger(App.class.getName());
+    static final Logger log = Logger.getLogger(App.class.getName());
 
     //    Connect to the MySQL database.
     public void connect(String location)
@@ -24,7 +24,7 @@ public class App
         }
         catch (ClassNotFoundException e)
         {
-//            Error message for sql driver connection
+            // Error message for sql driver connection
             log.log(Level.SEVERE,"Could not load SQL driver", e);
             System.exit(-1);
         }
@@ -74,7 +74,10 @@ public class App
         }
     }
 
-    // The following function produces countries information report filtered by different criteria
+    /**
+     * The following function produces countries information report filtered by different criteria.
+     * @param choice The list of countries to print
+     */
     public ArrayList<Country> countries(int choice) {
         try {
 
@@ -110,11 +113,13 @@ public class App
                     default:
                         // Error message for invalid number selection
                         log.warning("Invalid selection. Please, try again.");
+                        break;
                 }
             } catch (NumberFormatException e) {
                 // Error message for unknown error
                 log.log(Level.SEVERE,"An unknown error has occurred",e);
             }
+
 
             ResultSet results = statement.executeQuery(query);
             ArrayList<Country> countries = new ArrayList<Country>();
@@ -129,6 +134,8 @@ public class App
                 country.setCapital(results.getString("Capital")) ;
                 countries.add(country);
             }
+            statement.close();
+            results.close();
             return countries;
         } catch (Exception e) {
             // Error message
@@ -137,8 +144,10 @@ public class App
         }
     }
 
-    /// The following function produces cities information report filtered by different criteria
-
+    /**
+     * The following function produces cities information report filtered by different criteria.
+     * @param choice The list of cities to print
+     */
     public ArrayList<City> getCitiesInWorldByPopulation(int choice)  {
         try {
             Statement statement = con.createStatement();
@@ -169,27 +178,29 @@ public class App
                     default:
                         // Error message for invalid number selection
                         log.warning("Invalid selection. Please, try again.");
+                        break;
                 }
-            } catch (NumberFormatException e) {
-
+            }
+            catch (NumberFormatException e) {
                 // Error message for unknown error
                 log.log(Level.SEVERE,"An unknown error has occurred",e);
             }
-            return getCities(statement, query);
+            return getCities(query);
         }
         catch (Exception e) {
             // Error message
             log.log(Level.WARNING,"Failed to get cities details",e.getMessage());
             return null;
         }
+
     }
+
     /**
      * Prints a list of cities.
      * @param choice,number The list of countries to print
      */
     public ArrayList<City> getCitiesInWorldByPopulationUserInput(int choice,int number)  {
         try {
-            Statement statement = con.createStatement();
             // The following is a query to retrieve all the countries in the world
             String query = null;
             try {
@@ -218,12 +229,13 @@ public class App
                     default:
                         // Error message for invalid number selection
                         log.warning("Invalid selection. Please, try again.");
+                        break;
                 }
             } catch (NumberFormatException e) {
                 // Error message for unknown error
                 log.log(Level.SEVERE,"An unknown error has occurred",e);
             }
-            return getCities(statement, query);
+            return getCities(query);
         }
         catch (Exception e) {
             // Error message
@@ -232,13 +244,16 @@ public class App
         }
     }
 
-    // Generate the array list from the chosen query
-    public ArrayList<City> getCities(Statement statement, String query) throws SQLException {
+    /**
+     * Generate the array list from the chosen query
+     * @param query to give the desired results
+     */
+    public ArrayList<City> getCities(String query) throws SQLException {
+        Statement statement = con.createStatement();
         ResultSet results = statement.executeQuery(query);
         ArrayList<City> arr_c_world = new ArrayList<City>();
         while(results.next()) {
             City cities = new City();
-
             cities.setName(results.getString("city.Name"));
             cities.setCountryCode(results.getString("city.CountryCode"));
             cities.setDistrict(results.getString("city.District"));
@@ -248,11 +263,15 @@ public class App
             cities.setPopulation(results.getLong("city.Population"));
             arr_c_world.add(cities);
         }
+        statement.close();
+        results.close();
         return arr_c_world;
     }
 
-    /// The following function produces capitals information report filtered by different criteria
-
+    /**
+     * The following function produces capitals information report filtered by different criteria
+     * @param choice The list of capitals to print
+     */
     public ArrayList<City> capitals(int choice) {
         try {
 
@@ -287,6 +306,7 @@ public class App
                     default:
                         // Error message for invalid number selection
                         log.warning("Invalid selection. Please, try again.");
+                        break;
                 }
             } catch (NumberFormatException e) {
                 // Error message for unknown error
@@ -305,6 +325,8 @@ public class App
                 capital.setRegion(results.getString("country.Region"));
                 capitals.add(capital);
             }
+            statement.close();
+            results.close();
             return capitals;
         } catch (Exception e) {
 
@@ -314,15 +336,17 @@ public class App
         }
     }
 
-    /// The following function produces population who live in cities or not information report filtered by different criteria
-
+    /**
+     * The following function produces population who live in cities or not information report filtered by different criteria
+     * @param choice The list of population to print
+     */
     public ArrayList<Dictionary> populationLON(int choice) {
         try {
 
             Statement statement = con.createStatement();
             // The following is a query to retrieve all the countries in the world
             String query_city_ppl = null;
-            String query_existiong_ppl = null;
+            String query_ext_ppl = null;
             String criteria = null;
             try {
                 switch (choice) {
@@ -330,36 +354,37 @@ public class App
                         // Get city population information in the each continent
                         criteria = "country.Continent";
                         query_city_ppl = "SELECT `country`.`Continent`, SUM(`city`.`Population`) AS `TtlCityPopulation` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` GROUP BY `country`.`Continent`  ORDER BY `country`.`Continent` ASC ";
-                        query_existiong_ppl = "SELECT `country`.`Continent`, SUM(`country`.`Population`) AS `TtlExistingPopulation` FROM `country` GROUP BY `country`.`Continent`  ORDER BY `country`.`Continent` ASC ";
+                        query_ext_ppl = "SELECT `country`.`Continent`, SUM(`country`.`Population`) AS `TtlExistingPopulation` FROM `country` GROUP BY `country`.`Continent`  ORDER BY `country`.`Continent` ASC ";
                         break;
                     case 2:
                         // Get city population information in the each region
                         criteria = "country.Region";
                         query_city_ppl = "SELECT `country`.`Region`, SUM(`city`.`Population`) AS `TtlCityPopulation` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` GROUP BY `country`.`Region` ORDER BY `country`.`Region` ASC ";
-                        query_existiong_ppl = "SELECT `country`.`Region`, SUM(`country`.`Population`) AS `TtlExistingPopulation` FROM `country` GROUP BY `country`.`Region` ORDER BY `country`.`Region` ASC";
+                        query_ext_ppl = "SELECT `country`.`Region`, SUM(`country`.`Population`) AS `TtlExistingPopulation` FROM `country` GROUP BY `country`.`Region` ORDER BY `country`.`Region` ASC";
                         break;
                     case 3:
                         // Get city population information in the each country
                         criteria = "country.Name";
                         query_city_ppl = "SELECT `country`.`Name`, SUM(`city`.`Population`) AS `TtlCityPopulation` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` GROUP BY `country`.`Name` ORDER BY `country`.`Name` ASC ";
-                        query_existiong_ppl = "SELECT `country`.`Name`, SUM(`country`.`Population`) AS `TtlExistingPopulation` FROM `country` GROUP BY `country`.`Name` ORDER BY `country`.`Name` ASC";
+                        query_ext_ppl = "SELECT `country`.`Name`, SUM(`country`.`Population`) AS `TtlExistingPopulation` FROM `country` GROUP BY `country`.`Name` ORDER BY `country`.`Name` ASC";
                         break;
                     default:
                         // Error message for invalid number selection
                         log.warning("Invalid selection. Please, try again.");
+                        break;
                 }
             } catch (NumberFormatException e) {
                 // Error message for unknown error
                 log.log(Level.SEVERE,"An unknown error has occurred",e);
             }
             ArrayList<Dictionary> arr_population = new ArrayList<>();
-            ResultSet results_existing_ppl = statement.executeQuery(query_existiong_ppl);
+            ResultSet rst_ext_ppl = statement.executeQuery(query_ext_ppl);
 
             // The following block pushes the retrieved data into the array list
-            while(results_existing_ppl.next()) {
+            while(rst_ext_ppl.next()) {
                 Dictionary temp = new Hashtable();
-                temp.put("TtlExistingPopulation",results_existing_ppl.getLong("TtlExistingPopulation"));
-                temp.put("Criteria",results_existing_ppl.getString(criteria));
+                temp.put("TtlExistingPopulation",rst_ext_ppl.getLong("TtlExistingPopulation"));
+                temp.put("Criteria",rst_ext_ppl.getString(criteria));
                 temp.put("TtlCityPopulation",0L);
                 arr_population.add(temp);
             }
@@ -388,6 +413,9 @@ public class App
                     }
                 }
             }
+            statement.close();
+            rst_ext_ppl.close();
+            results_city_ppl.close();
             return arr_population;
         } catch (Exception e) {
             // Error message
@@ -396,12 +424,12 @@ public class App
         }
     }
 
-    /// The following function produces population who speak different langauge report filtered by different criteria
-
+    /**
+     * The following function produces population who speak different langauge report filtered by different criteria
+     */
     public ArrayList<CountryLanguage> language()
     {
         try {
-
             Statement statement = con.createStatement();
             // The following is a query to retrieve all the countries in the world
             String query="SELECT `countrylanguage`.`Language`, SUM(`country`.`Population`*(`countrylanguage`.`Percentage`/100)) AS `NoOfSpeakers` FROM `countrylanguage` LEFT JOIN `country` ON `countrylanguage`.`CountryCode` = `country`.`Code` WHERE `countrylanguage`.`Language`= 'Arabic' OR `countrylanguage`.`Language`='Chinese' OR `countrylanguage`.`Language`= 'English' OR `countrylanguage`.`Language`= 'Hindi' OR `countrylanguage`.`Language`= 'Spanish' GROUP BY `countrylanguage`.`Language` ORDER BY `NoOfSpeakers` DESC ";
@@ -415,11 +443,11 @@ public class App
                 lang.setNoOfSpeakers(results_lang.getLong("NoOfSpeakers"));
                 arr_lang.add(lang);
             }
+            statement.close();
             return arr_lang;
         } catch (Exception e) {
             // Error message
             log.log(Level.WARNING,"Failed to get language details",e.getMessage());
-
             return null;
         }
     }
@@ -455,21 +483,20 @@ public class App
      * Prints a list of cities.
      * @param Cities The list of capitals to print
      */
-
     public void viewCities (ArrayList<City> Cities) {
         if (Cities == null)
         {
             log.info("No cities");
         }
         else {
-            System.out.println(String.format("%5s %-35s %-5s %-20s %-11s %-50s %-20s %-26s","###", "City Name", "Country Code", "District", "Population", "Country Name", "Country Continent", "Country Region"));
+            System.out.println(String.format("%5s %-35s %-10s %-20s %-11s %-50s %-20s %-26s","###", "City Name", "Country Code", "District", "Population", "Country Name", "Country Continent", "Country Region"));
             // Loop over all countries in the list
             int index = 1;
             for (City city : Cities)
             {
                 String data_string =
-                        String.format("%-5d %-35s %-5s %-20s %-11s %-50s %-20s %-26s", index,
-                                city.getName(), city.getCountryCode(), city.getDistrict(),city.getPopulation(),city.getCountryName(),city.getCountryContinent(),city.getCountryRegion());
+                        String.format("%5d %-35s %-10s %-20s %-11s %-50s %-20s %-26s", index,
+                                city.getName(), city.getCountryCode(), city.getDistrict(),city.getPopulation(),city.getCountryName(),city.getCountryContinent(),city.getRegion());
                 System.out.println(data_string);
                 index++;
             }
@@ -485,14 +512,12 @@ public class App
         if (capitals == null)
         {
             log.info("No capital information");
-//            System.out.println("No capital information");
         }
         else
         {
             // Print header
             System.out.println(String.format("%-5s %-20s %-20s %-20s", "###", "Name", "Country", "Population"));
             // Loop over all countries in the list
-
             int index = 0;
             for (City capital : capitals)
             {
@@ -507,13 +532,12 @@ public class App
     }
 
     /**
-     * Prints a list of poeple who speak different languages.
+     * Prints a list of people who speak different languages.
      * @param langs The list of population to print
      */
     public void viewLanguages(ArrayList<CountryLanguage> langs) {
         if (langs == null) {
             log.info("No language information");
-//            System.out.println("No language information");
         } else {
             // Print header
             System.out.println(String.format("%5s %-20s %-30s","###", "Language", "Number of Speakers"));
@@ -538,7 +562,6 @@ public class App
         if (population == null)
         {
             log.info("No population information");
-//            System.out.println("No population information");
         }
         else
         {
@@ -563,46 +586,46 @@ public class App
     public static void main(String[] args)
     {
         // Create new Application
-        App a = new App();
+        App app = new App();
 
         // Connect to database
         if (args.length < 1)
         {
-            a.connect("localhost:33060");
+            app.connect("localhost:33060");
         }
         else
         {
-            a.connect(args[0]);
+            app.connect(args[0]);
         }
         // Countries Report Generation
-//        ArrayList<Country> countries = a.countries(4);
-//        a.printCountries(countries);
+//        ArrayList<Country> countries = app.countries(4);
+//        app.printCountries(countries);
 //
 //        // Capitals Report Generation
-//        ArrayList<City> capitals = a.capitals(4);
-//        a.printCapitals(capitals);
+//        ArrayList<City> capitals = app.capitals(4);
+//        app.printCapitals(capitals);
 //
 //        // All the cities information by population
-//        a.viewCities(a.getCitiesInWorldByPopulation(1));
-//        a.viewCities(a.getCitiesInWorldByPopulation(2));
-//        a.viewCities(a.getCitiesInWorldByPopulation(3));
-//        a.viewCities(a.getCitiesInWorldByPopulation(4));
+//        app.viewCities(app.getCitiesInWorldByPopulation(1));
+//        app.viewCities(app.getCitiesInWorldByPopulation(2));
+//        app.viewCities(app.getCitiesInWorldByPopulation(3));
+//        app.viewCities(app.getCitiesInWorldByPopulation(4));
 //
-//        // All the top cities information by population
-//        a.viewCities(a.getCitiesInWorldByPopulationUserInput(1,10));
-//        a.viewCities(a.getCitiesInWorldByPopulationUserInput(2,10));
-//        a.viewCities(a.getCitiesInWorldByPopulationUserInput(3,10));
-//        a.viewCities(a.getCitiesInWorldByPopulationUserInput(4,10));
+        // All the top cities information by population
+        app.viewCities(app.getCitiesInWorldByPopulationUserInput(1,10));
+        app.viewCities(app.getCitiesInWorldByPopulationUserInput(2,10));
+        app.viewCities(app.getCitiesInWorldByPopulationUserInput(3,10));
+        app.viewCities(app.getCitiesInWorldByPopulationUserInput(4,10));
 
         // All the population information who live in the cities nor not
-        a.viewPopulationLON(a.populationLON(1));
-        a.viewPopulationLON(a.populationLON(2));
-        a.viewPopulationLON(a.populationLON(3));
+        app.viewPopulationLON(app.populationLON(1));
+        app.viewPopulationLON(app.populationLON(2));
+        app.viewPopulationLON(app.populationLON(3));
 
-        a.viewLanguages(a.language());
+        app.viewLanguages(app.language());
 
         // Disconnect from database
-        a.disconnect();
+        app.disconnect();
     }
 
 }

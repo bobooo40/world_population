@@ -78,6 +78,10 @@ public class Country {
 
     private String Code2;
 
+    /**
+     * Declare getter and setter for all relevant attributes
+     */
+
     public String getCode() {
         return code;
     }

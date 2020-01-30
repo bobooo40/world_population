@@ -27,6 +27,9 @@ public class CountryLanguage {
      */
     private Long NoOfSpeakers;
 
+    /**
+     * Declare getter and setter for all relevant attributes
+     */
     public String getCountryCode() {
         return CountryCode;
     }

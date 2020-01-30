@@ -42,10 +42,10 @@ public class City {
      */
     private String CountryContinent;
 
+
     /**
-     * Declare Country's Region
+     * Declare getter and setter for all relevant attributes
      */
-    private String CountryRegion;
 
     public String getName() {
         return Name;
@@ -111,11 +111,4 @@ public class City {
         CountryContinent = countryContinent;
     }
 
-    public String getCountryRegion() {
-        return CountryRegion;
-    }
-
-    public void setCountryRegion(String countryRegion) {
-        CountryRegion = countryRegion;
-    }
 }

@@ -12,14 +12,17 @@ assignees: shoonlaiyee
 
 
 **Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+The organisation must have access to the population of the people (living in the world, continent, region, country, district, city).
 
 **Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+
+A solution is in the branch of "features/produce-population-report". The user can look at the solution of this feature request.
+
 
 **Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+---
+
 
 **Additional context**
-Add any other context or screenshots about the feature request here.
-
+----

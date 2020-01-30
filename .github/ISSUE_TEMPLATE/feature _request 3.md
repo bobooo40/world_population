@@ -12,14 +12,16 @@ assignees: bobooo40
 
 
 **Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+The organisation wants to be able to generate a report on the number of people who speak the languages in the parentheses (Chinese, English, Hindi, Spanish, Arabic) from greatest number to smallest, including the percentage of the world population.
 
 **Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+
+The solution for this feature request is in the branch of "features/produce-population-report". 
 
 **Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+--
 
 **Additional context**
-Add any other context or screenshots about the feature request here.
+---
 

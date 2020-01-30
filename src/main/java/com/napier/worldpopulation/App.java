@@ -108,11 +108,12 @@ public class App
                         query = "SELECT * FROM country WHERE Region='Eastern Africa' ORDER BY Population DESC LIMIT 10";
                         break;
                     default:
-                        log.warning("An unknown error has occurred");
+                        // Error message for invalid number selection
+                        log.warning("Invalid selection. Please, try again.");
                 }
             } catch (NumberFormatException e) {
-                // Error message for invalid number selection
-                log.log(Level.SEVERE,"Invalid selection. Please, try again.",e);
+                // Error message for unknown error
+                log.log(Level.SEVERE,"An unknown error has occurred",e);
             }
 
             ResultSet results = statement.executeQuery(query);
@@ -166,12 +167,13 @@ public class App
                         query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `country`.`Name` ASC, `city`.`Population` DESC ";
                         break;
                     default:
-                        log.warning("An unknown error has occurred");
+                        // Error message for invalid number selection
+                        log.warning("Invalid selection. Please, try again.");
                 }
             } catch (NumberFormatException e) {
 
-                // Error message for invalid number selection
-                log.log(Level.SEVERE,"Invalid selection. Please, try again.",e);
+                // Error message for unknown error
+                log.log(Level.SEVERE,"An unknown error has occurred",e);
             }
             return getCities(statement, query);
         }
@@ -214,12 +216,12 @@ public class App
                         break;
 
                     default:
-                        log.warning("An unknown error has occurred");
+                        // Error message for invalid number selection
+                        log.warning("Invalid selection. Please, try again.");
                 }
             } catch (NumberFormatException e) {
-
-                // Error message for invalid number selection
-                log.log(Level.SEVERE,"Invalid selection. Please, try again.",e);
+                // Error message for unknown error
+                log.log(Level.SEVERE,"An unknown error has occurred",e);
             }
             return getCities(statement, query);
         }
@@ -283,12 +285,12 @@ public class App
                         // Get the top N numbers capital information in the region by population
                         query = "SELECT city.Name, country.Name, city.Population, country.Continent, country.Region  FROM city, country WHERE country.Region='Eastern Africa' AND city.ID=country.Capital ORDER BY Population DESC LIMIT 10";
                     default:
-
-                        log.warning("An unknown error has occurred");
+                        // Error message for invalid number selection
+                        log.warning("Invalid selection. Please, try again.");
                 }
             } catch (NumberFormatException e) {
-                // Error message for invalid number selection
-                log.log(Level.SEVERE,"Invalid selection. Please, try again.",e);
+                // Error message for unknown error
+                log.log(Level.SEVERE,"An unknown error has occurred",e);
             }
 
             ResultSet results = statement.executeQuery(query);
@@ -343,12 +345,12 @@ public class App
                         query_existiong_ppl = "SELECT `country`.`Name`, SUM(`country`.`Population`) AS `TtlExistingPopulation` FROM `country` GROUP BY `country`.`Name` ORDER BY `country`.`Name` ASC";
                         break;
                     default:
-                        log.warning("An unknown error has occurred");
+                        // Error message for invalid number selection
+                        log.warning("Invalid selection. Please, try again.");
                 }
             } catch (NumberFormatException e) {
-
-                // Error message for invalid number selection
-                log.log(Level.SEVERE,"Failed to get capitals details",e.getMessage());
+                // Error message for unknown error
+                log.log(Level.SEVERE,"An unknown error has occurred",e);
             }
             ArrayList<Dictionary> arr_population = new ArrayList<>();
             ResultSet results_existing_ppl = statement.executeQuery(query_existiong_ppl);
@@ -396,7 +398,8 @@ public class App
 
     /// The following function produces population who speak different langauge report filtered by different criteria
 
-    public ArrayList<CountryLanguage> languge() {
+    public ArrayList<CountryLanguage> language()
+    {
         try {
 
             Statement statement = con.createStatement();
@@ -415,7 +418,7 @@ public class App
             return arr_lang;
         } catch (Exception e) {
             // Error message
-            log.log(Level.WARNING,"Failed to get population details",e.getMessage());
+            log.log(Level.WARNING,"Failed to get language details",e.getMessage());
 
             return null;
         }
@@ -596,7 +599,7 @@ public class App
         a.viewPopulationLON(a.populationLON(2));
         a.viewPopulationLON(a.populationLON(3));
 
-        a.viewLanguages(a.languge());
+        a.viewLanguages(a.language());
 
         // Disconnect from database
         a.disconnect();

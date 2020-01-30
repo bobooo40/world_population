@@ -23,8 +23,8 @@ public class AppIntegrationTests
     @Test
     void testGetCountry()
     {
-        Assert.assertNotNull(app.countries(4));
         ArrayList<Country> countries = app.countries(4);
+        Assert.assertNotNull(countries);
         app.printCountries(countries);
     }
 
@@ -32,39 +32,40 @@ public class AppIntegrationTests
     @Test
     void testGetCapital()
     {
-        Assert.assertNotNull(app.capitals(4));
         ArrayList<City> capitals = app.capitals(4);
+        Assert.assertNotNull(capitals);
         app.printCapitals(capitals);
     }
 
     // Testing view Cities by user input
     @Test
     void getCityInfoUserInputWValidNoTest() {
-        Assert.assertNotNull(app.getCitiesInWorldByPopulationUserInput(1, 10));
-        app.viewCities(app.getCitiesInWorldByPopulationUserInput(1,10));
+        ArrayList<City> cities = app.getCitiesInWorldByPopulationUserInput(1, 10);
+        Assert.assertNotNull(cities);
+        app.viewCities(cities);
     }
 
     // Testing view Cities by valid user input
     @Test
     void viewCountriesInfoUserInputWValidNoTest() {
-        Assert.assertNotNull(app.countries(1));
         ArrayList<Country> countries = app.countries(4);
+        Assert.assertNotNull(countries);
         app.printCountries(countries);
     }
 
-    // Testing view Cities by valid user input
+    // Testing view language information
     @Test
     void viewLanguageInfo() {
-        Assert.assertNotNull(app.languge());
-        ArrayList<CountryLanguage> langs = app.languge();
+        ArrayList<CountryLanguage> langs = app.language();
+        Assert.assertNotNull(langs);
         app.viewLanguages(langs);
     }
 
-    // Testing view population information by valid user input
+    // Testing view language information
     @Test
-    void viewPopulationInfoUserInputWValidNoTest() {
-        Assert.assertNotNull(app.populationLON(1));
-        ArrayList<Dictionary> population = app.populationLON(1);
-        app.viewPopulationLON(population);
+    void viewPopulationInfo() {
+        ArrayList<Dictionary> populationLON = app.populationLON(1);
+        Assert.assertNotNull(populationLON);
+        app.viewPopulationLON(populationLON);
     }
 }

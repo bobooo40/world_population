@@ -7,10 +7,12 @@ assignees: khanttayza and shoonlaiyee
 ---
 
 **Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+User want to be able to produce a report on all the cities in the world arranged by the parameters in the parentheses (world, continent, region, country, district) organised by the largest population to the smallest.
 
 **Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+
+The solution of this feature request is in the branch of "features/produce-cities-report". THe user can find that solution for this feature request. 
 
 **Describe alternatives you've considered**
 A clear and concise description of any alternative solutions or features you've considered.

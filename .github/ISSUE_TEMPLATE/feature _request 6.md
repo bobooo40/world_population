@@ -9,13 +9,17 @@ assignees: khanttayza and shoonlaiyee
 ---
 
 **Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+User want to have access to the report on all the capital cities specified by areas in the parentheses (in the world, in a continent, or in a region) organized by the largest population to the smallest.
 
 **Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+
+The solution of this feature report can be seen in the branch of "features/capitals-cities-report".
 
 **Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+
+---
 
 **Additional context**
-Add any other context or screenshots about the feature request here.
+
+---

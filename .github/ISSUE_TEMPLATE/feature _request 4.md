@@ -3,7 +3,7 @@ name: Feature request
 about: Request for feature (report generation, population of people living and not living in cities)
 title: ''
 labels: enhancement
-assignees: bobooo40
+assignees: shoonlaiyee, khanttayza and oaksoephonekhant 
 ---
 
 **Is your feature request related to a problem? Please describe.**

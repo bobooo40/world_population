@@ -1,5 +1,6 @@
 package com.napier.worldpopulation;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -11,27 +12,16 @@ public class AppTests {
     @BeforeAll
     static void init() {
         app = new App();
+        app.connect("localhost:33060");
+
     }
 
-
+    // Testing countries information
     // Testing null countries information
     @Test
     void printCountriesInfoTestNull() {
         app.printCountries(null);
     }
-
-    // Testing view Cities by user input
-    @Test
-    void viewCitiesInfoUserInputTest() {
-        app.getCitiesInWorldByPopulationUserInput(1, 0);
-    }
-
-    // Testing view Cities by invalid user input
-    @Test
-    void viewCitiesInfoUserInputWValidNoTest() {
-        app.getCitiesInWorldByPopulationUserInput(1, 10);
-    }
-
     // Testing view Countries information
     @Test
     void printCountriesInfoTest() {
@@ -61,6 +51,57 @@ public class AppTests {
         countries.add(country);
         app.printCountries(countries);
     }
+    @Test
+    void viewCountriesInfoUserInputWNValidNoTest() {
+        Assert.assertNull(app.countries(10));
+        ArrayList<Country> countries = app.countries(10);
+        app.printCountries(countries);
+    }
+
+    // Testing view Cities by invalid user input
+    @Test
+    void viewCountriesInfoUserInputWValidNoTest() {
+        Assert.assertNotNull(app.countries(1));
+        ArrayList<Country> countries = app.countries(4);
+        app.printCountries(countries);
+    }
+
+    // Testing Cities information
+    // Testing view Cities information
+    @Test
+    void viewCitiesInfoTest() {
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.setName("Tokyo");
+        city.setCountryCode("JPN");
+        city.setPopulation(7980230L);
+        cities.add(city);
+        app.viewCities(cities);
+    }
+    @Test
+    void viewCitiesNullInfoTest() {
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.setName(null);
+        city.setCountryCode(null);
+        city.setPopulation(0L);
+        cities.add(city);
+        app.printCapitals(cities);
+    }
+
+    // Testing view Cities by user input
+    @Test
+    void getCityInfoUserInputWValidNoTest() {
+        Assert.assertNotNull(app.getCitiesInWorldByPopulationUserInput(1, 10));
+        app.viewCities(app.getCitiesInWorldByPopulationUserInput(1,10));
+    }
+
+    @Test
+    void getCityInfoUserInputWNValidNoTest() {
+        Assert.assertNull(app.getCitiesInWorldByPopulationUserInput(10, 10));
+        app.viewCities(app.getCitiesInWorldByPopulationUserInput(10,10));
+    }
+
 
     // Testing view null capitals information
     @Test
@@ -96,24 +137,6 @@ public class AppTests {
         capital.setPopulation(0L);
         capitals.add(capital);
         app.printCapitals(capitals);
-    }
-
-    //
-    @Test
-    void viewCityInfoUserInputWValidNoTest() {
-        app.viewCities(app.getCitiesInWorldByPopulationUserInput(1, 10));
-    }
-
-    // Testing view cities information
-    @Test
-    void viewCitiesInfoTest() {
-        ArrayList<City> cities = new ArrayList<City>();
-        City city = new City();
-        city.setName("Tokyo");
-        city.setCountryCode("JPN");
-        city.setPopulation(7980230L);
-        cities.add(city);
-        app.viewCities(cities);
     }
 
     // Testing view null capitals information

@@ -6,15 +6,19 @@ labels: enhancement
 assignees: khanttayza 
 
 ---
-
 **Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+User want to be able to produce a report on all the countries according to the variables in the parentheses (their region, their continent, the world) arranged in the order of the largest population to the smallest.
 
 **Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+
+The solution of this feature request is in the branch of "features/produce-countries-report". User can find the solution in there.
 
 **Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+
+---
 
 **Additional context**
-Add any other context or screenshots about the feature request here.
+
+
+---

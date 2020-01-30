@@ -1,4 +1,6 @@
 FROM openjdk:latest
-COPY ./target/seMethods.jar /tmp
+COPY ./target/world_population.jar /tmp
+#working directory of a Docker container
 WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "seMethods.jar", "db:3306"]
+#tells docker to run application, first value is command and the last two are parameters
+ENTRYPOINT ["java", "-jar", "world_population.jar"]

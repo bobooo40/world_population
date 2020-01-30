@@ -12,7 +12,6 @@ public class AppTests {
     @BeforeAll
     static void init() {
         app = new App();
-        app.connect("localhost:33060");
 
     }
 
@@ -58,14 +57,6 @@ public class AppTests {
         app.printCountries(countries);
     }
 
-    // Testing view Cities by invalid user input
-    @Test
-    void viewCountriesInfoUserInputWValidNoTest() {
-        Assert.assertNotNull(app.countries(1));
-        ArrayList<Country> countries = app.countries(4);
-        app.printCountries(countries);
-    }
-
     // Testing Cities information
     // Testing view Cities information
     @Test
@@ -89,12 +80,6 @@ public class AppTests {
         app.printCapitals(cities);
     }
 
-    // Testing view Cities by user input
-    @Test
-    void getCityInfoUserInputWValidNoTest() {
-        Assert.assertNotNull(app.getCitiesInWorldByPopulationUserInput(1, 10));
-        app.viewCities(app.getCitiesInWorldByPopulationUserInput(1,10));
-    }
 
     @Test
     void getCityInfoUserInputWNValidNoTest() {

@@ -673,13 +673,9 @@ public class App
 //        // All the population information of desired language
 //        app.viewLanguages(app.language());
         // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String main_c = null;
-        do{
-            app.menu();
-            System.out.print("\n Please choose desired number(1~7) : ");
-            // main_c = br.readLine();
-            app.perform(1, app);
-        } while (main_c != "n");
+
+        app.menu();
+        app.perform(1, app);
 
         // Disconnect from database
         app.disconnect();

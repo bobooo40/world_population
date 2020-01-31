@@ -1,6 +1,9 @@
 package com.napier.worldpopulation;
 //import required packages
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -650,16 +653,16 @@ public class App
 //        app.printCapitals(app.capitals(6,"Caribbean",10));
 
         // All the cities information by population including top number
-        app.viewCities(app.getCitiesInWorldByPopulation(1, null, 0));
-        app.viewCities(app.getCitiesInWorldByPopulation(2,"Asia",0));
-        app.viewCities(app.getCitiesInWorldByPopulation(3,"Caribbean",0));
-        app.viewCities(app.getCitiesInWorldByPopulation(4,"North Korea",0));
-        app.viewCities(app.getCitiesInWorldByPopulation(5,"kabol",0));
-        app.viewCities(app.getCitiesInWorldByPopulation(6, null, 10));
-        app.viewCities(app.getCitiesInWorldByPopulation(7,"Asia",10));
-        app.viewCities(app.getCitiesInWorldByPopulation(8,"Caribbean",10));
-        app.viewCities(app.getCitiesInWorldByPopulation(9,"North Korea",10));
-        app.viewCities(app.getCitiesInWorldByPopulation(10,"kabol",10));
+    //    app.viewCities(app.getCitiesInWorldByPopulation(1, null, 0));
+        //app.viewCities(app.getCitiesInWorldByPopulation(2,"Asia",0));
+        //app.viewCities(app.getCitiesInWorldByPopulation(3,"Caribbean",0));
+        //app.viewCities(app.getCitiesInWorldByPopulation(4,"North Korea",0));
+        //app.viewCities(app.getCitiesInWorldByPopulation(5,"kabol",0));
+        //app.viewCities(app.getCitiesInWorldByPopulation(6, null, 10));
+        //app.viewCities(app.getCitiesInWorldByPopulation(7,"Asia",10));
+        //app.viewCities(app.getCitiesInWorldByPopulation(8,"Caribbean",10));
+        //app.viewCities(app.getCitiesInWorldByPopulation(9,"North Korea",10));
+        //app.viewCities(app.getCitiesInWorldByPopulation(10,"kabol",10));
 
 
 //        // All the population information who live in the cities nor not
@@ -669,6 +672,14 @@ public class App
 //
 //        // All the population information of desired language
 //        app.viewLanguages(app.language());
+        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String main_c = null;
+        do{
+            app.menu();
+            System.out.print("\n Please choose desired number(1~7) : ");
+            // main_c = br.readLine();
+            app.perform(1, app);
+        } while (main_c != "n");
 
         // Disconnect from database
         app.disconnect();

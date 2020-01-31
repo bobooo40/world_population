@@ -54,8 +54,8 @@ public class AppTests {
     }
     @Test
     void viewCountriesInfoUserInputWNValidNoTest() {
-        Assert.assertNull(app.countries(10));
-        ArrayList<Country> countries = app.countries(10);
+        Assert.assertNull(app.countries(15,null, 10));
+        ArrayList<Country> countries = app.countries(15, null,10);
         app.printCountries(countries);
     }
 
@@ -84,8 +84,8 @@ public class AppTests {
 
     @Test
     void getCityInfoUserInputWNValidNoTest() {
-        Assert.assertNull(app.getCitiesInWorldByPopulationUserInput(10, 10));
-        app.viewCities(app.getCitiesInWorldByPopulationUserInput(10,10));
+        Assert.assertNull(app.getCitiesInWorldByPopulation(15, null,10));
+        app.viewCities(app.getCitiesInWorldByPopulation(15, null,10));
     }
 
 
@@ -148,7 +148,7 @@ public class AppTests {
     void getCountriesExceptionTest() {
         exception.expect(Exception.class);
         exception.expectMessage("Failed to get countries details");
-        app.countries(1);
+        app.countries(1, null, 10);
     }
 
     // Testing exception for get cities information
@@ -156,23 +156,16 @@ public class AppTests {
     void getCitiesExceptionTest() {
         exception.expect(Exception.class);
         exception.expectMessage("Failed to get cities details");
-        app.getCitiesInWorldByPopulation(1);
+        app.getCitiesInWorldByPopulation(1, null, 10);
     }
 
-    // Testing exception for get cities information with user input
-    @Test
-    void getCitiesInWorldByPopulationUserInputExceptionTest() {
-        exception.expect(Exception.class);
-        exception.expectMessage("Failed to get cities details");
-        app.getCitiesInWorldByPopulationUserInput(1,10);
-    }
 
     // Testing exception for get capitals information
     @Test
     void getCapitalsExceptionTest() {
         exception.expect(Exception.class);
         exception.expectMessage("Failed to get capitals details");
-        app.capitals(1);
+        app.capitals(1, null, 10);
     }
 
     // Testing exception for get population information
@@ -188,7 +181,7 @@ public class AppTests {
     void getLanguageExceptionTest() {
         exception.expect(Exception.class);
         exception.expectMessage("Failed to get language details");
-        app.populationLON(1);
+        app.language();
     }
 
 }

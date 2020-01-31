@@ -23,7 +23,15 @@ public class AppIntegrationTests
     @Test
     void testGetCountry()
     {
-        ArrayList<Country> countries = app.countries(4);
+        ArrayList<Country> countries = app.countries(2,"Asia", 10);
+        Assert.assertNotNull(countries);
+        app.printCountries(countries);
+    }
+
+    // Testing view country by valid user input
+    @Test
+    void viewCountriesInfoUserInputWValidNoTest() {
+        ArrayList<Country> countries = app.countries(2,"Asia", 10);
         Assert.assertNotNull(countries);
         app.printCountries(countries);
     }
@@ -32,7 +40,16 @@ public class AppIntegrationTests
     @Test
     void testGetCapital()
     {
-        ArrayList<City> capitals = app.capitals(4);
+        ArrayList<City> capitals = app.capitals(2,"Asia", 10);
+        Assert.assertNotNull(capitals);
+        app.printCapitals(capitals);
+    }
+
+    // Testing get capital information by choice
+    @Test
+    void testGetCapitalWValidNoTest()
+    {
+        ArrayList<City> capitals = app.capitals(4,"Asia", 10);
         Assert.assertNotNull(capitals);
         app.printCapitals(capitals);
     }
@@ -40,17 +57,9 @@ public class AppIntegrationTests
     // Testing view Cities by user input
     @Test
     void getCityInfoUserInputWValidNoTest() {
-        ArrayList<City> cities = app.getCitiesInWorldByPopulationUserInput(1, 10);
+        ArrayList<City> cities = app.getCitiesInWorldByPopulation(6, "Asia",10);
         Assert.assertNotNull(cities);
         app.viewCities(cities);
-    }
-
-    // Testing view Cities by valid user input
-    @Test
-    void viewCountriesInfoUserInputWValidNoTest() {
-        ArrayList<Country> countries = app.countries(4);
-        Assert.assertNotNull(countries);
-        app.printCountries(countries);
     }
 
     // Testing view language information

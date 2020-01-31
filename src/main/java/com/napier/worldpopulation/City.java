@@ -1,54 +1,114 @@
 package com.napier.worldpopulation;
-// Declare public function for City informaiton
+// Declare public function for City information
 public class City {
 
     /**
      * Declare City's name
      */
-    public String Name;
-
-    /**
-     * Declare City's country name
-     */
-    public String Country;
+    private String Name;
 
     /**
      * Declare City's continent
      */
-    public String Continent;
+    private String Continent;
 
     /**
      * Declare City's Region
      */
-    public String Region;
+    private String Region;
 
     /**
      * Declare City's dictrict
      */
-    public String District;
+    private String District;
 
     /**
      * Declare City's population
      */
-    public int Population;
+    private Long Population;
 
     /**
      * Declare Country's Code
      */
-    public String CountryCode;
+    private String CountryCode;
 
     /**
-     * Declare Country's Name
+     * Declare Country Name
      */
-    public String CountryName;
+    private String CountryName;
 
     /**
      * Declare Country's Continent
      */
-    public String CountryContinent;
+    private String CountryContinent;
+
 
     /**
-     * Declare Country's Region
+     * Declare getter and setter for all relevant attributes
      */
-    public String CountryRegion;
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getContinent() {
+        return Continent;
+    }
+
+    public void setContinent(String continent) {
+        Continent = continent;
+    }
+
+    public String getRegion() {
+        return Region;
+    }
+
+    public void setRegion(String region) {
+        Region = region;
+    }
+
+    public String getDistrict() {
+        return District;
+    }
+
+    public void setDistrict(String district) {
+        District = district;
+    }
+
+    public Long getPopulation() {
+        return Population;
+    }
+
+    public void setPopulation(Long population) {
+        Population = population;
+    }
+
+    public String getCountryCode() {
+        return CountryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        CountryCode = countryCode;
+    }
+
+    public String getCountryName() {
+        return CountryName;
+    }
+
+    public void setCountryName(String countryName) {
+        CountryName = countryName;
+    }
+
+    public String getCountryContinent() {
+        return CountryContinent;
+    }
+
+    public void setCountryContinent(String countryContinent) {
+        CountryContinent = countryContinent;
+    }
+
 }

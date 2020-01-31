@@ -1,9 +1,11 @@
 package com.napier.worldpopulation;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 public class AppIntegrationTests
 {
@@ -21,102 +23,58 @@ public class AppIntegrationTests
     @Test
     void testGetCountry()
     {
-
-        ArrayList<Country> countries = app.countries(4);
+        ArrayList<Country> countries = app.countries(2,"Asia", 10);
+        Assert.assertNotNull(countries);
         app.printCountries(countries);
     }
 
-
-//    @Test
-//    void testGetCities()
-//    {
-//        ArrayList<City> capitals = app.capitals(2);
-//
-//        for (City capital : capitals)
-//        {
-//            assertEquals(capital.CountryRegion, "Eastern Africa");
-//        }
-//
-//    }
+    // Testing view country by valid user input
+    @Test
+    void viewCountriesInfoUserInputWValidNoTest() {
+        ArrayList<Country> countries = app.countries(2,"Asia", 10);
+        Assert.assertNotNull(countries);
+        app.printCountries(countries);
+    }
 
     // Testing get capital information by choice
     @Test
-    void testGetCaptial()
+    void testGetCapital()
     {
-        ArrayList<City> capitals = app.capitals(4);
-        app.printCapitals(capitals);
-//        ArrayList<City> capitals = app.capitals(5);
-//        for (City capital : capitals)
-//        {
-//            System.out.println(capital.Region);
-//            assertEquals(capital.Region,"Eastern Africa");
-//        }
-    }
-
-//    @Test
-//    void testGetCitiesByUserDefine()
-//    {
-//        ArrayList<City> arr_c_world = app.getCitiesInWorldByPopulationUserInput(2,10);
-//        assertEquals(arr_c_world.size(), 10);
-//    }
-
-    // Testing countries information
-    @Test
-    void printCountriesInfoTest()
-    {
-        ArrayList<Country> countries = new ArrayList<Country>();
-        Country country = new Country();
-        country.code="AGO";
-        country.name="Angola";
-        country.continent="Africa";
-        country.region="Central Africa";
-        country.population=12878000;
-        country.capital="Angola";
-        countries.add(country);
-        app.printCountries(countries);
-    }
-
-    // Testing null countries information
-    @Test
-    void printCountriesNullInfoTest()
-    {
-        ArrayList<Country> countries = new ArrayList<Country>();
-        Country country = new Country();
-        country.code=null;
-        country.name=null;
-        country.continent=null;
-        country.region=null;
-        country.population=0;
-        country.capital=null;
-        countries.add(country);
-        app.printCountries(countries);
-    }
-
-    // Testing capitals information
-    @Test
-    void viewCapitalsInfoTest()
-    {
-        ArrayList<City> capitals = new ArrayList<City>();
-        City capital = new City();
-        capital.Name = "Tokyo";
-        capital.Country = "JPN";
-        capital.Population = 7980230;
-        capitals.add(capital);
+        ArrayList<City> capitals = app.capitals(2,"Asia", 10);
+        Assert.assertNotNull(capitals);
         app.printCapitals(capitals);
     }
 
-    // Testing null capital information
+    // Testing get capital information by choice
     @Test
-    void viewCaptitalNullInfoTest()
+    void testGetCapitalWValidNoTest()
     {
-        ArrayList<City> capitals = new ArrayList<City>();
-        City capital = new City();
-        capital.Name = null;
-        capital.Country = null;
-        capital.Population = 0;
-        capitals.add(capital);
+        ArrayList<City> capitals = app.capitals(4,"Asia", 10);
+        Assert.assertNotNull(capitals);
         app.printCapitals(capitals);
     }
 
+    // Testing view Cities by user input
+    @Test
+    void getCityInfoUserInputWValidNoTest() {
+        ArrayList<City> cities = app.getCitiesInWorldByPopulation(6, "Asia",10);
+        Assert.assertNotNull(cities);
+        app.viewCities(cities);
+    }
 
+    // Testing view language information
+    @Test
+    void viewLanguageInfo() {
+        ArrayList<CountryLanguage> langs = app.language();
+        Assert.assertNotNull(langs);
+        app.viewLanguages(langs);
+    }
+
+    // Testing view language information
+    @Test
+    void viewPopulationInfo() {
+        ArrayList<Dictionary> populationLON = app.populationLON(1);
+        Assert.assertNotNull(populationLON);
+        app.viewPopulationLON(populationLON);
+    }
 }

@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -673,4 +674,139 @@ public class App
         app.disconnect();
     }
 
+    // The function prompts for an integer input
+    private int getIntInput(int a, int b) {
+        int choice = -1;
+        Scanner input = new Scanner(System.in);
+
+        // variables a & b serve as limiters
+        while (choice < a || choice > b) {
+            try {
+                System.out.print("Enter your choice of action: ");
+                choice = Integer.parseInt(input.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Please try again.");
+            }
+        }
+        return choice;
+    }
+
+    // The function prompts for a string input
+    private String getStringInput() {
+        String criteria = null;
+        Scanner input = new Scanner(System.in);
+
+        while (criteria == null) {
+            try {
+                System.out.print("Enter input: ");
+                criteria = input.nextLine();
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("Invalid data input. Please try again.");
+            }
+        }
+
+        return criteria;
+    }
+
+
+    // The function displays the main menu to the users
+    private void menu() {
+        System.out.println("Main Menu\n");
+        System.out.println("Choose sub-menu to display\n");
+        System.out.println("1) Countries report:\n");
+        System.out.println("2) Cities report\n");
+        System.out.println("3) Capital cities report\n");
+        System.out.println("4)  report\n");
+    }
+
+    // The function displays countries sub-menu to the users
+    private void countriesSubMenu() {
+        System.out.println("Countries Sub-Menu\n");
+        System.out.println("Choose report to generate:\n");
+        System.out.println("1) All the countries in the world organised by largest population to smallest\n");
+        System.out.println("2) All the countries in a continent organised by largest population to smallest\n");
+        System.out.println("3) All the countries in a region organised by largest population to smallest\n");
+        System.out.println("4) The top N populated countries in the world\n");
+        System.out.println("5) The top N populated countries in a continent\n");
+        System.out.println("6) The top N populated countries in a region\n");
+    }
+
+    // The function displays cities sub-menu to the users
+    private void citiesSubMenu() {
+        System.out.println("Cities Sub-Menu\n");
+        System.out.println("Choose report to generate:\n");
+        System.out.println("1) All the cities in the world organised by largest population to smallest\n");
+        System.out.println("2) All the cities in a continent organised by largest population to smallest\n");
+        System.out.println("3) All the cities in a region organised by largest population to smallest\n");
+        System.out.println("4) All the cities in a country organised by largest population to smallest\n");
+        System.out.println("5) All the cities in a district organised by largest population to smallest\n");
+        System.out.println("6) The top N populated cities in the world\n");
+        System.out.println("7) The top N populated cities in a continent\n");
+        System.out.println("8) The top N populated cities in a region\n");
+        System.out.println("9) The top N populated cities in a country\n");
+        System.out.println("10) The top N populated cities in a district\n");
+    }
+
+    // The function displays capital cities sub-menu to the users
+    private void capitalCitiesSubMenu() {
+        System.out.println("Capital Cities Sub-Menu\n");
+        System.out.println("Choose report to generate. *N* must be provided by the user.\n");
+        System.out.println("1) All the capital cities in the world organised by largest population to smallest\n");
+        System.out.println("2) All the capital cities in a continent organised by largest population to smallest\n");
+        System.out.println("3) All the capital cities in a region organised by largest population to smallest\n");
+        System.out.println("4) The top N populated capital cities in the world\n");
+        System.out.println("5) The top N populated capital cities in a continent\n");
+        System.out.println("6) The top N populated capital cities in a region\n");
+    }
+
+    // The function displays population sub-menu to the users
+    private void populationSubMenu() {
+        System.out.println("Population Sub-Menu\n");
+        System.out.println("1) The population of people, people living in cities, and people not living in cities in each continent\n");
+        System.out.println("2) The population of people, people living in cities, and people not living in cities in each region\n");
+        System.out.println("3) The population of people, people living in cities, and people not living in cities in each country\n");
+        System.out.println("4) The population of the world\n");
+        System.out.println("5) The population of a continent\n");
+        System.out.println("6) The population of a region\n");
+        System.out.println("7) The population of a country\n");
+        System.out.println("8) The population of a district\n");
+        System.out.println("9) The population of a city\n");
+    }
+
+    // function to execute functions and generate report
+    private void perform(int coa, App a) {
+        switch(coa) {
+            case 1:
+                a.countriesSubMenu();
+                // int choice = a.getIntInput(1, 6);
+                // String name = a.getStringInput();
+                ArrayList<Country> countries = a.countries(1, null, 0);
+                a.printCountries(countries);
+                break;
+            case 2:
+                a.citiesSubMenu();
+                // int choice = a.getIntInput(1, 10);
+                // String name = a.getStringInput();
+                ArrayList<City> cities = a.getCitiesInWorldByPopulation(2, "Asia", 0);
+                a.viewCities(cities);
+                break;
+            case 3:
+                a.capitalCitiesSubMenu();
+                // int choice = a.getIntInput(1, 6);
+                // String name = a.getStringInput();
+                ArrayList<City> capitals = a.capitals(6, "Eastern Africa", 0);
+                a.printCapitals(capitals);
+                break;
+            case 4:
+                a.populationSubMenu();
+                a.viewPopulationLON(a.populationLON(1));
+                break;
+            case 5:
+                a.viewLanguages(a.language());
+                break;
+            default:
+                System.out.println("Your input is incorrect.");
+                break;
+        }
+    }
 }

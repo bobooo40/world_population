@@ -17,6 +17,7 @@ public class App
 //    Connection to MySQL database
     private Connection con = null;
     static final Logger log = Logger.getLogger(App.class.getName());
+    static final Scanner input = new Scanner(System.in);
 
     //    Connect to the MySQL database.
     public void connect(String location)
@@ -463,14 +464,94 @@ public class App
     }
 
     /**
-     * The following function produces population who speak different langauge report filtered by different criteria
+     * The following function produces population who live in cities or not information report filtered by different criteria
+     * @param choice The list of population to print
+     */
+    public ArrayList<Dictionary> population(int choice) {
+        try {
+
+            // The following is a query to retrieve all the countries in the
+            String query = null;
+            PreparedStatement pre_stmt;
+            ResultSet results;
+            String criteria = "";
+            try {
+                switch (choice) {
+                    case 1:
+                        // Get population information in the world
+                        query = "SELECT SUM(`country`.`Population`) AS `Ttl_Population` FROM `country` ";
+                        break;
+                    case 2:
+                        // Get population information in the world by continent
+                        criteria = "country.Continent";
+                        query = "SELECT `country`.`Continent`, SUM(`country`.`Population`) AS `Ttl_Population` FROM `country` GROUP BY `country`.`Continent` ";
+                        break;
+                    case 3:
+                        // Get population information in the world by region
+                        criteria = "country.Region";
+                        query = "SELECT `country`.`Region`, SUM(`country`.`Population`) AS `Ttl_Population` FROM `country` GROUP BY `country`.`Region` ";
+                        break;
+                    case 4:
+                        // Get population information in the world by country
+                        criteria = "country.Name";
+                        query = "SELECT `country`.`Name`, `country`.`Population` AS `Ttl_Population` FROM `country` ";
+                        break;
+                    case 5:
+                        // Get the top N numbers capital information in the world by population
+                        criteria = "city.District";
+                        query = "SELECT `city`.`District`, SUM(`city`.`Population`) AS `Ttl_Population` FROM `city` GROUP BY `city`.`District` ";
+                        break;
+                    case 6:
+                        // Get the top N numbers capital information in the continent by population
+                        criteria = "city.Name";
+                        query = "SELECT `city`.`Name`, `city`.`Population` AS `Ttl_Population` FROM `city` ";
+                        break;
+                    default:
+                        // Error message for invalid number selection
+                        log.warning("Invalid selection. Please, try again.");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                // Error message for unknown error
+                log.log(Level.SEVERE,"An unknown error has occurred",e);
+            }
+            pre_stmt=con.prepareStatement(query);
+            results = pre_stmt.executeQuery();
+            ArrayList<Dictionary> arr_population = new ArrayList<>();
+            // The following block pushes the retrieved data into the array list
+            while(results.next()) {
+                Dictionary temp = new Hashtable();
+                temp.put("TtlPopulation",results.getLong("Ttl_Population"));
+                if (criteria.equals(""))
+                {
+                    temp.put("Name","World");
+                }
+                else
+                {
+                    temp.put("Name",results.getString(criteria));
+                }
+                arr_population.add(temp);
+            }
+            pre_stmt.close();
+            results.close();
+            return arr_population;
+        } catch (Exception e) {
+
+            // Error message
+            log.log(Level.SEVERE,e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * The following function produces population who speak different language report filtered by different criteria
      */
     public ArrayList<CountryLanguage> language()
     {
         try {
             Statement statement = con.createStatement();
             // The following is a query to retrieve all the countries in the world
-            String query="SELECT `countrylanguage`.`Language`, SUM(`country`.`Population`*(`countrylanguage`.`Percentage`/100)) AS `NoOfSpeakers` FROM `countrylanguage` LEFT JOIN `country` ON `countrylanguage`.`CountryCode` = `country`.`Code` WHERE `countrylanguage`.`Language`= 'Arabic' OR `countrylanguage`.`Language`='Chinese' OR `countrylanguage`.`Language`= 'English' OR `countrylanguage`.`Language`= 'Hindi' OR `countrylanguage`.`Language`= 'Spanish' GROUP BY `countrylanguage`.`Language` ORDER BY `NoOfSpeakers` DESC ";
+            String query="SELECT `countrylanguage`.`Language`, SUM( `country`.`Population` *(`countrylanguage`.`Percentage` / 100) ) AS `NoOfSpeakers`, ( CONCAT(ROUND (( SUM( `country`.`Population` *(`countrylanguage`.`Percentage` / 100) ) / SUM(`country`.`Population`) ) * 100,2),' %') ) AS `Percentage` FROM `countrylanguage` LEFT JOIN `country` ON `countrylanguage`.`CountryCode` = `country`.`Code` WHERE `countrylanguage`.`Language` = 'Arabic' OR `countrylanguage`.`Language` = 'Chinese' OR `countrylanguage`.`Language` = 'English' OR `countrylanguage`.`Language` = 'Hindi' OR `countrylanguage`.`Language` = 'Spanish' GROUP BY `countrylanguage`.`Language` ORDER BY `NoOfSpeakers` DESC ";
             ArrayList<CountryLanguage> arr_lang = new ArrayList<CountryLanguage>();
             ResultSet results_lang = statement.executeQuery(query);
 
@@ -479,6 +560,7 @@ public class App
                 CountryLanguage lang = new CountryLanguage();
                 lang.setLanguage(results_lang.getString("countrylanguage.Language"));
                 lang.setNoOfSpeakers(results_lang.getLong("NoOfSpeakers"));
+                lang.setPercentage(results_lang.getString("Percentage"));
                 arr_lang.add(lang);
             }
             statement.close();
@@ -578,13 +660,13 @@ public class App
             log.info("No language information");
         } else {
             // Print header
-            System.out.println(String.format("%5s %-20s %-30s","###", "Language", "Number of Speakers"));
+            System.out.println(String.format("%5s %-20s %-30s %-20s","###", "Language", "Number of Speakers", "Number of Speakers (%)"));
             // Loop over all languages in the
             int index = 1;
             for (CountryLanguage lang : langs) {
                 String data_string =
-                        String.format("%5d %-20s %30s", index,
-                                lang.getLanguage(), lang.getNoOfSpeakers());
+                        String.format("%5d %-20s %30s %20s", index,
+                                lang.getLanguage(), lang.getNoOfSpeakers(),lang.getPercentage());
                 System.out.println(data_string);
                 index++;
             }
@@ -615,6 +697,33 @@ public class App
                         String.format("%5d %-35s %35s %35s %35s %40s %40s",index,temp_ppl.get("Criteria"),
                                 temp_ppl.get("TtlExistingPopulation"), temp_ppl.get("TtlCityPopulation"),
                                 temp_ppl.get("TtlNotLivingPopulation"), temp_ppl.get("TtlCityPopulation (%)"),temp_ppl.get("TtlNotLivingPopulation (%)"));
+                index++;
+                System.out.println(data_string);
+            }
+        }
+    }
+
+    /**
+     * Prints a list of population
+     * @param population The list of population to print
+     */
+    public void viewPopulation(ArrayList<Dictionary> population)
+    {
+        if (population == null)
+        {
+            log.info("No population information");
+        }
+        else
+        {
+            // Print header
+            System.out.println(String.format("%5s %-35s %-35s ", "###","Name", "Total Population"));
+            // Loop over all population in the list
+            int index = 1;
+            for (Dictionary temp_ppl: population)
+            {
+                String data_string =
+                        String.format("%5d %-35s %35s ",index,temp_ppl.get("Name"),
+                                temp_ppl.get("TtlPopulation"));
                 index++;
                 System.out.println(data_string);
             }
@@ -672,10 +781,24 @@ public class App
 //
 //        // All the population information of desired language
 //        app.viewLanguages(app.language());
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        app.menu();
-        app.perform(1, app);
+
+//        app.viewPopulation(app.population(1));
+//        app.viewPopulation(app.population(2));
+//        app.viewPopulation(app.population(3));
+//        app.viewPopulation(app.population(4));
+//        app.viewPopulation(app.population(5));
+//        app.viewPopulation(app.population(6));
+
+        String retry = "y";
+        while (retry.endsWith("y"))
+        {
+            app.menu();
+            int choice = app.getIntInput(1,6);
+            app.perform(choice, app);
+            System.out.print("Retry again (y/n): ");
+            retry = input.nextLine();
+        }
 
         // Disconnect from database
         app.disconnect();
@@ -684,7 +807,6 @@ public class App
     // The function prompts for an integer input
     private int getIntInput(int a, int b) {
         int choice = -1;
-        Scanner input = new Scanner(System.in);
 
         // variables a & b serve as limiters
         while (choice < a || choice > b) {
@@ -698,10 +820,23 @@ public class App
         return choice;
     }
 
+    private int getLimitInput() {
+        int lmt = -1;
+
+        // variables a & b serve as limiters
+        while (lmt <= 0) {
+            try {
+                System.out.print("Enter your limit numbers: ");
+                lmt = Integer.parseInt(input.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid limit number. Please try again.");
+            }
+        }
+        return lmt;
+    }
     // The function prompts for a string input
     private String getStringInput() {
         String criteria = null;
-        Scanner input = new Scanner(System.in);
 
         while (criteria == null) {
             try {
@@ -711,7 +846,6 @@ public class App
                 System.out.println("Invalid data input. Please try again.");
             }
         }
-
         return criteria;
     }
 
@@ -723,7 +857,10 @@ public class App
         System.out.println("1) Countries report:\n");
         System.out.println("2) Cities report\n");
         System.out.println("3) Capital cities report\n");
-        System.out.println("4)  report\n");
+        System.out.println("4) Living or not population report\n");
+        System.out.println("5) Population report\n");
+        System.out.println("6) Language report\n");
+        System.out.println("7) Exit\n");
     }
 
     // The function displays countries sub-menu to the users
@@ -767,50 +904,85 @@ public class App
     }
 
     // The function displays population sub-menu to the users
-    private void populationSubMenu() {
-        System.out.println("Population Sub-Menu\n");
+    private void populationLONSubMenu() {
+        System.out.println("Population living or not Sub-Menu\n");
         System.out.println("1) The population of people, people living in cities, and people not living in cities in each continent\n");
         System.out.println("2) The population of people, people living in cities, and people not living in cities in each region\n");
         System.out.println("3) The population of people, people living in cities, and people not living in cities in each country\n");
-        System.out.println("4) The population of the world\n");
-        System.out.println("5) The population of a continent\n");
-        System.out.println("6) The population of a region\n");
-        System.out.println("7) The population of a country\n");
-        System.out.println("8) The population of a district\n");
-        System.out.println("9) The population of a city\n");
+    }
+
+    // The function displays population sub-menu to the users
+    private void populationSubMenu() {
+        System.out.println("Population Sub-Menu\n");
+        System.out.println("1) The population of the world\n");
+        System.out.println("2) The population of a continent\n");
+        System.out.println("3) The population of a region\n");
+        System.out.println("4) The population of a country\n");
+        System.out.println("5) The population of a district\n");
+        System.out.println("6) The population of a city\n");
     }
 
     // function to execute functions and generate report
     private void perform(int coa, App a) {
+        int lmt = 0;
+        int choice = 0;
+        String name = null;
         switch(coa) {
             case 1:
                 a.countriesSubMenu();
-                // int choice = a.getIntInput(1, 6);
-                // String name = a.getStringInput();
-                ArrayList<Country> countries = a.countries(1, null, 0);
-                a.printCountries(countries);
+                choice = a.getIntInput(1, 6);
+                if (choice > 1)
+                {
+                    name = a.getStringInput();
+                }
+                if (choice > 3)
+                {
+                    lmt = a.getLimitInput();
+                }
+                a.printCountries(a.countries(choice, name, lmt));
                 break;
             case 2:
                 a.citiesSubMenu();
-                // int choice = a.getIntInput(1, 10);
-                // String name = a.getStringInput();
-                ArrayList<City> cities = a.getCitiesInWorldByPopulation(2, "Asia", 0);
-                a.viewCities(cities);
+                choice = a.getIntInput(1, 10);
+                if ((2 >= choice && choice <= 5) || (7 >= choice && choice <= 10))
+                {
+                    name = a.getStringInput();
+                }
+                if (choice > 5)
+                {
+                    lmt = a.getLimitInput();
+                }
+                a.viewCities(a.getCitiesInWorldByPopulation(choice, name, lmt));
                 break;
             case 3:
                 a.capitalCitiesSubMenu();
-                // int choice = a.getIntInput(1, 6);
-                // String name = a.getStringInput();
-                ArrayList<City> capitals = a.capitals(6, "Eastern Africa", 0);
-                a.printCapitals(capitals);
+                choice = a.getIntInput(1, 6);
+                if ((2 >= choice && choice <= 3) || (5 >= choice && choice <= 6))
+                {
+                    name = a.getStringInput();
+                }
+                if (choice > 3)
+                {
+                    lmt = a.getLimitInput();
+                }
+                a.printCapitals(a.capitals(choice, name, lmt));
                 break;
             case 4:
-                a.populationSubMenu();
-                a.viewPopulationLON(a.populationLON(1));
+                a.populationLONSubMenu();
+                choice = a.getIntInput(1, 3);
+                a.viewPopulationLON(a.populationLON(choice));
                 break;
             case 5:
+                a.populationSubMenu();
+                choice = a.getIntInput(1, 6);
+                a.viewPopulation(a.population(choice));
+                break;
+            case 6:
                 a.viewLanguages(a.language());
                 break;
+
+            case 7:
+                System.exit(-1);
             default:
                 System.out.println("Your input is incorrect.");
                 break;

@@ -20,7 +20,7 @@ public class CountryLanguage {
     /**
      * Declare usage percentage
      */
-    private float Percentage;
+    private String Percentage;
 
     /**
      * Declare no of speakers
@@ -54,11 +54,11 @@ public class CountryLanguage {
         IsOffical = offical;
     }
 
-    public float getPercentage() {
+    public String getPercentage() {
         return Percentage;
     }
 
-    public void setPercentage(float percentage) {
+    public void setPercentage(String percentage) {
         Percentage = percentage;
     }
 

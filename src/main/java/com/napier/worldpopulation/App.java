@@ -548,7 +548,7 @@ public class App
         try {
             Statement statement = con.createStatement();
             // The following is a query to retrieve all the countries in the world
-            String query="SELECT `countrylanguage`.`Language`, SUM( `country`.`Population` *(`countrylanguage`.`Percentage` / 100) ) AS `NoOfSpeakers`, ( CONCAT(ROUND (( SUM( `country`.`Population` *(`countrylanguage`.`Percentage` / 100) ) / SUM(`country`.`Population`) ) * 100,2),' %') ) AS `Percentage` FROM `countrylanguage` LEFT JOIN `country` ON `countrylanguage`.`CountryCode` = `country`.`Code` WHERE `countrylanguage`.`Language` = 'Arabic' OR `countrylanguage`.`Language` = 'Chinese' OR `countrylanguage`.`Language` = 'English' OR `countrylanguage`.`Language` = 'Hindi' OR `countrylanguage`.`Language` = 'Spanish' GROUP BY `countrylanguage`.`Language` ORDER BY `NoOfSpeakers` DESC ";
+            String query="SELECT `countrylanguage`.`Language`, SUM( `country`.`Population` *(`countrylanguage`.`Percentage` / 100) ) AS `NoOfSpeakers`, ( CONCAT(ROUND (( SUM( `country`.`Population` *(`countrylanguage`.`Percentage` / 100) ) / ( SELECT SUM(`country`.`Population`) FROM `country`) ) * 100,2),' %') ) AS `Percentage` FROM `countrylanguage` LEFT JOIN `country` ON `countrylanguage`.`CountryCode` = `country`.`Code` WHERE `countrylanguage`.`Language` = 'Arabic' OR `countrylanguage`.`Language` = 'Chinese' OR `countrylanguage`.`Language` = 'English' OR `countrylanguage`.`Language` = 'Hindi' OR `countrylanguage`.`Language` = 'Spanish' GROUP BY `countrylanguage`.`Language` ORDER BY `NoOfSpeakers` DESC ";
             ArrayList<CountryLanguage> arr_lang = new ArrayList<CountryLanguage>();
             ResultSet results_lang = statement.executeQuery(query);
 

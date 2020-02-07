@@ -67,7 +67,7 @@ For the population reports, the following information is requested:
 - The total population of the continent/region/country not living in cities (including a %).
 
 
-
+> 32 requirements of 32 have been implemented, which is 100.0%.
 
 | ID    | Name | Met  | Screenshot |
 |-------|------|------|------------|
@@ -102,9 +102,12 @@ For the population reports, the following information is requested:
 | 29    | The population of a country. | Yes |   |
 | 30    | The population of a district. | Yes | image |
 | 31    | The population of a city. | Yes | image |
-| 32    | The name of the continent/region/country. | Yes |image  |
-| 33    | The total population of the continent/region/country. | Yes | image |
-| 34    | The total population of the continent/region/country living in cities (including a %). | Yes | image |
-| 35    | The total population of the continent/region/country not living in cities (including a %). | Yes | image |
+| 32    | The number of people in the world who speak languages from greatest number to smallest . | Yes | [Git](/img/1.png)|
 
- 
+
+ |      | Code Review 1 | Code Review 2 | Code Review 3 | Code Review 4 | Final Deliverable |
+|------|---------------|---------------|---------------|---------------|-------------------|
+| BoBo Oo | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
+| Khant Tayza | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
+| Oak Soe Phone Khant | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
+| Shoon lai yee | 0.25 | 0.25 | 0.25 | 0.25 | 0.25|

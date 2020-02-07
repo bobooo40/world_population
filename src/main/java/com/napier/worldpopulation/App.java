@@ -1,9 +1,7 @@
 package com.napier.worldpopulation;
 //import required packages
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -15,6 +13,7 @@ import java.util.logging.Logger;
 public class App
 {
 //    Connection to MySQL database
+//    Declaration of logger and scanner
     private Connection con = null;
     static final Logger log = Logger.getLogger(App.class.getName());
     static final Scanner input = new Scanner(System.in);
@@ -110,7 +109,7 @@ public class App
                         query = "SELECT * FROM country WHERE Region=(?) ORDER BY Population DESC";
                         pre_stmt=con.prepareStatement(query);
                         pre_stmt.setString(1,name);
-                        results = pre_stmt.executeQuery();;
+                        results = pre_stmt.executeQuery();
                         break;
                     case 4:
                         // Get country information by population
@@ -125,7 +124,7 @@ public class App
                         pre_stmt=con.prepareStatement(query);
                         pre_stmt.setString(1,name);
                         pre_stmt.setInt(2,limit);
-                        results = pre_stmt.executeQuery();;
+                        results = pre_stmt.executeQuery();
                         break;
                     case 6:
                         // Get country information with specific region by population
@@ -133,7 +132,7 @@ public class App
                         pre_stmt=con.prepareStatement(query);
                         pre_stmt.setString(1,name);
                         pre_stmt.setInt(2,limit);
-                        results = pre_stmt.executeQuery();;
+                        results = pre_stmt.executeQuery();
                         break;
                     default:
                         // Error message for invalid number selection
@@ -184,7 +183,6 @@ public class App
                         query = "SELECT `city`.*, `country`.`Name`, `country`.`Continent`, `country`.`Region` FROM `city` LEFT JOIN `country` ON `city`.`CountryCode` = `country`.`Code` ORDER BY `city`.`Population` DESC ";
                         pre_stmt=con.prepareStatement(query);
                         results = pre_stmt.executeQuery();
-                        ;
                         break;
                     case 2:
                         // Get city information in the district by population
@@ -220,7 +218,6 @@ public class App
                         pre_stmt=con.prepareStatement(query);
                         pre_stmt.setInt(1,number);
                         results = pre_stmt.executeQuery();
-                        ;
                         break;
                     case 7:
                         // Get top N number city information in the continent by population
@@ -931,7 +928,7 @@ public class App
             case 1:
                 a.countriesSubMenu();
                 choice = a.getIntInput(1, 6);
-                if (choice > 1)
+                if ((2 <= choice && choice <= 3) || (5 <= choice && choice <= 6))
                 {
                     name = a.getStringInput();
                 }
@@ -944,7 +941,7 @@ public class App
             case 2:
                 a.citiesSubMenu();
                 choice = a.getIntInput(1, 10);
-                if ((2 >= choice && choice <= 5) || (7 >= choice && choice <= 10))
+                if ((2 <= choice && choice <= 5) || (7 <= choice && choice <= 10))
                 {
                     name = a.getStringInput();
                 }
@@ -957,7 +954,7 @@ public class App
             case 3:
                 a.capitalCitiesSubMenu();
                 choice = a.getIntInput(1, 6);
-                if ((2 >= choice && choice <= 3) || (5 >= choice && choice <= 6))
+                if ((2 <= choice && choice <= 3) || (5 <= choice && choice <= 6))
                 {
                     name = a.getStringInput();
                 }
@@ -980,9 +977,9 @@ public class App
             case 6:
                 a.viewLanguages(a.language());
                 break;
-
             case 7:
-                System.exit(-1);
+                System.exit(0);
+                break;
             default:
                 System.out.println("Your input is incorrect.");
                 break;

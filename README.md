@@ -7,10 +7,8 @@
 - License [![LICENSE](https://img.shields.io/github/license/bobooo40/world_population.svg?style=flat-square)](https://github.com/bobooo40/world_population)
 - Release [![Releases](https://img.shields.io/github/release/bobooo40/world_population/all.svg?style=flat-square)](https://github.com/bobooo40/world_population)
 - Develop Build Status [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=develop)](https://travis-ci.org/bobooo40/world_population)
-- Build Status [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=master)](https://travis-ci.org/bobooo40/world_population)
+- Master Build Status [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=master)](https://travis-ci.org/bobooo40/world_population)
 - SQL Integration [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=feature/mysql-integration)](https://travis-ci.org/bobooo40/world_population)
-- Produce City Report [![Build Status](https://travis-ci.org/bobooo40/world_population.svg?branch=features/produce-cities-report)](https://travis-ci.org/bobooo40/world_population)
-
 - CodeCov [![codecov](https://codecov.io/gh/bobooo40/world_population/branch/master/graph/badge.svg)](https://codecov.io/gh/bobooo40/world_population)
 
 
@@ -66,6 +64,7 @@ For the population reports, the following information is requested:
 - The total population of the continent/region/country living in cities (including a %).
 - The total population of the continent/region/country not living in cities (including a %).
 
+## Detailed requirements
 
 > 32 requirements of 32 have been implemented, which is 100.0%.
 
@@ -104,10 +103,10 @@ For the population reports, the following information is requested:
 | 31    | The population of a city. | Yes | image |
 | 32    | The number of people in the world who speak languages from greatest number to smallest . | Yes | [Git](/img/1.png)|
 
-
+## Final Individual Contribution Spreadsheet
  |      | Code Review 1 | Code Review 2 | Code Review 3 | Code Review 4 | Final Deliverable |
 |------|---------------|---------------|---------------|---------------|-------------------|
 | BoBo Oo | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
 | Khant Tayza | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
 | Oak Soe Phone Khant | 0.25 | 0.25 | 0.25 | 0.25 | 0.25 |
-| Shoon lai yee | 0.25 | 0.25 | 0.25 | 0.25 | 0.25|
+| Shoon lai Yee | 0.25 | 0.25 | 0.25 | 0.25 | 0.25|

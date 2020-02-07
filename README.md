@@ -67,6 +67,8 @@ For the population reports, the following information is requested:
 - The total population of the continent/region/country not living in cities (including a %).
 
 
+
+
 | ID    | Name | Met  | Screenshot |
 |-------|------|------|------------|
 | 1     | All the countries in the world organised by largest population to smallest. | Yes | image |

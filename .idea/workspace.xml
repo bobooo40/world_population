@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="39cdf16f-cbfa-430c-8bfb-206928dc36ad" name="Default Changelist" comment="README update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +68,22 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Docker" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Docker" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="Containers" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Docker" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="Images" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -95,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581072023095</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="README update">
+      <created>1581073008531</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1581073008531</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,14 +128,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="README update" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="291" y="0" key="CommitChangelistDialog2" timestamp="1581072573625">
+    <state x="291" y="0" key="CommitChangelistDialog2" timestamp="1581073169013">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="291" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1581072573625" />
-    <state x="129" y="61" key="DiffContextDialog" timestamp="1581071984394">
+    <state x="291" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1581073169013" />
+    <state x="129" y="61" key="DiffContextDialog" timestamp="1581073168075">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="129" y="61" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1581071984394" />
+    <state x="129" y="61" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1581073168075" />
     <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1581072953669">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -131,10 +152,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1581072953669" />
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1581072027252">
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1581073177891">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1581072027252" />
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1581073177891" />
     <state x="499" y="222" key="git4idea.ui.GitTagDialog" timestamp="1581071918323">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
